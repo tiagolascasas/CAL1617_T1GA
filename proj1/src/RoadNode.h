@@ -12,10 +12,18 @@ private:
 
 public:
 	RoadNode(int id, float degLat, float radLat, float degLong, float radLong);
-	int getID();
-	string getDegLocation();
-	string getRadLocation();
+	int getID() const;
+	string getDegLocation() const;
+	string getRadLocation() const;
 };
 
+bool operator==(const RoadNode n1, const RoadNode n2);
+
+struct road_t
+{
+	string name;
+	int id;
+	bool twoWay;
+};
 
 #endif /* ROADNODE_H_ */

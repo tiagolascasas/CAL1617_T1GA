@@ -1,0 +1,25 @@
+124309448;Rua Engenheiro Farinas de Almeida;False
+141895611;;False
+141895625;Rua Padre Alves das Neves;False
+141895667;;False
+141895684;;False
+141895707;;False
+141895709;;False
+141895712;;False
+141895774;Rua Entre Muros;False
+141895784;Rua da Igreja de São Pedro;False
+202441423;Rua Manuel Sousa Matos;True
+202441424;;True
+381421912;;False
+381421914;;False
+381421915;;False
+381421916;;False
+381421917;;False
+381421918;;False
+381421919;;False
+381423500;;False
+381423564;;False
+381423595;;False
+381423657;;False
+381423794;;False
+381423845;;False

@@ -10,21 +10,26 @@ RoadNode::RoadNode(int id, float degLat, float radLat, float degLong, float radL
 	this->radLong = radLong;
 }
 
-int RoadNode::getID()
+int RoadNode::getID() const
 {
 	return id;
 }
 
-string RoadNode::getDegLocation()
+string RoadNode::getDegLocation() const
 {
 	ostringstream ss;
 	ss << '(' << degLat << ", " << degLong << ')';
 	return ss.str();
 }
 
-string RoadNode::getRadLocation()
+string RoadNode::getRadLocation() const
 {
 	ostringstream ss;
 	ss << '(' << radLat << ", " << radLong << ')';
 	return ss.str();
+}
+
+bool operator==(const RoadNode n1, const RoadNode n2)
+{
+	return (n1.getID() == n2.getID());
 }
