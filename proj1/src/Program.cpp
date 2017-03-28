@@ -39,10 +39,11 @@ void Program::loadGraph(char* nodesFile, char* roadInfoFile, char* roadFile)
 	while (getline(nodes, s))
 	{
 		istringstream ss(s);
-		int id, latDeg, latRad, lonDeg, lonRad;
+		int id;
+		float latDeg, latRad, lonDeg, lonRad;
 		char marker;
-		ss >> id >> marker >> latDeg >> marker >> latRad;
-		ss >> marker >> lonDeg >> marker >> lonRad;
+		ss >> id >> marker >> latDeg >> marker >> lonDeg;
+		ss >> marker >> latRad >> marker >> lonRad;
 		RoadNode n(id, latDeg, latRad, lonDeg, lonRad);
 		graph.addVertex(n);
 	}
@@ -96,14 +97,28 @@ void Program::loadGraph(char* nodesFile, char* roadInfoFile, char* roadFile)
 
 void Program::loadMarkets(char* marketsFile)
 {
-	ifstream markets(marketsFile);
-	if (!markets.is_open())
+	ifstream mark(marketsFile);
+	if (!mark.is_open())
 		throw new FileNotFound(marketsFile);
 
-	//...
-	//...
+	string s;
+	while (getline(mark, s))
+	{
+		istringstream ss(s);
+		int marketID;
+		ss >> marketID;
+		for (int i = 0; i < graph.getNumVertex(); i++)
+		{
+			if (graph.getVertexSet().at(i)->getInfo().getID() == marketID)
+			{
+				RoadNode n = graph.getVertexSet().at(i)->getInfo();
+				markets.push_back(n);
+				break;
+			}
+		}
+	}
 
-	markets.close();
+	mark.close();
 }
 
 void Program::generatePurchases(int n)
@@ -123,12 +138,15 @@ void Program::run()
 		switch (choice)
 		{
 		case 1:
+			displayMarketsInfo();
+			break;
+		case 2:
 		{
 			displayGraphStatistics(graph);
 			displayGraph(graph);
 			break;
 		}
-		case 2:
+		case 3:
 			cout << "\nNumber of purchases to generate:";
 			int n;
 			cin >> n;
@@ -147,11 +165,12 @@ void Program::run()
 void Program::displayMenu()
 {
 	cout << endl;
-	cout << "1. Display the whole graph\n";
-	cout << "2. Generate random clients/purchases\n";
-	cout << "3. Check connectivity between all clients and all markets\n";
-	cout << "4. Distribute from a single market to all clients\n";
-	cout << "5. Distribute from all markets to all clients\n";
+	cout << "1. Display all markets\n";
+	cout << "2. Display the whole graph\n";
+	cout << "3. Generate random clients/purchases\n";
+	cout << "4. Check connectivity between all clients and all markets\n";
+	cout << "5. Distribute from a single market to all clients\n";
+	cout << "6. Distribute from all markets to all clients\n";
 	cout << "0. Quit program\n";
 	cout << endl;
 }
@@ -189,4 +208,14 @@ void Program::displayGraphStatistics(Graph<RoadNode> g)
 	for (int i = 0; i < g.getVertexSet().size(); i++)
 		nEdges += g.getVertexSet().at(i)->getAdj().size();
 	cout << nEdges << " edges\n";
+}
+
+void Program::displayMarketsInfo()
+{
+	cout << endl;
+	for (int i = 0; i < markets.size(); i++)
+	{
+		cout << "Market " << i << ": Node " << markets.at(i).getID();
+		cout << ", at coordinate " << markets.at(i).getDegLocation() << endl;
+	}
 }

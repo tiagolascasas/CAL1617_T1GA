@@ -13,13 +13,17 @@ private:
 	GraphViewer* gv;
 	Graph<RoadNode> graph;
 	vector<road_t> r;
+	vector<RoadNode> markets;
 	bool running;
+
 	void loadGraph(char* nodesFile, char* roadInfoFile, char* roadFile);
 	void loadMarkets(char* marketsFile);
 	void displayMenu();
 	void displayGraphStatistics(Graph<RoadNode> g);
 	void displayGraph(Graph<RoadNode> g);
+	void displayMarketsInfo();
 	void generatePurchases(int n);
+
 public:
 	Program(char** files);
 	void run();
