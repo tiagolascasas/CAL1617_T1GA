@@ -124,11 +124,7 @@ void Program::run()
 		{
 		case 1:
 		{
-			cout << "\nShowing full graph: " << graph.getNumVertex() << " nodes and ";
-			int nEdges = 0;
-			for (int i = 0; i < graph.getVertexSet().size(); i++)
-				nEdges += graph.getVertexSet().at(i)->getAdj().size();
-			cout << nEdges << " edges\n";
+			displayGraphStatistics(graph);
 			displayGraph(graph);
 			break;
 		}
@@ -152,9 +148,10 @@ void Program::displayMenu()
 {
 	cout << endl;
 	cout << "1. Display the whole graph\n";
-	cout << "2. Generate random purchases\n";
-	cout << "3. do something #2\n";
-	cout << "4. do something #3\n";
+	cout << "2. Generate random clients/purchases\n";
+	cout << "3. Check connectivity between all clients and all markets\n";
+	cout << "4. Distribute from a single market to all clients\n";
+	cout << "5. Distribute from all markets to all clients\n";
 	cout << "0. Quit program\n";
 	cout << endl;
 }
@@ -183,4 +180,13 @@ void Program::displayGraph(Graph<RoadNode> g)
 			edgeID++;
 		}
 	}
+}
+
+void Program::displayGraphStatistics(Graph<RoadNode> g)
+{
+	cout << "\nGraph statistics: " << g.getNumVertex() << " nodes and ";
+	int nEdges = 0;
+	for (int i = 0; i < g.getVertexSet().size(); i++)
+		nEdges += g.getVertexSet().at(i)->getAdj().size();
+	cout << nEdges << " edges\n";
 }

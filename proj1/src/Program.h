@@ -14,14 +14,15 @@ private:
 	Graph<RoadNode> graph;
 	vector<road_t> r;
 	bool running;
-public:
-	Program(char** files);
 	void loadGraph(char* nodesFile, char* roadInfoFile, char* roadFile);
 	void loadMarkets(char* marketsFile);
-	void run();
 	void displayMenu();
+	void displayGraphStatistics(Graph<RoadNode> g);
 	void displayGraph(Graph<RoadNode> g);
 	void generatePurchases(int n);
+public:
+	Program(char** files);
+	void run();
 };
 
 
