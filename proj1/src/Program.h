@@ -6,7 +6,7 @@
 #include "Purchase.h"
 #include "RoadNode.h"
 #include <string>
-
+//
 class Program
 {
 private:

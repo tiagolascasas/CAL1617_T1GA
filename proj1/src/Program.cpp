@@ -10,7 +10,7 @@
 #include <fstream>
 #include <sstream>
 #include <algorithm>
-
+//
 Program::Program(char** files)
 {
 	this->gv = new GraphViewer(600, 600, true);

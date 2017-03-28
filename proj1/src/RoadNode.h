@@ -6,7 +6,7 @@ using namespace std;
 
 class RoadNode
 {
-private:
+private://
 	int id;
 	float degLat, radLat, degLong, radLong;
 

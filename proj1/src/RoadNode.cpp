@@ -8,7 +8,7 @@ RoadNode::RoadNode(int id, float degLat, float radLat, float degLong, float radL
 	this->radLat = radLat;
 	this->degLong = degLong;
 	this->radLong = radLong;
-}
+}//
 
 int RoadNode::getID() const
 {

@@ -6,7 +6,7 @@ RoadNode Purchase::getAddr() const
 {
 	return addr;
 }
-
+//
 void Purchase::setAddr(RoadNode &address)
 {
 	addr = address;

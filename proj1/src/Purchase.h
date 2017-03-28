@@ -6,7 +6,7 @@
 #include "RoadNode.h"
 
 class Purchase
-{
+{//
 private:
 	RoadNode addr;
 	vector<RoadNode> validMarkets;
