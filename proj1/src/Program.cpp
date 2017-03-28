@@ -168,10 +168,11 @@ void Program::displayMenu()
 	cout << "1. Display all markets\n";
 	cout << "2. Display the whole graph\n";
 	cout << "3. Generate random clients/purchases\n";
-	cout << "4. Check connectivity between all clients and all markets\n";
-	cout << "5. Distribute from a single market to all clients\n";
-	cout << "6. Distribute from all markets to all clients\n";
-	cout << "0. Quit program\n";
+	cout << "4. Check connectivity between all clients and all markets\n";	//Conectividade para gráficos dirigidos
+	cout << "5. Distribute from a single market to a single client\n";		//Dijkstra
+	cout << "6. Distribute from a single market to all clients\n";			//Dijkstra, minimum spanning tree
+	cout << "7. Distribute from all markets to all clients\n";				//Mesmo que o anterior, mas com um preprocessamento
+	cout << "0. Quit program\n";											//que indica o supermercado mais próximo de cada cliente
 	cout << endl;
 }
 
