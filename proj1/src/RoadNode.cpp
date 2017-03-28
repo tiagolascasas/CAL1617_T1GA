@@ -33,3 +33,10 @@ bool operator==(const RoadNode n1, const RoadNode n2)
 {
 	return (n1.getID() == n2.getID());
 }
+
+ostream& operator<<(ostream &out, const RoadNode n)
+{
+	out << "node " << n.getID() << " at coordinate " << n.getDegLocation();
+	return out;
+}
+

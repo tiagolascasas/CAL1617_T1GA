@@ -123,7 +123,13 @@ void Program::loadMarkets(char* marketsFile)
 
 void Program::generatePurchases(int n)
 {
-
+	for (int i = 0; i < n; i++)
+	{
+		int randIndex = rand() % graph.getNumVertex();
+		RoadNode node = graph.getVertexSet().at(randIndex)->getInfo();
+		Purchase p(node);
+		purchases.push_back(p);
+	}
 }
 
 void Program::run()
@@ -153,6 +159,9 @@ void Program::run()
 			generatePurchases(n);
 			cout << n << " purchases generated\n";
 			break;
+		case 4:
+			displayPurchasesInfo();
+			break;
 		case 0:
 			running = false;
 			break;
@@ -168,10 +177,11 @@ void Program::displayMenu()
 	cout << "1. Display all markets\n";
 	cout << "2. Display the whole graph\n";
 	cout << "3. Generate random clients/purchases\n";
-	cout << "4. Check connectivity between all clients and all markets\n";	//Conectividade para gráficos dirigidos
-	cout << "5. Distribute from a single market to a single client\n";		//Dijkstra
-	cout << "6. Distribute from a single market to all clients\n";			//Dijkstra, minimum spanning tree
-	cout << "7. Distribute from all markets to all clients\n";				//Mesmo que o anterior, mas com um preprocessamento
+	cout << "4. Display all clients/purchases\n";
+	cout << "5. Check connectivity between all clients and all markets\n";	//Conectividade para gráficos dirigidos
+	cout << "6. Distribute from a single market to a single client\n";		//Dijkstra
+	cout << "7. Distribute from a single market to all clients\n";			//Dijkstra, minimum spanning tree
+	cout << "8. Distribute from all markets to all clients\n";				//Mesmo que o anterior, mas com um preprocessamento
 	cout << "0. Quit program\n";											//que indica o supermercado mais próximo de cada cliente
 	cout << endl;
 }
@@ -215,8 +225,12 @@ void Program::displayMarketsInfo()
 {
 	cout << endl;
 	for (int i = 0; i < markets.size(); i++)
-	{
-		cout << "Market " << i << ": Node " << markets.at(i).getID();
-		cout << ", at coordinate " << markets.at(i).getDegLocation() << endl;
-	}
+		cout << "Market " << i + 1 << ": " << markets.at(i) << endl;
+}
+
+void Program::displayPurchasesInfo()
+{
+	cout << endl;
+	for (int i = 0; i < purchases.size(); i++)
+		cout << "Purchase " << i + 1 << ": " << purchases.at(i).getAddr() << endl;
 }

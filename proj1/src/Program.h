@@ -14,6 +14,7 @@ private:
 	Graph<RoadNode> graph;
 	vector<road_t> r;
 	vector<RoadNode> markets;
+	vector<Purchase> purchases;
 	bool running;
 
 	void loadGraph(char* nodesFile, char* roadInfoFile, char* roadFile);
@@ -22,6 +23,7 @@ private:
 	void displayGraphStatistics(Graph<RoadNode> g);
 	void displayGraph(Graph<RoadNode> g);
 	void displayMarketsInfo();
+	void displayPurchasesInfo();
 	void generatePurchases(int n);
 
 public:

@@ -8,14 +8,14 @@
 class Purchase
 {
 private:
-	string addr;
+	RoadNode addr;
 	vector<RoadNode> validMarkets;
 public:
-	Purchase(string addr);
-	string getAddr() const;
-	void setAddr(string address);
-	vector<RoadNode> getValidMarkets();
-	void addValidMarket(RoadNode market);
+	Purchase(RoadNode &address);
+	RoadNode getAddr() const;
+	void setAddr(RoadNode &address);
+	vector<RoadNode> getValidMarkets() const;
+	void addValidMarket(RoadNode &market);
 };
 
 #endif /* PURCHASE_H_ */

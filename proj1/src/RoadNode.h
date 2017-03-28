@@ -19,6 +19,8 @@ public:
 
 bool operator==(const RoadNode n1, const RoadNode n2);
 
+ostream& operator<<(ostream &out, const RoadNode n);
+
 struct road_t
 {
 	string name;
