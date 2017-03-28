@@ -6,7 +6,11 @@
 
 #include <vector>
 #include <queue>
+#include <stddef.h>
+#include <limits.h>
 using namespace std;
+
+const int INT_INFINITY = INT_MAX;
 
 template <class T> class Edge;
 template <class T> class Graph;
@@ -17,17 +21,21 @@ class Vertex {
 	vector<Edge<T>  > adj;
 	bool visited;
 	int indegree;
+	int dist;
 public:
 	Vertex(T in);
 	T getInfo() const;
 	int getIndegree() const;
 	vector<Edge<T> > getAdj() const;
 	friend class Graph<T>;
+	Vertex* path;
 };
 
 
 template <class T>
-Vertex<T>::Vertex(T in): info(in), visited(false), indegree(0){}
+Vertex<T>::Vertex(T in): info(in), visited(false), indegree(0), dist(0){
+	path = NULL;
+}
 
 template <class T>
 T Vertex<T>::getInfo() const
@@ -97,6 +105,7 @@ public:
 	void resetIndegrees();
 	bool isDAG();
 	vector<T> topologicalOrder();
+	void unweightedShortestPath(const T &s);
 };
 
 template <class T>
@@ -341,5 +350,31 @@ vector<T> Graph<T>::topologicalOrder()
 	return res;
 }
 
+template<class T>
+void Graph<T>::unweightedShortestPath(const T &s) {
+
+	for(unsigned int i = 0; i < vertexSet.size(); i++) {
+		vertexSet[i]->path = NULL;
+		vertexSet[i]->dist = INT_INFINITY;
+	}
+
+	Vertex<T>* v = getVertex(s);
+	v->dist = 0;
+	queue< Vertex<T>* > q;
+	q.push(v);
+
+	while( !q.empty() ) {
+		v = q.front(); q.pop();
+		for(unsigned int i = 0; i < v->adj.size(); i++) {
+			Vertex<T>* w = v->adj[i].dest;
+			if( w->dist == INT_INFINITY ) {
+				w->dist = v->dist + 1;
+				w->path = v;
+				q.push(w);
+			}
+		}
+	}
+
+}
 
 #endif /* GRAPH_H_ */
