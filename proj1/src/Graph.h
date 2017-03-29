@@ -9,6 +9,7 @@
 #include <stddef.h>
 #include <limits.h>
 #include <list>
+#include <iostream>
 using namespace std;
 
 const int INT_INFINITY = INT_MAX;
@@ -46,9 +47,7 @@ struct vertex_greater_than {
 };
 
 template <class T>
-Vertex<T>::Vertex(T in): info(in), visited(false), indegree(0), dist(0), processed(false){
-	path = NULL;
-}
+Vertex<T>::Vertex(T in): info(in), visited(false), indegree(0), dist(0), processed(false), path(NULL){}
 
 template <class T>
 T Vertex<T>::getInfo() const
@@ -131,7 +130,7 @@ public:
 	bool addEdge(const T &sourc, const T &dest, double w);
 	bool removeVertex(const T &in);
 	bool removeEdge(const T &sourc, const T &dest);
-	Vertex<T>* getVertex(const T &info) const;
+	Vertex<T>* getVertex(const T &info);
 	vector<T> dfs();
 	void dfs(Vertex<T>* v);
 	vector<T> bfs(Vertex<T> *v) const;
@@ -142,7 +141,7 @@ public:
 	vector<T> getPath(const T &origin, const T &dest);
 	void unweightedShortestPath(const T &s);
 	void dijkstraShortestPath(const T &s);
-	void dijkstraShortestPath(const T &s, const T &d);
+	int dijkstraShortestPath(const T &s, const T &d);
 };
 
 template <class T>
@@ -261,7 +260,7 @@ bool Graph<T>::removeEdge(const T &sourc, const T &dest)
 }
 
 template <class T>
-Vertex<T>* Graph<T>::getVertex(const T &info) const
+Vertex<T>* Graph<T>::getVertex(const T &info)
 {
 	for (int i = 0; i < vertexSet.size(); i++)
 	{
@@ -514,7 +513,7 @@ void Graph<T>::dijkstraShortestPath(const T &s)
 }
 
 template <class T>
-void Graph<T>::dijkstraShortestPath(const T &s, const T &d)
+int Graph<T>::dijkstraShortestPath(const T &s, const T &d)
 {
 	for (int i = 0; i < vertexSet.size(); i++)
 	{
@@ -526,9 +525,10 @@ void Graph<T>::dijkstraShortestPath(const T &s, const T &d)
 	Vertex<T>* v = getVertex(s);
 	v->dist = 0;
 	vector<Vertex<T>* > q;
+
 	q.push_back(v);
 
-	while (!q.empty())
+	while (!(q.size() == 0))
 	{
 		v = q.front();
 		q.erase(q.begin()+0);
@@ -536,7 +536,7 @@ void Graph<T>::dijkstraShortestPath(const T &s, const T &d)
 		{
 			Vertex<T>* w = v->adj.at(i).dest;
 			if (w->info == d)
-				return;
+				return w->dist;
 			if (v->dist + v->adj.at(i).weight < w->dist)
 			{
 				bool wasInf = false;

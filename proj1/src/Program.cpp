@@ -257,19 +257,17 @@ void Program::singleMarketSingleClient()
 	cout << "\nSelect by index the market: ";
 	int marketIdx;
 	cin >> marketIdx;
-	RoadNode market, client;
+	clientIdx--;
+	marketIdx--;
 	try
 	{
-		market = markets.at(marketIdx - 1);
-		client = purchases.at(clientIdx - 1).getAddr();
+		int length = graph.dijkstraShortestPath(markets.at(marketIdx), purchases.at(clientIdx).getAddr());
+		vector<RoadNode> path = graph.getPath(markets.at(marketIdx), purchases.at(clientIdx).getAddr());
+		cout << "Shortest path has " << length << " meters\n";
 	}
 	catch (out_of_range &ex)
 	{
 		cout << "Index of one or more choices was invalid\n";
-		return;
 	}
-	graph.dijkstraShortestPath(market, client);
-	vector<RoadNode> path = graph.getPath(market, client);
-	cout << "Shortest path has " << path.size() << endl;
 	return;
 }
