@@ -3,6 +3,15 @@
 #include <cmath>
 #include <iostream>
 
+RoadNode::RoadNode()
+{
+	this->id = 0;
+	this->degLat = 0;
+	this->radLat = 0;
+	this->degLong = 0;
+	this->radLong = 0;
+}
+
 RoadNode::RoadNode(int id, float degLat, float radLat, float degLong, float radLong)
 {
 	this->id = id;
@@ -41,6 +50,16 @@ float RoadNode::getRadLat() const
 	return radLat;
 }
 
+float RoadNode::getDegLong() const
+{
+	return degLong;
+}
+
+float RoadNode::getDegLat() const
+{
+	return degLat;
+}
+
 int RoadNode::getDistanceBetween(const RoadNode &n) const
 {
 	//http://andrew.hedges.name/experiments/haversine/
@@ -52,9 +71,20 @@ int RoadNode::getDistanceBetween(const RoadNode &n) const
 	return static_cast<int>(d);
 }
 
+RoadNode& RoadNode::operator=(RoadNode n)
+{
+	RoadNode res(n.id, n.degLat, n.radLat, n.degLong, n.radLong);
+	return res;
+}
+
 bool operator==(const RoadNode n1, const RoadNode n2)
 {
 	return (n1.getID() == n2.getID());
+}
+
+bool operator!=(const RoadNode n1, const RoadNode n2)
+{
+	return !(n1 == n2);
 }
 
 ostream& operator<<(ostream &out, const RoadNode n)

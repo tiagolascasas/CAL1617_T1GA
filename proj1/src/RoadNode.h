@@ -11,16 +11,22 @@ private://
 	float degLat, radLat, degLong, radLong;
 	static const double RADIUS = 6371e3;
 public:
+	RoadNode();
 	RoadNode(int id, float degLat, float radLat, float degLong, float radLong);
 	int getID() const;
 	string getDegLocation() const;
 	string getRadLocation() const;
 	float getRadLong() const;
 	float getRadLat() const;
+	float getDegLong() const;
+	float getDegLat() const;
 	int getDistanceBetween(const RoadNode &n) const;
+	RoadNode& operator=(RoadNode n);
 };
 
 bool operator==(const RoadNode n1, const RoadNode n2);
+
+bool operator!=(const RoadNode n1, const RoadNode n2);
 
 ostream& operator<<(ostream &out, const RoadNode n);
 

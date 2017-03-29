@@ -10,7 +10,9 @@
 #include <fstream>
 #include <sstream>
 #include <algorithm>
-//
+
+#define DEFAULT_PURCHASES 10
+
 Program::Program(char** files)
 {
 	this->gv = new GraphViewer(600, 600, true);
@@ -18,6 +20,7 @@ Program::Program(char** files)
 
 	loadGraph(files[1], files[2], files[3]);
 	loadMarkets(files[4]);
+	generatePurchases(DEFAULT_PURCHASES);
 }
 
 void Program::loadGraph(char* nodesFile, char* roadInfoFile, char* roadFile)
@@ -165,6 +168,11 @@ void Program::run()
 		case 4:
 			displayPurchasesInfo();
 			break;
+		case 5:
+			break;
+		case 6:
+			singleMarketSingleClient();
+			break;
 		case 0:
 			running = false;
 			break;
@@ -237,4 +245,31 @@ void Program::displayPurchasesInfo()
 	cout << endl;
 	for (int i = 0; i < purchases.size(); i++)
 		cout << "Purchase " << i + 1 << ": " << purchases.at(i).getAddr() << endl;
+}
+
+void Program::singleMarketSingleClient()
+{
+	displayPurchasesInfo();
+	cout << "\nSelect by index the client/purchase: ";
+	int clientIdx;
+	cin >> clientIdx;
+	displayMarketsInfo();
+	cout << "\nSelect by index the market: ";
+	int marketIdx;
+	cin >> marketIdx;
+	RoadNode market, client;
+	try
+	{
+		market = markets.at(marketIdx - 1);
+		client = purchases.at(clientIdx - 1).getAddr();
+	}
+	catch (out_of_range &ex)
+	{
+		cout << "Index of one or more choices was invalid\n";
+		return;
+	}
+	graph.dijkstraShortestPath(market, client);
+	vector<RoadNode> path = graph.getPath(market, client);
+	cout << "Shortest path has " << path.size() << endl;
+	return;
 }

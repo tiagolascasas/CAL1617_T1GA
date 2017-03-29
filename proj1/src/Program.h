@@ -26,6 +26,7 @@ private:
 	void displayMarketsInfo();
 	void displayPurchasesInfo();
 	void generatePurchases(int n);
+	void singleMarketSingleClient();
 
 public:
 	Program(char** files);

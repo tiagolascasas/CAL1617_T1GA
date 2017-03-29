@@ -8,6 +8,7 @@
 #include <queue>
 #include <stddef.h>
 #include <limits.h>
+#include <list>
 using namespace std;
 
 const int INT_INFINITY = INT_MAX;
@@ -15,11 +16,16 @@ const int INT_INFINITY = INT_MAX;
 template <class T> class Edge;
 template <class T> class Graph;
 
+//------------------------------
+//Vertex<T>
+//------------------------------
+
 template <class T>
 class Vertex {
 	T info;
 	vector<Edge<T>  > adj;
 	bool visited;
+	bool processed;
 	int indegree;
 	int dist;
 public:
@@ -27,13 +33,20 @@ public:
 	T getInfo() const;
 	int getIndegree() const;
 	vector<Edge<T> > getAdj() const;
+	int getDist() const;
 	friend class Graph<T>;
-	Vertex* path;
+	Vertex<T>* path;
 };
 
+template <class T>
+struct vertex_greater_than {
+    bool operator()(Vertex<T> * a, Vertex<T> * b) const {
+        return a->getDist() > b->getDist();
+    }
+};
 
 template <class T>
-Vertex<T>::Vertex(T in): info(in), visited(false), indegree(0), dist(0){
+Vertex<T>::Vertex(T in): info(in), visited(false), indegree(0), dist(0), processed(false){
 	path = NULL;
 }
 
@@ -55,6 +68,15 @@ vector<Edge<T> > Vertex<T>::getAdj() const
 	return adj;
 }
 
+template <class T>
+int Vertex<T>::getDist() const
+{
+	return dist;
+}
+
+//------------------------------
+//Edge<T>
+//------------------------------
 
 template <class T>
 class Edge {
@@ -91,16 +113,22 @@ double Edge<T>::getWeight() const
 	return weight;
 }
 
+//------------------------------
+//Graph<T>
+//------------------------------
+
 template <class T>
 class Graph {
 	vector<Vertex<T> *> vertexSet;
 	vector<T> dfsResult;
 	bool isDAGflag;
+	void getPathTo(Vertex<T> *origin, list<T> &res);
 public:
 	vector<Vertex<T> * > getVertexSet() const;
 	int getNumVertex() const;
 	bool addVertex(const T &in);
 	bool addEdge(const T &sourc, const T &dest, double w, int id);
+	bool addEdge(const T &sourc, const T &dest, double w);
 	bool removeVertex(const T &in);
 	bool removeEdge(const T &sourc, const T &dest);
 	Vertex<T>* getVertex(const T &info) const;
@@ -111,7 +139,10 @@ public:
 	void resetIndegrees();
 	bool isDAG();
 	vector<T> topologicalOrder();
+	vector<T> getPath(const T &origin, const T &dest);
 	void unweightedShortestPath(const T &s);
+	void dijkstraShortestPath(const T &s);
+	void dijkstraShortestPath(const T &s, const T &d);
 };
 
 template <class T>
@@ -149,6 +180,29 @@ bool Graph<T>::addEdge(const T &sourc, const T &dest, double w, int id)
 				if (vertexSet.at(j)->info == dest)
 				{
 					Edge<T> e(vertexSet.at(j), w, id);
+					vertexSet.at(i)->adj.push_back(e);
+					vertexSet.at(j)->indegree++;
+					return true;
+				}
+			}
+			return false;
+		}
+	}
+	return false;
+}
+
+template <class T>
+bool Graph<T>::addEdge(const T &sourc, const T &dest, double w)
+{
+	for (int i = 0; i < vertexSet.size(); i++)
+	{
+		if (vertexSet.at(i)->info == sourc)
+		{
+			for (int j = 0; j < vertexSet.size(); j++)
+			{
+				if (vertexSet.at(j)->info == dest)
+				{
+					Edge<T> e(vertexSet.at(j), w, 0);
 					vertexSet.at(i)->adj.push_back(e);
 					vertexSet.at(j)->indegree++;
 					return true;
@@ -368,6 +422,28 @@ vector<T> Graph<T>::topologicalOrder()
 }
 
 template<class T>
+vector<T> Graph<T>::getPath(const T &origin, const T &dest)
+{
+	list<T> res;
+	Vertex<T>* v = getVertex(dest);
+	res.push_front(dest);
+	while (v->path != NULL && v->path->info != origin)
+	{
+		v = v->path;
+		res.push_front(v->info);
+	}
+	if (v->path != NULL)
+		res.push_front(v->path->info);
+	vector<T> vres;
+	while (!res.empty())
+	{
+		vres.push_back(res.front());
+		res.pop_front();
+	}
+	return vres;
+}
+
+template<class T>
 void Graph<T>::unweightedShortestPath(const T &s) {
 
 	for(unsigned int i = 0; i < vertexSet.size(); i++) {
@@ -391,7 +467,96 @@ void Graph<T>::unweightedShortestPath(const T &s) {
 			}
 		}
 	}
+}
 
+template <class T>
+void Graph<T>::dijkstraShortestPath(const T &s)
+{
+	for (int i = 0; i < vertexSet.size(); i++)
+	{
+		vertexSet.at(i)->processed = false;
+		vertexSet.at(i)->path = NULL;
+		vertexSet.at(i)->dist = INT_INFINITY;
+	}
+
+	Vertex<T>* v = getVertex(s);
+	v->dist = 0;
+	vector<Vertex<T>* > q;
+	q.push_back(v);
+
+	while (!q.empty())
+	{
+		v = q.front();
+		q.erase(q.begin()+0);
+		for (int i = 0; i < v->adj.size(); i++)
+		{
+			Vertex<T>* w = v->adj.at(i).dest;
+			if (v->dist + v->adj.at(i).weight < w->dist)
+			{
+				bool wasInf = false;
+				if (w->dist == INT_INFINITY)
+					wasInf = true;
+				w->dist = v->dist + v->adj.at(i).weight;
+				w->path = v;
+				if (wasInf)
+				{
+					q.push_back(w);
+					make_heap(q.begin(), q.end(), vertex_greater_than<T>());
+				}
+				else
+				{
+					q.erase(find(q.begin(), q.end(), w));
+					q.push_back(w);
+				}
+			}
+		}
+	}
+}
+
+template <class T>
+void Graph<T>::dijkstraShortestPath(const T &s, const T &d)
+{
+	for (int i = 0; i < vertexSet.size(); i++)
+	{
+		vertexSet.at(i)->processed = false;
+		vertexSet.at(i)->path = NULL;
+		vertexSet.at(i)->dist = INT_INFINITY;
+	}
+
+	Vertex<T>* v = getVertex(s);
+	v->dist = 0;
+	vector<Vertex<T>* > q;
+	q.push_back(v);
+
+	while (!q.empty())
+	{
+		v = q.front();
+		q.erase(q.begin()+0);
+		for (int i = 0; i < v->adj.size(); i++)
+		{
+			Vertex<T>* w = v->adj.at(i).dest;
+			if (w->info == d)
+				return;
+			if (v->dist + v->adj.at(i).weight < w->dist)
+			{
+				bool wasInf = false;
+				if (w->dist == INT_INFINITY)
+					wasInf = true;
+				w->dist = v->dist + v->adj.at(i).weight;
+				w->path = v;
+				if (wasInf)
+				{
+					q.push_back(w);
+					make_heap(q.begin(), q.end(), vertex_greater_than<T>());
+				}
+				else
+				{
+					q.erase(find(q.begin(), q.end(), w));
+					q.push_back(w);
+				}
+			}
+		}
+	}
 }
 
 #endif /* GRAPH_H_ */
