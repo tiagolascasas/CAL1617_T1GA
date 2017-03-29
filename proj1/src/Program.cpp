@@ -61,7 +61,7 @@ void Program::loadGraph(char* nodesFile, char* roadInfoFile, char* roadFile)
 		else
 			road.name = aux;
 		ss >> marker >> aux;
-		if (aux == "False")
+		if (aux.find("lse", 0) != aux.npos)
 			road.twoWay = false;
 		else
 			road.twoWay = true;
@@ -85,9 +85,12 @@ void Program::loadGraph(char* nodesFile, char* roadInfoFile, char* roadFile)
 		}
 
 		RoadNode aux1(v1, 0, 0, 0, 0), aux2(v2, 0, 0, 0, 0);
-		graph.addEdge(aux1, aux2, 1, id);
+		RoadNode n1 = graph.getVertex(aux1)->getInfo();
+		RoadNode n2 = graph.getVertex(aux2)->getInfo();
+		float edgeDistance = n1.getDistanceBetween(n2);
+		graph.addEdge(aux1, aux2, edgeDistance, id);
 		if (road.twoWay)
-			graph.addEdge(aux2, aux1, 1, id);
+			graph.addEdge(aux2, aux1, edgeDistance, id);
 	}
 
 	nodes.close();
@@ -178,11 +181,11 @@ void Program::displayMenu()
 	cout << "2. Display the whole graph\n";
 	cout << "3. Generate random clients/purchases\n";
 	cout << "4. Display all clients/purchases\n";
-	cout << "5. Check connectivity between all clients and all markets\n";	//Conectividade para gráficos dirigidos
+	cout << "5. Check connectivity between all clients and all markets\n";	//Conectividade para grï¿½ficos dirigidos
 	cout << "6. Distribute from a single market to a single client\n";		//Dijkstra
 	cout << "7. Distribute from a single market to all clients\n";			//Dijkstra, minimum spanning tree
 	cout << "8. Distribute from all markets to all clients\n";				//Mesmo que o anterior, mas com um preprocessamento
-	cout << "0. Quit program\n";											//que indica o supermercado mais próximo de cada cliente
+	cout << "0. Quit program\n";											//que indica o supermercado mais prï¿½ximo de cada cliente
 	cout << endl;
 }
 
@@ -206,6 +209,7 @@ void Program::displayGraph(Graph<RoadNode> g)
 			int id1 = n->getInfo().getID();
 			int id2 = n->getAdj().at(j).getDest()->getInfo().getID();
 			gv->addEdge(edgeID, id1, id2, EdgeType::DIRECTED);
+			gv->setEdgeWeight(edgeID, n->getAdj().at(j).getWeight());
 		//	gv->setEdgeLabel(edgeID, n->getAdj().at(i).)
 			edgeID++;
 		}

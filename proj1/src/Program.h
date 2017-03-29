@@ -16,6 +16,7 @@ private:
 	vector<RoadNode> markets;
 	vector<Purchase> purchases;
 	bool running;
+	static const int metersPerEdge = 30;
 
 	void loadGraph(char* nodesFile, char* roadInfoFile, char* roadFile);
 	void loadMarkets(char* marketsFile);

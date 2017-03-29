@@ -65,6 +65,7 @@ public:
 	Edge(Vertex<T> *d, double w, int id);
 	int getID() const;
 	Vertex<T>* getDest() const;
+	double getWeight() const;
 	friend class Graph<T>;
 	friend class Vertex<T>;
 };
@@ -84,7 +85,11 @@ Vertex<T>* Edge<T>::getDest() const
 	return dest;
 }
 
-
+template <class T>
+double Edge<T>::getWeight() const
+{
+	return weight;
+}
 
 template <class T>
 class Graph {
@@ -98,6 +103,7 @@ public:
 	bool addEdge(const T &sourc, const T &dest, double w, int id);
 	bool removeVertex(const T &in);
 	bool removeEdge(const T &sourc, const T &dest);
+	Vertex<T>* getVertex(const T &info) const;
 	vector<T> dfs();
 	void dfs(Vertex<T>* v);
 	vector<T> bfs(Vertex<T> *v) const;
@@ -198,6 +204,17 @@ bool Graph<T>::removeEdge(const T &sourc, const T &dest)
 		}
 	}
 	return false;
+}
+
+template <class T>
+Vertex<T>* Graph<T>::getVertex(const T &info) const
+{
+	for (int i = 0; i < vertexSet.size(); i++)
+	{
+		if (vertexSet.at(i)->getInfo() == info)
+			return vertexSet.at(i);
+	}
+	return NULL;
 }
 
 template <class T>

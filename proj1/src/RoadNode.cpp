@@ -1,5 +1,7 @@
 #include "RoadNode.h"
 #include <sstream>
+#include <cmath>
+#include <iostream>
 
 RoadNode::RoadNode(int id, float degLat, float radLat, float degLong, float radLong)
 {
@@ -8,7 +10,7 @@ RoadNode::RoadNode(int id, float degLat, float radLat, float degLong, float radL
 	this->radLat = radLat;
 	this->degLong = degLong;
 	this->radLong = radLong;
-}//
+}
 
 int RoadNode::getID() const
 {
@@ -27,6 +29,27 @@ string RoadNode::getRadLocation() const
 	ostringstream ss;
 	ss << '(' << radLat << ", " << radLong << ')';
 	return ss.str();
+}
+
+float RoadNode::getRadLong() const
+{
+	return radLong;
+}
+
+float RoadNode::getRadLat() const
+{
+	return radLat;
+}
+
+int RoadNode::getDistanceBetween(const RoadNode &n) const
+{
+	//http://andrew.hedges.name/experiments/haversine/
+	float dLong = n.getRadLong() - radLong;
+	float dLat = n.getRadLat() - radLat;
+	float a = pow((sin(dLat / 2)), 2) + cos(radLat) * cos(n.getRadLat()) * pow(sin(dLong / 2), 2);
+	float c = 2 * atan2(sqrt(a), sqrt(1 - a));
+	float d = RADIUS * c;
+	return static_cast<int>(d);
 }
 
 bool operator==(const RoadNode n1, const RoadNode n2)
