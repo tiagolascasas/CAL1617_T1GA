@@ -71,7 +71,7 @@ int RoadNode::getDistanceBetween(const RoadNode &n) const
 	return static_cast<int>(d);
 }
 
-RoadNode& RoadNode::operator=(RoadNode n)
+RoadNode& RoadNode::operator=(RoadNode n) const
 {
 	RoadNode res(n.id, n.degLat, n.radLat, n.degLong, n.radLong);
 	return res;

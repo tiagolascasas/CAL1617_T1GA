@@ -206,7 +206,7 @@ void Program::displayGraph(Graph<RoadNode> g)
 	for (int i = 0; i < g.getVertexSet().size(); i++)
 	{
 		gv->addNode(g.getVertexSet().at(i)->getInfo().getID());
-		gv->setVertexSize(g.getVertexSet().at(i)->getInfo().getID(), 1);
+		gv->setVertexSize(g.getVertexSet().at(i)->getInfo().getID(), 5);
 	}
 	int edgeID = 0;
 	for (int i = 0; i < g.getVertexSet().size(); i++)

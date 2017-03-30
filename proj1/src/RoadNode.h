@@ -6,7 +6,7 @@ using namespace std;
 
 class RoadNode
 {
-private://
+private:
 	int id;
 	float degLat, radLat, degLong, radLong;
 	const double RADIUS;
@@ -21,7 +21,7 @@ public:
 	float getDegLong() const;
 	float getDegLat() const;
 	int getDistanceBetween(const RoadNode &n) const;
-	RoadNode& operator=(RoadNode n);
+	RoadNode& operator=(RoadNode n) const;
 };
 
 bool operator==(const RoadNode n1, const RoadNode n2);
