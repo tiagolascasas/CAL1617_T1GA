@@ -9,7 +9,7 @@ class RoadNode
 private://
 	int id;
 	float degLat, radLat, degLong, radLong;
-	static const double RADIUS = 6371e3;
+	const double RADIUS;
 public:
 	RoadNode();
 	RoadNode(int id, float degLat, float radLat, float degLong, float radLong);

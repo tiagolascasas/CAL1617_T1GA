@@ -3,7 +3,7 @@
 #include <cmath>
 #include <iostream>
 
-RoadNode::RoadNode()
+RoadNode::RoadNode(): RADIUS(6371e3)
 {
 	this->id = 0;
 	this->degLat = 0;
@@ -12,7 +12,7 @@ RoadNode::RoadNode()
 	this->radLong = 0;
 }
 
-RoadNode::RoadNode(int id, float degLat, float radLat, float degLong, float radLong)
+RoadNode::RoadNode(int id, float degLat, float radLat, float degLong, float radLong): RADIUS(6371e3)
 {
 	this->id = id;
 	this->degLat = degLat;
