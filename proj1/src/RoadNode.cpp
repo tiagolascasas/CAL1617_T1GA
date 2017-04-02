@@ -2,6 +2,7 @@
 #include <sstream>
 #include <cmath>
 #include <iostream>
+#include <iomanip>
 
 RoadNode::RoadNode(): RADIUS(6371e3)
 {
@@ -89,7 +90,7 @@ bool operator!=(const RoadNode n1, const RoadNode n2)
 
 ostream& operator<<(ostream &out, const RoadNode n)
 {
-	out << "node " << n.getID() << " at coordinate " << n.getDegLocation();
+	out << "node " << setw(13) << left <<n.getID() << " at coordinate " << setw(20) << left << n.getDegLocation();
 	return out;
 }
 

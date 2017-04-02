@@ -124,19 +124,29 @@ void Program::loadMarkets(char* marketsFile)
 			}
 		}
 	}
-
 	mark.close();
 }
 
 void Program::generatePurchases(int n)
 {
+	if (n >= graph.getNumVertex() - markets.size())
+	{
+		cout << "Number of purchases selected is too big, value defaulted to ";
+		n = (graph.getNumVertex() - markets.size()) / 10;
+		cout << n << endl;
+	}
+
 	for (int i = 0; i < n; i++)
 	{
 		int randIndex = rand() % graph.getNumVertex();
 		RoadNode node = graph.getVertexSet().at(randIndex)->getInfo();
 		Purchase p(node);
-		purchases.push_back(p);
+		if (find(purchases.begin(), purchases.end(), p) != purchases.end())
+			i--;
+		else
+			purchases.push_back(p);
 	}
+	checkValidMarkets();
 }
 
 void Program::run()
@@ -170,6 +180,7 @@ void Program::run()
 			displayPurchasesInfo();
 			break;
 		case 5:
+			displayConnectivity();
 			break;
 		case 6:
 			singleMarketSingleClient();
@@ -245,7 +256,15 @@ void Program::displayPurchasesInfo()
 {
 	cout << endl;
 	for (int i = 0; i < purchases.size(); i++)
-		cout << "Purchase " << i + 1 << ": " << purchases.at(i).getAddr() << endl;
+	{
+		cout << "Purchase " << setw(3) << left << i + 1 << ": " << purchases.at(i).getAddr() << setw(16) << "Valid Markets: ";
+		for (int j = 0; j < purchases.at(i).getValidMarkets().size(); j++)
+		{
+			vector<RoadNode>::iterator it = find(markets.begin(), markets.end(), purchases.at(i).getValidMarkets().at(j));
+			cout << distance(markets.begin(), it) + 1 << " ";
+		}
+		cout << endl;
+	}
 }
 
 void Program::singleMarketSingleClient()
@@ -274,4 +293,32 @@ void Program::singleMarketSingleClient()
 		cout << "Index of one or more choices was invalid\n";
 	}
 	return;
+}
+
+void Program::checkValidMarkets()
+{
+	//REPLACE WITH CONNECTIVIY FUNCTION
+	for (int i = 0; i < markets.size(); i++)
+	{
+		for (int j = 0; j < purchases.size(); j++)
+		{
+			if (graph.dijkstraShortestPath(markets.at(i), purchases.at(j).getAddr()) != INT_MAX)
+				purchases.at(j).addValidMarket(markets.at(i));
+		}
+	}
+}
+
+void Program::displayConnectivity()
+{
+	cout << endl;
+	for (int i = 0; i < purchases.size(); i++)
+	{
+		cout << "Purchase " << left << setw(3) << i + 1 << ": Markets ";
+		for (int j = 0; j < purchases.at(i).getValidMarkets().size(); j++)
+		{
+			vector<RoadNode>::iterator it = find(markets.begin(), markets.end(), purchases.at(i).getValidMarkets().at(j));
+			cout << distance(markets.begin(), it) + 1 << " ";
+		}
+		cout << endl;
+	}
 }

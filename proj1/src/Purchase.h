@@ -6,7 +6,7 @@
 #include "RoadNode.h"
 
 class Purchase
-{//
+{
 private:
 	RoadNode addr;
 	vector<RoadNode> validMarkets;
@@ -17,5 +17,7 @@ public:
 	vector<RoadNode> getValidMarkets() const;
 	void addValidMarket(RoadNode &market);
 };
+
+bool operator==(const Purchase &p1, const Purchase &p2);
 
 #endif /* PURCHASE_H_ */
