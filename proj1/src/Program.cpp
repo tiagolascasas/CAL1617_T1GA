@@ -43,7 +43,7 @@ void Program::loadGraph(char* nodesFile, char* roadInfoFile, char* roadFile)
 	while (getline(nodes, s))
 	{
 		istringstream ss(s);
-		int id;
+		long long id;
 		float latDeg, latRad, lonDeg, lonRad;
 		char marker;
 		ss >> id >> marker >> latDeg >> marker >> lonDeg;
@@ -74,7 +74,7 @@ void Program::loadGraph(char* nodesFile, char* roadInfoFile, char* roadFile)
 
 	while (getline(roads, s))
 	{
-		int id, v1, v2;
+		long long id, v1, v2;
 		char marker;
 		istringstream ss(s);
 		ss >> id >> marker >> v1 >> marker >> v2;
@@ -96,7 +96,6 @@ void Program::loadGraph(char* nodesFile, char* roadInfoFile, char* roadFile)
 		if (road.twoWay)
 			graph.addEdge(aux2, aux1, edgeDistance, id);
 	}
-
 	nodes.close();
 	roadInfo.close();
 	roads.close();
@@ -112,14 +111,18 @@ void Program::loadMarkets(char* marketsFile)
 	while (getline(mark, s))
 	{
 		istringstream ss(s);
-		int marketID;
+		long long marketID;
+		string mName;
 		ss >> marketID;
+		getline(ss, mName);
+		cout << mName << endl;
 		for (int i = 0; i < graph.getNumVertex(); i++)
 		{
 			if (graph.getVertexSet().at(i)->getInfo().getID() == marketID)
 			{
 				RoadNode n = graph.getVertexSet().at(i)->getInfo();
 				markets.push_back(n);
+				marketNames.push_back(mName);
 				break;
 			}
 		}
@@ -185,6 +188,9 @@ void Program::run()
 		case 6:
 			singleMarketSingleClient();
 			break;
+		case 7:
+			allMarketsSingleClient();
+			break;
 		case 0:
 			running = false;
 			break;
@@ -202,9 +208,10 @@ void Program::displayMenu()
 	cout << "3. Generate random clients/purchases\n";
 	cout << "4. Display all clients/purchases\n";
 	cout << "5. Check connectivity between all clients and all markets\n";	//Conectividade para gr�ficos dirigidos
-	cout << "6. Distribute from a single market to a single client\n";		//Dijkstra
-	cout << "7. Distribute from a single market to all clients\n";			//Dijkstra, minimum spanning tree
-	cout << "8. Distribute from all markets to all clients\n";				//Mesmo que o anterior, mas com um preprocessamento
+	cout << "6. Distribute from a single market to a single client\n";		//Dijkstra	- feito, falta mostrar o grafo
+	cout << "7. Distribute from all markets to a single client\n";			//Dijkstra	- feito, falta mostrar o grafo
+	cout << "8. Distribute from a single market to all clients\n";			//Dijkstra, minimum spanning tree
+	cout << "9. Distribute from all markets to all clients\n";				//Mesmo que o anterior, mas com um preprocessamento
 	cout << "0. Quit program\n";											//que indica o supermercado mais pr�ximo de cada cliente
 	cout << endl;
 }
@@ -249,7 +256,7 @@ void Program::displayMarketsInfo()
 {
 	cout << endl;
 	for (int i = 0; i < markets.size(); i++)
-		cout << "Market " << i + 1 << ": " << markets.at(i) << endl;
+		cout << "Market " << i + 1 << ": " << markets.at(i) << " Name: " << marketNames.at(i) << endl;
 }
 
 void Program::displayPurchasesInfo()
@@ -263,7 +270,6 @@ void Program::displayPurchasesInfo()
 			vector<RoadNode>::iterator it = find(markets.begin(), markets.end(), purchases.at(i).getValidMarkets().at(j));
 			cout << distance(markets.begin(), it) + 1 << " ";
 		}
-		cout << "n = " << purchases.at(i).getValidMarkets().size() << endl;
 		cout << endl;
 	}
 }
@@ -328,4 +334,34 @@ void Program::displayConnectivity()
 			cout << getIndexOfMarket(purchases.at(i).getValidMarkets().at(j)) + 1 << " ";
 		cout << endl;
 	}
+}
+
+void Program::allMarketsSingleClient()
+{
+	displayPurchasesInfo();
+	cout << "\nSelect by index the client/purchase: ";
+	int clientIdx;
+	cin >> clientIdx;
+	clientIdx--;
+	try
+	{
+		if (purchases.at(clientIdx).getValidMarkets().size() == 0)
+		{
+			cout << "There isn't any market that can reach the specified client\n";
+			return;
+		}
+		for (int i = 0; i < purchases.at(clientIdx).getValidMarkets().size(); i++)
+		{
+			int length = graph.dijkstraShortestPath(purchases.at(clientIdx).getValidMarkets().at(i),
+													purchases.at(clientIdx).getAddr());
+			cout << "Shortest path for market "<< i + 1 << " is " << length << " meters (" <<
+					setprecision(2) << length / 1000.0 << " Km)\n";
+		}
+	}
+	catch (out_of_range &ex)
+	{
+		cout << "Selected client index was invalid\n";
+		return;
+	}
+	return;
 }

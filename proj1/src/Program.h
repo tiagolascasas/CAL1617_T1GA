@@ -6,7 +6,7 @@
 #include "Purchase.h"
 #include "RoadNode.h"
 #include <string>
-//
+
 class Program
 {
 private:
@@ -14,6 +14,7 @@ private:
 	Graph<RoadNode> graph;
 	vector<road_t> r;
 	vector<RoadNode> markets;
+	vector<string> marketNames;
 	vector<Purchase> purchases;
 	bool running;
 
@@ -29,6 +30,7 @@ private:
 	void checkValidMarkets();
 	int getIndexOfMarket(RoadNode m);
 	void displayConnectivity();
+	void allMarketsSingleClient();
 
 public:
 	Program(char** files);

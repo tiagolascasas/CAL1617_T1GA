@@ -7,13 +7,13 @@ using namespace std;
 class RoadNode
 {
 private:
-	int id;
+	long long id;
 	float degLat, radLat, degLong, radLong;
 	const double RADIUS;
 public:
 	RoadNode();
-	RoadNode(int id, float degLat, float radLat, float degLong, float radLong);
-	int getID() const;
+	RoadNode(long long id, float degLat, float radLat, float degLong, float radLong);
+	long long getID() const;
 	string getDegLocation() const;
 	string getRadLocation() const;
 	float getRadLong() const;
@@ -33,7 +33,7 @@ ostream& operator<<(ostream &out, const RoadNode n);
 struct road_t
 {
 	string name;
-	int id;
+	long long id;
 	bool twoWay;
 };
 

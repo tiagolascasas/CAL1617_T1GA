@@ -13,7 +13,7 @@ RoadNode::RoadNode(): RADIUS(6371e3)
 	this->radLong = 0;
 }
 
-RoadNode::RoadNode(int id, float degLat, float radLat, float degLong, float radLong): RADIUS(6371e3)
+RoadNode::RoadNode(long long id, float degLat, float radLat, float degLong, float radLong): RADIUS(6371e3)
 {
 	this->id = id;
 	this->degLat = degLat;
@@ -22,7 +22,7 @@ RoadNode::RoadNode(int id, float degLat, float radLat, float degLong, float radL
 	this->radLong = radLong;
 }
 
-int RoadNode::getID() const
+long long RoadNode::getID() const
 {
 	return id;
 }

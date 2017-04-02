@@ -1,3 +1,3 @@
-409089302	//alameda
-1731170287	//parque nascente
-2156098698	//campus s. joao
+409089302 Alameda
+1731170287 Parque Nascente
+2156098698 Campus S. Joao
