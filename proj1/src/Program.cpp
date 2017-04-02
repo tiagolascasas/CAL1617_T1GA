@@ -135,7 +135,7 @@ void Program::generatePurchases(int n)
 		n = (graph.getNumVertex() - markets.size()) / 10;
 		cout << n << endl;
 	}
-
+	purchases.clear();
 	for (int i = 0; i < n; i++)
 	{
 		int randIndex = rand() % graph.getNumVertex();
@@ -263,6 +263,7 @@ void Program::displayPurchasesInfo()
 			vector<RoadNode>::iterator it = find(markets.begin(), markets.end(), purchases.at(i).getValidMarkets().at(j));
 			cout << distance(markets.begin(), it) + 1 << " ";
 		}
+		cout << "n = " << purchases.at(i).getValidMarkets().size() << endl;
 		cout << endl;
 	}
 }
@@ -297,15 +298,24 @@ void Program::singleMarketSingleClient()
 
 void Program::checkValidMarkets()
 {
-	//REPLACE WITH CONNECTIVIY FUNCTION
-	for (int i = 0; i < markets.size(); i++)
+	for (int i = 0; i < purchases.size(); i++)
 	{
-		for (int j = 0; j < purchases.size(); j++)
+		for (int j = 0; j < markets.size(); j++)
 		{
-			if (graph.dijkstraShortestPath(markets.at(i), purchases.at(j).getAddr()) != INT_MAX)
-				purchases.at(j).addValidMarket(markets.at(i));
+			if (graph.dijkstraShortestPath(markets.at(j), purchases.at(i).getAddr()) != INT_MAX)
+				purchases.at(i).addValidMarket(markets.at(j));
 		}
 	}
+}
+
+int Program::getIndexOfMarket(RoadNode m)
+{
+	for (int i = 0; i < markets.size(); i++)
+	{
+		if (markets.at(i) == m)
+			return i;
+	}
+	return -1;
 }
 
 void Program::displayConnectivity()
@@ -315,10 +325,7 @@ void Program::displayConnectivity()
 	{
 		cout << "Purchase " << left << setw(3) << i + 1 << ": Markets ";
 		for (int j = 0; j < purchases.at(i).getValidMarkets().size(); j++)
-		{
-			vector<RoadNode>::iterator it = find(markets.begin(), markets.end(), purchases.at(i).getValidMarkets().at(j));
-			cout << distance(markets.begin(), it) + 1 << " ";
-		}
+			cout << getIndexOfMarket(purchases.at(i).getValidMarkets().at(j)) + 1 << " ";
 		cout << endl;
 	}
 }

@@ -27,6 +27,7 @@ private:
 	void generatePurchases(int n);
 	void singleMarketSingleClient();
 	void checkValidMarkets();
+	int getIndexOfMarket(RoadNode m);
 	void displayConnectivity();
 
 public:
