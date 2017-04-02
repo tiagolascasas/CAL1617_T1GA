@@ -10,6 +10,7 @@
 #include <fstream>
 #include <sstream>
 #include <algorithm>
+#include <iomanip>
 
 #define DEFAULT_PURCHASES 10
 
@@ -263,7 +264,10 @@ void Program::singleMarketSingleClient()
 	{
 		int length = graph.dijkstraShortestPath(markets.at(marketIdx), purchases.at(clientIdx).getAddr());
 		vector<RoadNode> path = graph.getPath(markets.at(marketIdx), purchases.at(clientIdx).getAddr());
-		cout << "Shortest path has " << length << " meters\n";
+		if (length == INT_MAX)
+			cout << "There is no connection between the market and the client\n";
+		else
+			cout << "Shortest path has " << length << " meters (" << setprecision(2) << length / 1000.0 << " Km)\n";
 	}
 	catch (out_of_range &ex)
 	{

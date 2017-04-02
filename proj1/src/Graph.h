@@ -468,45 +468,43 @@ void Graph<T>::unweightedShortestPath(const T &s) {
 	}
 }
 
-template <class T>
+template<class T>
 void Graph<T>::dijkstraShortestPath(const T &s)
 {
-	for (int i = 0; i < vertexSet.size(); i++)
+	for(unsigned int i = 0; i < vertexSet.size(); i++)
 	{
-		vertexSet.at(i)->processed = false;
-		vertexSet.at(i)->path = NULL;
-		vertexSet.at(i)->dist = INT_INFINITY;
+		vertexSet[i]->path = NULL;
+		vertexSet[i]->dist = INT_INFINITY;
+		vertexSet[i]->processing = false;
 	}
 
 	Vertex<T>* v = getVertex(s);
 	v->dist = 0;
-	vector<Vertex<T>* > q;
-	q.push_back(v);
 
-	while (!q.empty())
+	vector< Vertex<T>* > pq;
+	pq.push_back(v);
+	make_heap(pq.begin(), pq.end());
+
+	while( !pq.empty() )
 	{
-		v = q.front();
-		q.erase(q.begin()+0);
-		for (int i = 0; i < v->adj.size(); i++)
+		v = pq.front();
+		pop_heap(pq.begin(), pq.end());
+		pq.pop_back();
+
+		for(unsigned int i = 0; i < v->adj.size(); i++)
 		{
-			Vertex<T>* w = v->adj.at(i).dest;
-			if (v->dist + v->adj.at(i).weight < w->dist)
+			Vertex<T>* w = v->adj[i].dest;
+
+			if(v->dist + v->adj[i].weight < w->dist )
 			{
-				bool wasInf = false;
-				if (w->dist == INT_INFINITY)
-					wasInf = true;
-				w->dist = v->dist + v->adj.at(i).weight;
+				w->dist = v->dist + v->adj[i].weight;
 				w->path = v;
-				if (wasInf)
+				if(!w->processing)
 				{
-					q.push_back(w);
-					make_heap(q.begin(), q.end(), vertex_greater_than<T>());
+					w->processing = true;
+					pq.push_back(w);
 				}
-				else
-				{
-					q.erase(find(q.begin(), q.end(), w));
-					q.push_back(w);
-				}
+				make_heap (pq.begin(),pq.end(),vertex_greater_than<T>());
 			}
 		}
 	}
@@ -515,48 +513,46 @@ void Graph<T>::dijkstraShortestPath(const T &s)
 template <class T>
 int Graph<T>::dijkstraShortestPath(const T &s, const T &d)
 {
-	for (int i = 0; i < vertexSet.size(); i++)
+	for(unsigned int i = 0; i < vertexSet.size(); i++)
 	{
-		vertexSet.at(i)->processed = false;
-		vertexSet.at(i)->path = NULL;
-		vertexSet.at(i)->dist = INT_INFINITY;
+		vertexSet[i]->path = NULL;
+		vertexSet[i]->dist = INT_INFINITY;
+		vertexSet[i]->processed = false;
 	}
 
 	Vertex<T>* v = getVertex(s);
 	v->dist = 0;
-	vector<Vertex<T>* > q;
 
-	q.push_back(v);
+	vector< Vertex<T>* > pq;
+	pq.push_back(v);
+	make_heap(pq.begin(), pq.end());
 
-	while (!(q.size() == 0))
+	while( !pq.empty() )
 	{
-		v = q.front();
-		q.erase(q.begin()+0);
-		for (int i = 0; i < v->adj.size(); i++)
+		v = pq.front();
+		if (v->getInfo() == d)
+			return v->dist;
+		pop_heap(pq.begin(), pq.end());
+		pq.pop_back();
+
+		for(unsigned int i = 0; i < v->adj.size(); i++)
 		{
-			Vertex<T>* w = v->adj.at(i).dest;
-			if (w->info == d)
-				return w->dist;
-			if (v->dist + v->adj.at(i).weight < w->dist)
+			Vertex<T>* w = v->adj[i].dest;
+
+			if(v->dist + v->adj[i].weight < w->dist )
 			{
-				bool wasInf = false;
-				if (w->dist == INT_INFINITY)
-					wasInf = true;
-				w->dist = v->dist + v->adj.at(i).weight;
+				w->dist = v->dist + v->adj[i].weight;
 				w->path = v;
-				if (wasInf)
+				if(!w->processed)
 				{
-					q.push_back(w);
-					make_heap(q.begin(), q.end(), vertex_greater_than<T>());
+					w->processed = true;
+					pq.push_back(w);
 				}
-				else
-				{
-					q.erase(find(q.begin(), q.end(), w));
-					q.push_back(w);
-				}
+				make_heap (pq.begin(),pq.end(),vertex_greater_than<T>());
 			}
 		}
 	}
+	return INT_INFINITY;
 }
 
 #endif /* GRAPH_H_ */
