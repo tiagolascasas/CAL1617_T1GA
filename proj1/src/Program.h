@@ -17,6 +17,7 @@ private:
 	vector<string> marketNames;
 	vector<Purchase> purchases;
 	bool running;
+	float avgVelocity;
 
 	void loadGraph(char* nodesFile, char* roadInfoFile, char* roadFile);
 	void loadMarkets(char* marketsFile);
@@ -31,6 +32,8 @@ private:
 	int getIndexOfMarket(RoadNode m);
 	void displayConnectivity();
 	void allMarketsSingleClient();
+	int calculateTime(int length);
+	string getMarketName(int idx);
 
 public:
 	Program(char** files);

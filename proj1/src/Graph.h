@@ -475,7 +475,7 @@ void Graph<T>::dijkstraShortestPath(const T &s)
 	{
 		vertexSet[i]->path = NULL;
 		vertexSet[i]->dist = INT_INFINITY;
-		vertexSet[i]->processing = false;
+		vertexSet[i]->processed = false;
 	}
 
 	Vertex<T>* v = getVertex(s);
@@ -499,9 +499,9 @@ void Graph<T>::dijkstraShortestPath(const T &s)
 			{
 				w->dist = v->dist + v->adj[i].weight;
 				w->path = v;
-				if(!w->processing)
+				if(!w->processed)
 				{
-					w->processing = true;
+					w->processed = true;
 					pq.push_back(w);
 				}
 				make_heap (pq.begin(),pq.end(),vertex_greater_than<T>());

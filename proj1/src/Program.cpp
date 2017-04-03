@@ -14,11 +14,9 @@
 
 #define DEFAULT_PURCHASES 10
 
-Program::Program(char** files)
+Program::Program(char** files): avgVelocity(30), running(true)
 {
 	this->gv = new GraphViewer(600, 600, true);
-	this->running = true;
-
 	loadGraph(files[1], files[2], files[3]);
 	loadMarkets(files[4]);
 	generatePurchases(DEFAULT_PURCHASES);
@@ -115,7 +113,7 @@ void Program::loadMarkets(char* marketsFile)
 		string mName;
 		ss >> marketID;
 		getline(ss, mName);
-		cout << mName << endl;
+		mName.erase(0, 1);
 		for (int i = 0; i < graph.getNumVertex(); i++)
 		{
 			if (graph.getVertexSet().at(i)->getInfo().getID() == marketID)
@@ -290,10 +288,12 @@ void Program::singleMarketSingleClient()
 	{
 		int length = graph.dijkstraShortestPath(markets.at(marketIdx), purchases.at(clientIdx).getAddr());
 		vector<RoadNode> path = graph.getPath(markets.at(marketIdx), purchases.at(clientIdx).getAddr());
-		if (length == INT_MAX)
+		if (length == INT_INFINITY)
 			cout << "There is no connection between the market and the client\n";
 		else
-			cout << "Shortest path has " << length << " meters (" << setprecision(2) << length / 1000.0 << " Km)\n";
+			cout << "Shortest path from market "<< marketIdx + 1 << " (" << getMarketName(marketIdx) <<
+					") is " << length << " meters (" << setprecision(2) << length / 1000.0 <<
+					" Km), estimated time is " << calculateTime(length) << " min\n";
 	}
 	catch (out_of_range &ex)
 	{
@@ -304,12 +304,13 @@ void Program::singleMarketSingleClient()
 
 void Program::checkValidMarkets()
 {
-	for (int i = 0; i < purchases.size(); i++)
+	for (int i = 0; i < markets.size(); i++)
 	{
-		for (int j = 0; j < markets.size(); j++)
+		graph.dijkstraShortestPath(markets.at(i));
+		for (int j = 0; j < purchases.size(); j++)
 		{
-			if (graph.dijkstraShortestPath(markets.at(j), purchases.at(i).getAddr()) != INT_MAX)
-				purchases.at(i).addValidMarket(markets.at(j));
+			if (graph.getVertex(purchases.at(j).getAddr())->getDist() != INT_INFINITY)
+				purchases.at(j).addValidMarket(markets.at(i));
 		}
 	}
 }
@@ -322,6 +323,18 @@ int Program::getIndexOfMarket(RoadNode m)
 			return i;
 	}
 	return -1;
+}
+
+string Program::getMarketName(int idx)
+{
+	try
+	{
+		return marketNames.at(idx);
+	}
+	catch (out_of_range &ex)
+	{
+		cout << "Invalid market selected\n";
+	}
 }
 
 void Program::displayConnectivity()
@@ -354,8 +367,8 @@ void Program::allMarketsSingleClient()
 		{
 			int length = graph.dijkstraShortestPath(purchases.at(clientIdx).getValidMarkets().at(i),
 													purchases.at(clientIdx).getAddr());
-			cout << "Shortest path for market "<< i + 1 << " is " << length << " meters (" <<
-					setprecision(2) << length / 1000.0 << " Km)\n";
+			cout << "Shortest path from market "<< i + 1 << " (" << getMarketName(i) << ") is " << length << " meters (" <<
+					setprecision(2) << length / 1000.0 << " Km), estimated time is " << calculateTime(length) << " min\n";
 		}
 	}
 	catch (out_of_range &ex)
@@ -364,4 +377,11 @@ void Program::allMarketsSingleClient()
 		return;
 	}
 	return;
+}
+
+int Program::calculateTime(int length)
+{
+	float v = avgVelocity / 3.6;
+	float t = length / v;
+	return static_cast<int>(t / 60);
 }
