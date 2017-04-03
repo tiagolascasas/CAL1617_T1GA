@@ -165,11 +165,9 @@ void Program::run()
 			displayMarketsInfo();
 			break;
 		case 2:
-		{
 			displayGraphStatistics(graph);
 			displayGraph(graph);
 			break;
-		}
 		case 3:
 			cout << "\nNumber of purchases to generate:";
 			int n;
@@ -287,13 +285,24 @@ void Program::singleMarketSingleClient()
 	try
 	{
 		int length = graph.dijkstraShortestPath(markets.at(marketIdx), purchases.at(clientIdx).getAddr());
-		vector<RoadNode> path = graph.getPath(markets.at(marketIdx), purchases.at(clientIdx).getAddr());
+		vector<Vertex<RoadNode>* > path = graph.getPathVertex(markets.at(marketIdx), purchases.at(clientIdx).getAddr());
+
 		if (length == INT_INFINITY)
 			cout << "There is no connection between the market and the client\n";
 		else
+		{
+			try
+			{
+				displaySubGraph(path);
+			}
+			catch(out_of_range &ex)
+			{
+				cout << "Problem displaying graph\n";
+			}
 			cout << "Shortest path from market "<< marketIdx + 1 << " (" << getMarketName(marketIdx) <<
 					") is " << length << " meters (" << setprecision(2) << length / 1000.0 <<
 					" Km), estimated time is " << calculateTime(length) << " min\n";
+		}
 	}
 	catch (out_of_range &ex)
 	{
@@ -384,4 +393,48 @@ int Program::calculateTime(int length)
 	float v = avgVelocity / 3.6;
 	float t = length / v;
 	return static_cast<int>(t / 60);
+}
+
+string Program::getMarketName(RoadNode n)
+{
+	for (int i = 0; i < markets.size(); i++)
+	{
+		if (markets.at(i) == n)
+			return marketNames.at(i);
+	}
+}
+
+void Program::displaySubGraph(vector<Vertex<RoadNode>* > path)
+{
+	gv->closeWindow();
+	gv->createWindow(600, 600);
+	gv->defineVertexColor("blue");
+	gv->defineEdgeColor("black");
+	gv->defineEdgeCurved(true);
+
+	gv->addNode(path.at(0)->getInfo().getID());
+	gv->setVertexLabel(path.at(0)->getInfo().getID(), getMarketName(path.at(0)->getInfo()));
+	gv->setVertexSize(path.at(0)->getInfo().getID(), 5);
+	for (int i = 1; i < path.size() - 1; i++)
+	{
+		gv->addNode(path.at(i)->getInfo().getID());
+		gv->setVertexSize(path.at(i)->getInfo().getID(), 5);
+/*
+		for (int j = 0; j < path.at(i)->getAdj().size(); j++)
+		{
+			if (path.at(i - 1)->getAdj().at(j).getDest()->getInfo() == path.at(i)->getInfo())
+			{
+				gv->addEdge(i, path.at(i - 1)->getInfo().getID(), path.at(i)->getInfo().getID(), EdgeType::DIRECTED);
+				gv->setEdgeWeight(i, path.at(i - 1)->getAdj().at(j).getWeight());
+				break;
+			}
+		}*/
+		gv->addEdge(i, path.at(i - 1)->getInfo().getID(), path.at(i)->getInfo().getID(), EdgeType::DIRECTED);
+		gv->setEdgeWeight(i, path.at(i - 1)->getInfo().getDistanceBetween(path.at(i)->getInfo()));
+	}
+	gv->addNode(path.at(path.size() - 1)->getInfo().getID());
+	gv->setVertexLabel(path.at(path.size() - 1)->getInfo().getID(), "Destination");
+	gv->setVertexSize(path.at(path.size() - 1)->getInfo().getID(), 5);
+
+	gv->rearrange();
 }

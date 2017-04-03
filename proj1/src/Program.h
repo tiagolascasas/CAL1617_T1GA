@@ -34,6 +34,8 @@ private:
 	void allMarketsSingleClient();
 	int calculateTime(int length);
 	string getMarketName(int idx);
+	string getMarketName(RoadNode n);
+	void displaySubGraph(vector<Vertex<RoadNode>* > path);
 
 public:
 	Program(char** files);

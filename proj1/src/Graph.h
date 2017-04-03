@@ -139,6 +139,7 @@ public:
 	bool isDAG();
 	vector<T> topologicalOrder();
 	vector<T> getPath(const T &origin, const T &dest);
+	vector<Vertex<T>* > getPathVertex(const T &origin, const T &dest);
 	void unweightedShortestPath(const T &s);
 	void dijkstraShortestPath(const T &s);
 	int dijkstraShortestPath(const T &s, const T &d);
@@ -421,26 +422,51 @@ vector<T> Graph<T>::topologicalOrder()
 }
 
 template<class T>
-vector<T> Graph<T>::getPath(const T &origin, const T &dest)
-{
-	list<T> res;
+vector<T> Graph<T>::getPath(const T &origin, const T &dest){
+
+	list<T> buffer;
 	Vertex<T>* v = getVertex(dest);
-	res.push_front(dest);
-	while (v->path != NULL && v->path->info != origin)
-	{
+
+	buffer.push_front(v->info);
+	while ( v->path != NULL &&  v->path->info != origin) {
 		v = v->path;
-		res.push_front(v->info);
+		buffer.push_front(v->info);
 	}
-	if (v->path != NULL)
-		res.push_front(v->path->info);
-	vector<T> vres;
-	while (!res.empty())
-	{
-		vres.push_back(res.front());
-		res.pop_front();
+	if( v->path != NULL )
+		buffer.push_front(v->path->info);
+
+
+	vector<T> res;
+	while( !buffer.empty() ) {
+		res.push_back( buffer.front() );
+		buffer.pop_front();
 	}
-	return vres;
+	return res;
 }
+
+template<class T>
+vector<Vertex<T>* > Graph<T>::getPathVertex(const T &origin, const T &dest){
+
+	list<Vertex<T>* > buffer;
+	Vertex<T>* v = getVertex(dest);
+
+	buffer.push_front(v);
+	while ( v->path != NULL &&  v->path->info != origin) {
+		v = v->path;
+		buffer.push_front(v);
+	}
+	if( v->path != NULL )
+		buffer.push_front(v->path);
+
+
+	vector<Vertex<T>* > res;
+	while( !buffer.empty() ) {
+		res.push_back( buffer.front() );
+		buffer.pop_front();
+	}
+	return res;
+}
+
 
 template<class T>
 void Graph<T>::unweightedShortestPath(const T &s) {
