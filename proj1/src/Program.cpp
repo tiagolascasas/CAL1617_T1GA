@@ -410,7 +410,7 @@ void Program::displaySubGraph(vector<Vertex<RoadNode>* > path)
 	gv->createWindow(600, 600);
 	gv->defineVertexColor("blue");
 	gv->defineEdgeColor("black");
-	gv->defineEdgeCurved(true);
+	gv->defineEdgeCurved(false);
 
 	gv->addNode(path.at(0)->getInfo().getID());
 	gv->setVertexLabel(path.at(0)->getInfo().getID(), getMarketName(path.at(0)->getInfo()));
@@ -435,6 +435,10 @@ void Program::displaySubGraph(vector<Vertex<RoadNode>* > path)
 	gv->addNode(path.at(path.size() - 1)->getInfo().getID());
 	gv->setVertexLabel(path.at(path.size() - 1)->getInfo().getID(), "Destination");
 	gv->setVertexSize(path.at(path.size() - 1)->getInfo().getID(), 5);
+	gv->addEdge(path.size() - 1, path.at(path.size() - 2)->getInfo().getID(),
+				path.at(path.size() - 1)->getInfo().getID(), EdgeType::DIRECTED);
+	gv->setEdgeWeight(path.size() - 1,
+			path.at(path.size() - 2)->getInfo().getDistanceBetween(path.at(path.size() - 1)->getInfo()));
 
 	gv->rearrange();
 }
