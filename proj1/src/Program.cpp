@@ -187,6 +187,12 @@ void Program::run()
 		case 7:
 			allMarketsSingleClient();
 			break;
+		case 8:
+			singleMarketAllClients();
+			break;
+		case 9:
+			allMarketsAllClients();
+			break;
 		case 0:
 			running = false;
 			break;
@@ -455,4 +461,45 @@ void Program::displaySubGraph(vector<Vertex<RoadNode>* > path)
 			path.at(path.size() - 2)->getInfo().getDistanceBetween(path.at(path.size() - 1)->getInfo()));
 
 	gv->rearrange();
+}
+
+void Program::setClosestMarketToAllClients()
+{
+	for (int i = 0; i < markets.size(); i++)
+	{
+		graph.dijkstraShortestPath(markets.at(i));
+		for (int j = 0; j < purchases.size(); j++)
+		{
+			int dist = graph.getVertex(purchases.at(j).getAddr())->getDist();
+			if (dist != INT_INFINITY)
+				purchases.at(j).setClosestMarketIndex(i, dist);
+		}
+	}
+}
+
+void Program::displayClosestMarketsToClients()
+{
+	cout << endl;	//use sort()
+	for (int i = 0; i < purchases.size(); i++)
+	{
+		if (purchases.at(i).getClosestMarketIndex() != -1)
+			cout << "Purchase " << i + 1 << ": " << purchases.at(i).getClosestMarketIndex() + 1 <<
+					" (" << getMarketName(purchases.at(i).getClosestMarketIndex()) << ")\n";
+		else
+			cout << "Purchase " << i + 1 << ": no market can reach this client\n";
+	}
+}
+
+void Program::singleMarketAllClients()
+{
+	//calculate with primm, 1 market
+	//print path
+	return;
+}
+
+void Program::allMarketsAllClients()
+{
+	setClosestMarketToAllClients();
+	displayClosestMarketsToClients();
+	//calculate with primm, 3 markets
 }

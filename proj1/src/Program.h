@@ -21,23 +21,32 @@ private:
 
 	void loadGraph(char* nodesFile, char* roadInfoFile, char* roadFile);
 	void loadMarkets(char* marketsFile);
+
 	void displayMenu();
 	void displayGraphStatistics(Graph<RoadNode> g);
 	void displayGraph(Graph<RoadNode> g);
 	void displayMarketsInfo();
 	void displayPurchasesInfo();
-	void generatePurchases(int n);
-	void singleMarketSingleClient();
-	void addMarketToPurchase(RoadNode market, RoadNode purchaseAddr);
-	void dfsConnectivity(Vertex<RoadNode>* v, RoadNode market);
-	void checkValidMarkets();
-	int getIndexOfMarket(RoadNode m);
 	void displayConnectivity();
-	void allMarketsSingleClient();
+	void displaySubGraph(vector<Vertex<RoadNode>* > path);
+	void displayClosestMarketsToClients();
+
+	void generatePurchases(int n);
 	int calculateTime(int length);
+
+	int getIndexOfMarket(RoadNode m);
 	string getMarketName(int idx);
 	string getMarketName(RoadNode n);
-	void displaySubGraph(vector<Vertex<RoadNode>* > path);
+	void checkValidMarkets();
+	void addMarketToPurchase(RoadNode market, RoadNode purchaseAddr);
+
+	void dfsConnectivity(Vertex<RoadNode>* v, RoadNode market);
+	void setClosestMarketToAllClients();
+	void singleMarketSingleClient();
+	void allMarketsSingleClient();
+	void singleMarketAllClients();
+	void allMarketsAllClients();
+
 
 public:
 	Program(char** files);
