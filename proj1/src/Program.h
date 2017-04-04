@@ -28,6 +28,8 @@ private:
 	void displayPurchasesInfo();
 	void generatePurchases(int n);
 	void singleMarketSingleClient();
+	void addMarketToPurchase(RoadNode market, RoadNode purchaseAddr);
+	void dfsConnectivity(Vertex<RoadNode>* v, RoadNode market);
 	void checkValidMarkets();
 	int getIndexOfMarket(RoadNode m);
 	void displayConnectivity();

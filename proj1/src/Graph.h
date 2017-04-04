@@ -35,6 +35,8 @@ public:
 	int getIndegree() const;
 	vector<Edge<T> > getAdj() const;
 	int getDist() const;
+	bool getVisited() const;
+	void setVisited(bool visited);
 	friend class Graph<T>;
 	Vertex<T>* path;
 };
@@ -71,6 +73,18 @@ template <class T>
 int Vertex<T>::getDist() const
 {
 	return dist;
+}
+
+template <class T>
+bool Vertex<T>::getVisited() const
+{
+	return visited;
+}
+
+template <class T>
+void Vertex<T>::setVisited(bool visited)
+{
+	this->visited = visited;
 }
 
 //------------------------------
@@ -143,6 +157,7 @@ public:
 	void unweightedShortestPath(const T &s);
 	void dijkstraShortestPath(const T &s);
 	int dijkstraShortestPath(const T &s, const T &d);
+	void resetVisited();
 };
 
 template <class T>
@@ -579,6 +594,13 @@ int Graph<T>::dijkstraShortestPath(const T &s, const T &d)
 		}
 	}
 	return INT_INFINITY;
+}
+
+template <class T>
+void Graph<T>::resetVisited()
+{
+	for (int i = 0; i < vertexSet.size(); i++)
+		vertexSet.at(i)->visited = false;
 }
 
 #endif /* GRAPH_H_ */

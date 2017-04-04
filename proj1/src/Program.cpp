@@ -266,6 +266,10 @@ void Program::displayPurchasesInfo()
 			vector<RoadNode>::iterator it = find(markets.begin(), markets.end(), purchases.at(i).getValidMarkets().at(j));
 			cout << distance(markets.begin(), it) + 1 << " ";
 		}
+//		if (purchases.at(i).getClosestMarketIndex() != -1)
+//			cout << ", closest market is " << purchases.at(i).getClosestMarketIndex() + 1 << endl;
+//		else
+//			cout << "no market can reach this client" << endl;
 		cout << endl;
 	}
 }
@@ -295,7 +299,7 @@ void Program::singleMarketSingleClient()
 			{
 				displaySubGraph(path);
 			}
-			catch(out_of_range &ex)
+			catch(...)
 			{
 				cout << "Problem displaying graph\n";
 			}
@@ -311,16 +315,36 @@ void Program::singleMarketSingleClient()
 	return;
 }
 
+void Program::addMarketToPurchase(RoadNode market, RoadNode purchaseAddr)
+{
+	for (int i = 0; i < purchases.size(); i++)
+	{
+		if (purchases.at(i).getAddr() == purchaseAddr)
+		{
+			purchases.at(i).addValidMarket(market);
+			break;
+		}
+	}
+}
+
+void Program::dfsConnectivity(Vertex<RoadNode>* v, RoadNode market)
+{
+	v->setVisited(true);
+	addMarketToPurchase(market, v->getInfo());
+
+	for (int i = 0; i < v->getAdj().size(); i++)
+	{
+		if (!v->getAdj().at(i).getDest()->getVisited())
+			dfsConnectivity(v->getAdj().at(i).getDest(), market);
+	}
+}
+
 void Program::checkValidMarkets()
 {
 	for (int i = 0; i < markets.size(); i++)
 	{
-		graph.dijkstraShortestPath(markets.at(i));
-		for (int j = 0; j < purchases.size(); j++)
-		{
-			if (graph.getVertex(purchases.at(j).getAddr())->getDist() != INT_INFINITY)
-				purchases.at(j).addValidMarket(markets.at(i));
-		}
+		dfsConnectivity(graph.getVertex(markets.at(i)), markets.at(i));
+		graph.resetVisited();
 	}
 }
 
@@ -419,16 +443,6 @@ void Program::displaySubGraph(vector<Vertex<RoadNode>* > path)
 	{
 		gv->addNode(path.at(i)->getInfo().getID());
 		gv->setVertexSize(path.at(i)->getInfo().getID(), 5);
-/*
-		for (int j = 0; j < path.at(i)->getAdj().size(); j++)
-		{
-			if (path.at(i - 1)->getAdj().at(j).getDest()->getInfo() == path.at(i)->getInfo())
-			{
-				gv->addEdge(i, path.at(i - 1)->getInfo().getID(), path.at(i)->getInfo().getID(), EdgeType::DIRECTED);
-				gv->setEdgeWeight(i, path.at(i - 1)->getAdj().at(j).getWeight());
-				break;
-			}
-		}*/
 		gv->addEdge(i, path.at(i - 1)->getInfo().getID(), path.at(i)->getInfo().getID(), EdgeType::DIRECTED);
 		gv->setEdgeWeight(i, path.at(i - 1)->getInfo().getDistanceBetween(path.at(i)->getInfo()));
 	}
