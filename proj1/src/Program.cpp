@@ -11,14 +11,16 @@
 #include <sstream>
 #include <algorithm>
 #include <iomanip>
+#include <cmath>
 
 #define DEFAULT_PURCHASES 10
 
-Program::Program(char** files): avgVelocity(30), running(true)
+Program::Program(char** files): avgVelocity(30), running(true), lastEdgeID(-1)
 {
-	this->gv = new GraphViewer(600, 600, true);
 	loadGraph(files[1], files[2], files[3]);
 	loadMarkets(files[4]);
+	loadMap(files[5]);
+	this->gv = new GraphViewer(xRes, yRes, false);
 	generatePurchases(DEFAULT_PURCHASES);
 }
 
@@ -97,6 +99,37 @@ void Program::loadGraph(char* nodesFile, char* roadInfoFile, char* roadFile)
 	nodes.close();
 	roadInfo.close();
 	roads.close();
+}
+
+void Program::loadMap(char* mapFile)
+{
+	ifstream map(mapFile);
+	if (!map.is_open())
+		throw new FileNotFound(mapFile);
+
+	string s;
+	istringstream* ss;
+	char comma;
+	getline(map, s);
+	mapName = s;
+	getline(map, s);
+	ss = new istringstream(s);
+	pair<float, float> p1;
+	(*ss) >> p1.first >> comma >> p1.second;
+	origin = p1;
+	getline(map, s);
+	ss = new istringstream(s);
+	pair<float, float> p2;
+	(*ss) >> p2.first >> comma >> p1.second;
+	yMax = p2;
+	getline(map, s);
+	ss = new istringstream(s);
+	pair<float, float> p3;
+	(*ss) >> p3.first >> comma >> p3.second;
+	xMax = p3;
+	getline(map, s);
+	ss = new istringstream(s);
+	(*ss) >> xRes >> yRes;
 }
 
 void Program::loadMarkets(char* marketsFile)
@@ -220,13 +253,15 @@ void Program::displayMenu()
 
 void Program::displayGraph(Graph<RoadNode> g)
 {
-	gv->createWindow(600, 600);
+	gv->setBackground(mapName);
+	gv->createWindow(xRes, yRes);
 	gv->defineVertexColor("blue");
 	gv->defineEdgeColor("black");
-	gv->defineEdgeCurved(true);
+	gv->defineEdgeCurved(false);
 	for (int i = 0; i < g.getVertexSet().size(); i++)
 	{
-		gv->addNode(g.getVertexSet().at(i)->getInfo().getID());
+		pair<int, int> coord = mapCoordToXY(g.getVertexSet().at(i)->getInfo());
+		gv->addNode(g.getVertexSet().at(i)->getInfo().getID(), coord.first, coord.second);
 		gv->setVertexSize(g.getVertexSet().at(i)->getInfo().getID(), 5);
 	}
 	int edgeID = 0;
@@ -239,10 +274,11 @@ void Program::displayGraph(Graph<RoadNode> g)
 			int id2 = n->getAdj().at(j).getDest()->getInfo().getID();
 			gv->addEdge(edgeID, id1, id2, EdgeType::DIRECTED);
 			gv->setEdgeWeight(edgeID, n->getAdj().at(j).getWeight());
-		//	gv->setEdgeLabel(edgeID, n->getAdj().at(i).)
 			edgeID++;
 		}
 	}
+	gv->rearrange();
+	lastEdgeID = edgeID;
 }
 
 void Program::displayGraphStatistics(Graph<RoadNode> g)
@@ -272,10 +308,6 @@ void Program::displayPurchasesInfo()
 			vector<RoadNode>::iterator it = find(markets.begin(), markets.end(), purchases.at(i).getValidMarkets().at(j));
 			cout << distance(markets.begin(), it) + 1 << " ";
 		}
-//		if (purchases.at(i).getClosestMarketIndex() != -1)
-//			cout << ", closest market is " << purchases.at(i).getClosestMarketIndex() + 1 << endl;
-//		else
-//			cout << "no market can reach this client" << endl;
 		cout << endl;
 	}
 }
@@ -437,30 +469,37 @@ string Program::getMarketName(RoadNode n)
 void Program::displaySubGraph(vector<Vertex<RoadNode>* > path)
 {
 	gv->closeWindow();
-	gv->createWindow(600, 600);
+	gv->setBackground(mapName);
+	gv->createWindow(xRes, yRes);
+	cout << mapName << endl;
 	gv->defineVertexColor("blue");
 	gv->defineEdgeColor("black");
 	gv->defineEdgeCurved(false);
 
-	gv->addNode(path.at(0)->getInfo().getID());
+	pair<int, int> coord = mapCoordToXY(path.at(0)->getInfo());
+	gv->addNode(path.at(0)->getInfo().getID(), coord.first, coord.second);
 	gv->setVertexLabel(path.at(0)->getInfo().getID(), getMarketName(path.at(0)->getInfo()));
+	gv->setVertexColor(path.at(0)->getInfo().getID(), RED);
 	gv->setVertexSize(path.at(0)->getInfo().getID(), 5);
 	for (int i = 1; i < path.size() - 1; i++)
 	{
-		gv->addNode(path.at(i)->getInfo().getID());
+		coord = mapCoordToXY(path.at(i)->getInfo());
+		gv->addNode(path.at(i)->getInfo().getID(), coord.first, coord.second);
 		gv->setVertexSize(path.at(i)->getInfo().getID(), 5);
 		gv->addEdge(i, path.at(i - 1)->getInfo().getID(), path.at(i)->getInfo().getID(), EdgeType::DIRECTED);
 		gv->setEdgeWeight(i, path.at(i - 1)->getInfo().getDistanceBetween(path.at(i)->getInfo()));
 	}
-	gv->addNode(path.at(path.size() - 1)->getInfo().getID());
+	coord = mapCoordToXY(path.at(path.size() - 1)->getInfo());
+	gv->addNode(path.at(path.size() - 1)->getInfo().getID(), coord.first, coord.second);
 	gv->setVertexLabel(path.at(path.size() - 1)->getInfo().getID(), "Destination");
+	gv->setVertexColor(path.at(path.size() - 1)->getInfo().getID(), GREEN);
 	gv->setVertexSize(path.at(path.size() - 1)->getInfo().getID(), 5);
 	gv->addEdge(path.size() - 1, path.at(path.size() - 2)->getInfo().getID(),
 				path.at(path.size() - 1)->getInfo().getID(), EdgeType::DIRECTED);
 	gv->setEdgeWeight(path.size() - 1,
 			path.at(path.size() - 2)->getInfo().getDistanceBetween(path.at(path.size() - 1)->getInfo()));
-
 	gv->rearrange();
+	lastEdgeID = path.size() - 1;
 }
 
 void Program::setClosestMarketToAllClients()
@@ -502,4 +541,27 @@ void Program::allMarketsAllClients()
 	setClosestMarketToAllClients();
 	displayClosestMarketsToClients();
 	//calculate with primm, 3 markets
+}
+
+pair<int, int> Program::mapCoordToXY(RoadNode n)
+{
+	float lond = abs(origin.second - xMax.second) / xRes;
+	float lond2 = abs(origin.second - n.getDegLong());
+	int x = static_cast<int>(lond2 / lond);
+
+	float latd = abs(origin.first - yMax.first) / yRes;
+	float latd2 = abs(origin.first - n.getDegLat());
+	int y = static_cast<int>(latd2 / latd);
+
+	cout << x << ", " << y << endl;
+
+	return pair<int, int>(x, y);
+}
+
+void Program::resetGV()
+{
+	for (int i = 0; i < graph.getVertexSet().size(); i++)
+		gv->removeNode(graph.getVertexSet().at(i)->getInfo().getID());
+	for (int i = 0; i <= lastEdgeID; i++)
+		gv->removeEdge(i);
 }

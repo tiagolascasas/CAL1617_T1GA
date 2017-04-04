@@ -16,11 +16,16 @@ private:
 	vector<RoadNode> markets;
 	vector<string> marketNames;
 	vector<Purchase> purchases;
+	unsigned int xRes, yRes;
+	string mapName;
+	pair<float, float> origin, xMax, yMax;
 	bool running;
 	float avgVelocity;
+	int lastEdgeID;
 
 	void loadGraph(char* nodesFile, char* roadInfoFile, char* roadFile);
 	void loadMarkets(char* marketsFile);
+	void loadMap(char* mapFile);
 
 	void displayMenu();
 	void displayGraphStatistics(Graph<RoadNode> g);
@@ -31,8 +36,10 @@ private:
 	void displaySubGraph(vector<Vertex<RoadNode>* > path);
 	void displayClosestMarketsToClients();
 
+	void resetGV();
 	void generatePurchases(int n);
 	int calculateTime(int length);
+	pair<int, int> mapCoordToXY(RoadNode n);
 
 	int getIndexOfMarket(RoadNode m);
 	string getMarketName(int idx);

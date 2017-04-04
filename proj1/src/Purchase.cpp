@@ -1,4 +1,5 @@
 #include "Purchase.h"
+#include <climits>
 
 Purchase::Purchase(RoadNode &address): addr(address), closestMarket(pair<int, int>(-1, INT_MAX)){};
 
