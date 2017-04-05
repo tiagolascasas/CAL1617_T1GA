@@ -545,10 +545,9 @@ void Program::singleMarketAllClients()
 			{
 				validPurchases.push_back(purchases.at(i).getAddr()); break;
 			}
-//	graph.primMinimumSpanningTree(markets.at(marketIdx), validPurchases);
-	// DONE calculate with primm, 1 market
-	// TODO print path
-return;
+
+	graph.primMinimumSpanningTree(markets.at(marketIdx), validPurchases);
+	return;
 }
 
 void Program::allMarketsAllClients()
