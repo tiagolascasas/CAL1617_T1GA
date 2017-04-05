@@ -22,6 +22,7 @@ private:
 	bool running;
 	float avgVelocity;
 	int lastEdgeID;
+	int lastNodeID;
 
 	void loadGraph(char* nodesFile, char* roadInfoFile, char* roadFile);
 	void loadMarkets(char* marketsFile);
