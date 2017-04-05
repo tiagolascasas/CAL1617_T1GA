@@ -158,6 +158,8 @@ public:
 	void dijkstraShortestPath(const T &s);
 	int dijkstraShortestPath(const T &s, const T &d);
 	void resetVisited();
+	int primMinimumSpanningTree(const T &s, const  vector<T> &d);
+	int primMinimumSpanningTree(const T &s, const T &d);
 };
 
 template <class T>
@@ -603,4 +605,66 @@ void Graph<T>::resetVisited()
 		vertexSet.at(i)->visited = false;
 }
 
+template <class T>
+int Graph<T>::primMinimumSpanningTree(const T &s, const T &d)
+{
+	for(unsigned int i = 0; i < vertexSet.size(); i++)
+	{
+		vertexSet[i]->path = NULL;
+		vertexSet[i]->dist = INT_INFINITY;
+		vertexSet[i]->processed = false;
+	}
+	Vertex<T>* v = getVertex(s);
+	v->dist = 0;
+
+	vector< Vertex<T>* > pq;
+	pq.push_back(v);
+	make_heap(pq.begin(), pq.end());
+
+	for (int i = 0; i < this->getNumVertex()-1; i++)
+	{
+		int min = INT_INFINITY, min_index;
+
+		for (int j = 0; j < this->getNumVertex(); j++)
+			if (vertexSet[j]->processed == false && vertexSet[j]->dist < min)
+				min = vertexSet[j]->dist, min_index = j;
+		int u = min_index;
+
+		vertexSet[u]->processed = true;
+
+
+		for (int k = 0; k < this->getNumVertex(); k++)
+		{
+			vector<Edge<T> > adj = vertexSet[u]->getAdj();
+			int index = -1;
+			for (unsigned j = 0; j < adj.size(); j++)
+				if(adj[j].getDest()==vertexSet[k])
+					index=j;
+
+			if ((index!=-1) && (vertexSet[k]->processed == false) && (adj[index].getWeight() < vertexSet[k]->dist))
+			{
+				vertexSet[k]->path  = vertexSet[u];
+				vertexSet[k]->dist = adj[index].getWeight();
+			}
+		}
+	}
+}
+
+template <class T>
+int Graph<T>::primMinimumSpanningTree(const T &s, const  vector<T> &d)
+{
+	for(unsigned int i = 0; i < vertexSet.size(); i++)
+	{
+		vertexSet[i]->path = NULL;
+		vertexSet[i]->dist = INT_INFINITY;
+		vertexSet[i]->processed = false;
+	}
+
+
+	for (unsigned k=0; k < d.size(); k++)
+	{
+		primMinimumSpanningTree(s, d.at(k));
+	}
+
+}
 #endif /* GRAPH_H_ */

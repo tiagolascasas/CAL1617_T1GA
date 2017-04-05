@@ -531,8 +531,21 @@ void Program::displayClosestMarketsToClients()
 
 void Program::singleMarketAllClients()
 {
-	//calculate with primm, 1 market
-	//print path
+	displayMarketsInfo();
+	cout << "\nSelect by index the market: ";
+	int marketIdx;
+	cin >> marketIdx;
+	marketIdx--;
+	vector<RoadNode> validPurchases;
+	for(int i=0; i < purchases.size(); i++)
+		for(int j=0; j<purchases.at(i).getValidMarkets().size(); j++)
+			if(markets.at(marketIdx) == purchases.at(i).getValidMarkets()[j])
+			{
+				validPurchases.push_back(purchases.at(i).getAddr()); break;
+			}
+	graph.primMinimumSpanningTree(markets.at(marketIdx), validPurchases);
+	// DONE calculate with primm, 1 market
+	// TODO print path
 	return;
 }
 
