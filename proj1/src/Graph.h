@@ -694,15 +694,20 @@ vector<Vertex<T>* > Graph<T>::incompletePrimMST(const T &s, vector<T> elem, int 
 		pop_heap(pq.begin(), pq.end());
 		pq.pop_back();
 		res.push_back(v);
-
-		for (int j = 0; j < elem.size(); j++)
+	/*	for (int j = 0; j < elem.size(); j++)
 		{
-			if (elem.at(j) == v->getInfo())
+			if (elem.at(j).getID() == v->getInfo().getID())
 			{
+				cout << "Found " << elem.at(j) << endl;
 				elem.erase(elem.begin() + j);
-				cout << "size " << elem.size() << endl;
 				break;
 			}
+		}*/
+		typename vector<T>::iterator it = find(elem.begin(), elem.end(), v->getInfo());
+		if (it != elem.end())
+		{
+			cout << "Found " << (*it) << endl;
+			elem.erase(it);
 		}
 		if (elem.size() == 0)
 			return res;

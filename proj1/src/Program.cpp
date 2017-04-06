@@ -531,6 +531,44 @@ void Program::displayClosestMarketsToClients()
 	}
 }
 
+vector<RoadNode> Program::getTruckPath(RoadNode market, vector<RoadNode> &clients, int &distance)
+{
+	//First part: get client node that is farther away from the market
+	Vertex<RoadNode>* farthestVertex;
+	int farthestDistance = 0;
+	for (int i = 0; i < graph.getVertexSet().size(); i++)
+	{
+		vector<RoadNode>::iterator it = find(clients.begin(), clients.end(),
+										graph.getVertexSet().at(i)->getInfo());
+		if (it != clients.end() && farthestDistance < graph.getVertexSet().at(i)->getDist())
+		{
+			farthestVertex = graph.getVertexSet().at(i);
+			farthestDistance = graph.getVertexSet().at(i)->getDist();
+			clients.erase(it);
+		}
+	}
+	distance = farthestDistance;
+
+	//Second part: get the path from the previous vertex to the market, and if it
+	//goes through a client, remove that client from the client vector
+	list<Vertex<RoadNode>* > buffer;
+	buffer.push_front(farthestVertex);
+	while ( farthestVertex->path != NULL &&  farthestVertex->path->getInfo() != market) {
+		farthestVertex = farthestVertex->path;
+		buffer.push_front(farthestVertex);
+	}
+	if( farthestVertex->path != NULL )
+		buffer.push_front(farthestVertex->path);
+
+	//Third part: convert to a vector and return
+	vector<RoadNode> res;
+	while( !buffer.empty() ) {
+		res.push_back( buffer.front()->getInfo() );
+		buffer.pop_front();
+	}
+	return res;
+}
+
 void Program::singleMarketAllClients()
 {
 	displayMarketsInfo();
@@ -545,7 +583,9 @@ void Program::singleMarketAllClients()
 			{
 				validPurchases.push_back(purchases.at(i).getAddr()); break;
 			}
-	//graph.primMinimumSpanningTree(markets.at(marketIdx), validPurchases);
+	int validPurchasesSize = validPurchases.size();
+//	graph.primMinimumSpanningTree(markets.at(marketIdx), validPurchases);
+/*
 	int distance;
 	vector<Vertex<RoadNode>* > mst = graph.incompletePrimMST(markets.at(marketIdx), validPurchases, distance);
 	cout << "MST for market " << marketIdx << " has " << mst.size() << " nodes, distance " << distance << endl;
@@ -556,6 +596,20 @@ void Program::singleMarketAllClients()
 			if (mst.at(i)->getInfo() == validPurchases.at(j))
 				cout << validPurchases.at(j) << endl;
 		}
+	}*/
+	graph.dijkstraShortestPath(markets.at(marketIdx));
+//	vector<vector<RoadNode> > paths;
+	int pathId = 1;
+	while (!validPurchases.empty())
+	{
+		int distance;
+		vector<RoadNode> path = getTruckPath(markets.at(marketIdx), validPurchases, distance);
+//		paths.push_back(path);
+		//print path
+		cout << "Path " << pathId << ": " << validPurchasesSize - validPurchases.size() << " clients served, length is ";
+		cout << distance << " meters (" << distance / 1000.0 << " Km), estimated time is " << calculateTime(distance) << " min\n";
+		validPurchasesSize = validPurchases.size();
+		pathId++;
 	}
 	return;
 }
