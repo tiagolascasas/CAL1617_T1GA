@@ -160,6 +160,7 @@ public:
 	void resetVisited();
 	int primMinimumSpanningTree(const T &s, const  vector<T> &d);
 	int primMinimumSpanningTree(const T &s, const T &d);
+	vector<Vertex<T>* > incompletePrimMST(const T &s, vector<T> elem, int &distance);
 };
 
 template <class T>
@@ -666,5 +667,69 @@ int Graph<T>::primMinimumSpanningTree(const T &s, const  vector<T> &d)
 		primMinimumSpanningTree(s, d.at(k));
 	}
 
+}
+
+template <class T>
+vector<Vertex<T>* > Graph<T>::incompletePrimMST(const T &s, vector<T> elem, int &distance)
+{
+	for(unsigned int i = 0; i < vertexSet.size(); i++)
+	{
+		vertexSet[i]->path = NULL;
+		vertexSet[i]->dist = INT_INFINITY;
+		vertexSet[i]->processed = false;
+	}
+	distance = 0;
+	vector<Vertex<T>* > res;
+
+	Vertex<T>* v = getVertex(s);
+	v->dist = 0;
+
+	vector< Vertex<T>* > pq;
+	pq.push_back(v);
+	make_heap(pq.begin(), pq.end());
+
+	while( !pq.empty() )
+	{
+		v = pq.front();
+		pop_heap(pq.begin(), pq.end());
+		pq.pop_back();
+		res.push_back(v);
+
+		for (int j = 0; j < elem.size(); j++)
+		{
+			if (elem.at(j) == v->getInfo())
+			{
+				elem.erase(elem.begin() + j);
+				cout << "size " << elem.size() << endl;
+				break;
+			}
+		}
+		if (elem.size() == 0)
+			return res;
+
+		for(unsigned int i = 0; i < v->adj.size(); i++)
+		{
+			Vertex<T>* w = v->adj[i].dest;
+
+			if(v->dist + v->adj[i].weight < w->dist )
+			{
+				int min = 0;
+				if (w->dist < v->dist + v->adj[i].weight)
+					min = w->dist;
+				else
+					min = v->dist + v->adj[i].weight;
+				w->dist = min;
+				distance += min;
+				w->path = v;
+				if(!w->processed)
+				{
+					w->processed = true;
+					pq.push_back(w);
+				}
+				make_heap (pq.begin(),pq.end(),vertex_greater_than<T>());
+			}
+		}
+	}
+	return res;
 }
 #endif /* GRAPH_H_ */

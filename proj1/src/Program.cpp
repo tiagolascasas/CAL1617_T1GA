@@ -545,8 +545,18 @@ void Program::singleMarketAllClients()
 			{
 				validPurchases.push_back(purchases.at(i).getAddr()); break;
 			}
-
-	graph.primMinimumSpanningTree(markets.at(marketIdx), validPurchases);
+	//graph.primMinimumSpanningTree(markets.at(marketIdx), validPurchases);
+	int distance;
+	vector<Vertex<RoadNode>* > mst = graph.incompletePrimMST(markets.at(marketIdx), validPurchases, distance);
+	cout << "MST for market " << marketIdx << " has " << mst.size() << " nodes, distance " << distance << endl;
+	for (int i = 0; i < mst.size(); i++)
+	{
+		for (int j = 0; j < validPurchases.size(); j++)
+		{
+			if (mst.at(i)->getInfo() == validPurchases.at(j))
+				cout << validPurchases.at(j) << endl;
+		}
+	}
 	return;
 }
 
@@ -554,7 +564,20 @@ void Program::allMarketsAllClients()
 {
 	setClosestMarketToAllClients();
 	displayClosestMarketsToClients();
-	//calculate with primm, 3 markets
+
+	for (int i = 0; i < markets.size(); i++)
+	{
+		vector<RoadNode> closest;
+		for (int j = 0; j < purchases.size(); j++)
+		{
+			if (purchases.at(j).getClosestMarketIndex() == i)
+				closest.push_back(purchases.at(j).getAddr());
+		}
+		cout << closest.size() << " clients for market " << i << endl;
+		int distance;
+		vector<Vertex<RoadNode>* > mst = graph.incompletePrimMST(markets.at(i), closest, distance);
+		cout << "MST for market " << i << " has " << mst.size() << " nodes, distance " << distance << "\n";
+	}
 }
 
 pair<int, int> Program::mapCoordToXY(RoadNode n)
