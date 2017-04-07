@@ -12,6 +12,7 @@
 #include <algorithm>
 #include <iomanip>
 #include <cmath>
+#include <functional>
 
 #define DEFAULT_PURCHASES 10
 
@@ -520,7 +521,12 @@ void Program::setClosestMarketToAllClients()
 
 void Program::displayClosestMarketsToClients()
 {
-	cout << endl;	//use sort()
+	cout << endl;
+	function<bool(Purchase,Purchase)> f1 =  [](Purchase p1, Purchase p2)
+	{
+		return p1.getClosestMarketIndex() < p2.getClosestMarketIndex();
+	};
+	sort(purchases.begin(), purchases.end(), f1);
 	for (int i = 0; i < purchases.size(); i++)
 	{
 		if (purchases.at(i).getClosestMarketIndex() != -1)
@@ -531,30 +537,57 @@ void Program::displayClosestMarketsToClients()
 	}
 }
 
-vector<RoadNode> Program::getTruckPath(RoadNode market, vector<RoadNode> &clients, int &distance)
+vector<RoadNode> Program::getTruckPath(RoadNode market, vector<RoadNode> *clients, int &distance)
 {
+//	for (int i = 0; i < clients->size(); i++)
+//		cout << clients->at(i) << endl;
+//	cout << endl;
+
 	//First part: get client node that is farther away from the market
 	Vertex<RoadNode>* farthestVertex;
 	int farthestDistance = 0;
+	int farthestIndex;
 	for (int i = 0; i < graph.getVertexSet().size(); i++)
 	{
-		vector<RoadNode>::iterator it = find(clients.begin(), clients.end(),
-										graph.getVertexSet().at(i)->getInfo());
-		if (it != clients.end() && farthestDistance < graph.getVertexSet().at(i)->getDist())
+		for (int j = 0; j < clients->size(); j++)
 		{
-			farthestVertex = graph.getVertexSet().at(i);
-			farthestDistance = graph.getVertexSet().at(i)->getDist();
-			clients.erase(it);
+			if (clients->at(j) == graph.getVertexSet().at(i)->getInfo())
+			{
+			//	cout << "1\n";
+				if (farthestDistance < graph.getVertexSet().at(i)->getDist() &&
+					graph.getVertexSet().at(i)->getDist() < INT_MAX)
+				{
+				//	cout << "2\n";
+					farthestVertex = (Vertex<RoadNode>*)graph.getVertexSet().at(i);
+					farthestDistance = graph.getVertexSet().at(i)->getDist();
+					farthestIndex = j;
+				}
+			}
 		}
 	}
 	distance = farthestDistance;
-
+	RoadNode rn = farthestVertex->getInfo();
+//	cout << "3\n";
+//	clients->erase(clients->begin() + farthestIndex);
+	vector<RoadNode>* aux = new vector<RoadNode>();
+	for (int i = 0; i < clients->size(); i++)
+	{
+		if (i != farthestIndex)
+			aux->push_back(clients->at(i));
+	}
+	clients->clear();
+	for (int i = 0; i < aux->size(); i++)
+		clients->push_back(aux->at(i));
+//	cout << "4\n";
 	//Second part: get the path from the previous vertex to the market, and if it
 	//goes through a client, remove that client from the client vector
 	list<Vertex<RoadNode>* > buffer;
 	buffer.push_front(farthestVertex);
-	while ( farthestVertex->path != NULL &&  farthestVertex->path->getInfo() != market) {
+	while ( farthestVertex->path != NULL &&  farthestVertex->path->getInfo() != market)
+	{
 		farthestVertex = farthestVertex->path;
+		clients->erase(remove(clients->begin(), clients->end(), farthestVertex->getInfo()),
+						clients->end());
 		buffer.push_front(farthestVertex);
 	}
 	if( farthestVertex->path != NULL )
@@ -577,35 +610,21 @@ void Program::singleMarketAllClients()
 	cin >> marketIdx;
 	marketIdx--;
 	vector<RoadNode> validPurchases;
-	for(int i=0; i < purchases.size(); i++)
-		for(int j=0; j<purchases.at(i).getValidMarkets().size(); j++)
-			if(markets.at(marketIdx) == purchases.at(i).getValidMarkets()[j])
-			{
-				validPurchases.push_back(purchases.at(i).getAddr()); break;
-			}
-	int validPurchasesSize = validPurchases.size();
-//	graph.primMinimumSpanningTree(markets.at(marketIdx), validPurchases);
-/*
-	int distance;
-	vector<Vertex<RoadNode>* > mst = graph.incompletePrimMST(markets.at(marketIdx), validPurchases, distance);
-	cout << "MST for market " << marketIdx << " has " << mst.size() << " nodes, distance " << distance << endl;
-	for (int i = 0; i < mst.size(); i++)
+	for (int i = 0; i < purchases.size(); i++)
 	{
-		for (int j = 0; j < validPurchases.size(); j++)
+		for (int j = 0; j < purchases.at(i).getValidMarkets().size(); j++)
 		{
-			if (mst.at(i)->getInfo() == validPurchases.at(j))
-				cout << validPurchases.at(j) << endl;
+			if (purchases.at(i).getValidMarkets().at(j) == markets.at(marketIdx))
+				validPurchases.push_back(purchases.at(i).getAddr());
 		}
-	}*/
+	}
+	int validPurchasesSize = validPurchases.size();
 	graph.dijkstraShortestPath(markets.at(marketIdx));
-//	vector<vector<RoadNode> > paths;
 	int pathId = 1;
 	while (!validPurchases.empty())
 	{
 		int distance;
-		vector<RoadNode> path = getTruckPath(markets.at(marketIdx), validPurchases, distance);
-//		paths.push_back(path);
-		//print path
+		vector<RoadNode> path = getTruckPath(markets.at(marketIdx), &validPurchases, distance);
 		cout << "Path " << pathId << ": " << validPurchasesSize - validPurchases.size() << " clients served, length is ";
 		cout << distance << " meters (" << distance / 1000.0 << " Km), estimated time is " << calculateTime(distance) << " min\n";
 		validPurchasesSize = validPurchases.size();
@@ -621,16 +640,26 @@ void Program::allMarketsAllClients()
 
 	for (int i = 0; i < markets.size(); i++)
 	{
+		cout << "\nMarket " << i + 1 << " (" << getMarketName(i) << "):\n";
 		vector<RoadNode> closest;
 		for (int j = 0; j < purchases.size(); j++)
 		{
 			if (purchases.at(j).getClosestMarketIndex() == i)
 				closest.push_back(purchases.at(j).getAddr());
 		}
-		cout << closest.size() << " clients for market " << i << endl;
-		int distance;
-		vector<Vertex<RoadNode>* > mst = graph.incompletePrimMST(markets.at(i), closest, distance);
-		cout << "MST for market " << i << " has " << mst.size() << " nodes, distance " << distance << "\n";
+		int closestSize = closest.size();
+		cout << "There are " << closestSize << " clients to be served by this market\n";
+		graph.dijkstraShortestPath(markets.at(i));
+		int pathId = 1;
+		while (!closest.empty())
+		{
+			int distance;
+			vector<RoadNode> path = getTruckPath(markets.at(i), &closest, distance);
+			cout << "Path " << pathId << ": " << closestSize - closest.size() << " clients served, length is ";
+			cout << distance << " meters (" << distance / 1000.0 << " Km), estimated time is " << calculateTime(distance) << " min\n";
+			closestSize = closest.size();
+			pathId++;
+		}
 	}
 }
 
