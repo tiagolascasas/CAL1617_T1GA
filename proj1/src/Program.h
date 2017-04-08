@@ -80,34 +80,146 @@ private:
 	 * Displays which markets
 	 */
 	void displayConnectivity();
+
+	/**
+	 * Displays the graph given as argument
+	 * @param path path to be displayed in graphviewer
+	 */
 	void displaySubGraph(vector<Vertex<RoadNode>* > path);
+
+	/**
+	 * Lists the market closest to every client
+	 * Verifies whether the client is reachable or not
+	 */
 	void displayClosestMarketsToClients();
+
+	/**
+	 *
+	 * @param paths
+	 * @param clients
+	 */
 	void displaySetOfPaths(vector<vector<RoadNode> > paths, vector<RoadNode> clients);
 
+	/**
+	 * Clears the graph viewer of all edges and nodes
+	 */
 	void resetGV();
+
+	/**
+	 * Generates the specified amount of purchases
+	 * @param n amount of purchases to generate
+	 */
 	void generatePurchases(int n);
+
+	/**
+	 * Calculates the average amount of time needed to travel a specified distance
+	 * @param length traveled distance
+	 * @return average time to travel specified distance (in minutes)
+	 */
 	int calculateTime(int length, int numberOfClients);
+
+	/**
+	 * Converts a node's geographical coordinates to a (x, y) coordinate system
+	 * @param n node whose coordinates will be converted
+	 * @return pair with the coordinates x and y (in this order)
+	 */
 	pair<int, int> mapCoordToXY(RoadNode n);
 
+
+	/**
+	 * Gets the Market's index in the markets vector
+	 * @param m market to search for in the markets vector
+	 * @return index of given market or -1 if it doesn't exists
+	 */
 	int getIndexOfMarket(RoadNode m);
+
+	/**
+	 * Gets the market's name based on its index on the markets vector
+	 * @param idx index of the market
+	 * @return market's name if the index is valid
+	 */
 	string getMarketName(int idx);
+
+	/**
+	 * Gets the market's name
+	 * @param n RoadNode that represents the market
+	 * @return market's name
+	 */
 	string getMarketName(RoadNode n);
+
+	/**
+	 * Goes through the markets vector to check the valid state of each market
+	 * @see Program::dfsConnectivity
+	 */
 	void checkValidMarkets();
+
+	/**
+	 * Adds the given market to the address that matches purchaseAddr if purchaseAddr is a purchase
+	 * @param market RoadNode of the market to add to the purchase
+	 * @param purchaseAddr RoadNode of the client's adress
+	 */
 	void addMarketToPurchase(RoadNode market, RoadNode purchaseAddr);
 
+	/**
+	 * Tries to find a path from the market to a purchase
+	 * @see Program::addMarketToPurchase
+	 * @param v vertex purchase
+	 * @param market market's address
+	 */
 	void dfsConnectivity(Vertex<RoadNode>* v, RoadNode market);
+
+	/**
+	 * Allows the user to change parameters such as average velocity and time per delivery
+	 */
 	void changeParameters();
+
+	/**
+	 * Uses Dijkstra's shortest path algorithm to get the shortest way from the market to the client
+	 * And calls setClosestMarketIndex
+	 * @see Purchase::setClosestMarketIndex
+	 */
 	void setClosestMarketToAllClients();
+
+	/**
+	 * Gets the path for the truck to deliver to all clients
+	 * @param market node that represents both the starting point and the finish
+	 * @param clients vector with all the clients for the delivery
+	 * @param distance pointer used to return the distance between the market and the farthest client
+	 * @return vector containing the trucks path for the delivery
+	 */
 	vector<RoadNode> getTruckPath(RoadNode market, vector<RoadNode> &clients, int &distance);
 
+	/**
+	 * Distributes from a single market to a single client
+	 */
 	void singleMarketSingleClient();
+
+	/**
+	 * Distributes from all markets to a single client
+	 */
 	void allMarketsSingleClient();
+
+	/**
+	 * Distributes from a single market to all clients
+	 */
 	void singleMarketAllClients();
+
+	/**
+	 * Distributes from all markets to all clients
+	 */
 	void allMarketsAllClients();
 
 
 public:
+	/**
+	 * Creates a Program object
+	 * @param files array containing data files' names
+	 */
 	Program(char** files);
+
+	/**
+	 * Starts the application's interface
+	 */
 	void run();
 };
 
