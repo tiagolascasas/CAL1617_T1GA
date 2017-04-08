@@ -14,6 +14,12 @@
 #include <cmath>
 #include <functional>
 
+#ifdef linux
+#include <curses.h>
+#else
+#include <conio.h>
+#endif
+
 #define DEFAULT_PURCHASES 10
 
 Program::Program(char** files): avgVelocity(30), running(true), lastEdgeID(-1), lastNodeID(-1), deliveryTime(2)
@@ -25,6 +31,7 @@ Program::Program(char** files): avgVelocity(30), running(true), lastEdgeID(-1), 
 	gv->setBackground(mapName);
 	gv->createWindow(xRes, yRes);
 	generatePurchases(DEFAULT_PURCHASES);
+	delete gv;
 }
 
 void Program::loadGraph(char* nodesFile, char* roadInfoFile, char* roadFile)
@@ -260,31 +267,47 @@ void Program::displayMenu()
 
 void Program::displayGraph(Graph<RoadNode> g)
 {
-/*	gv->defineVertexColor("blue");
+	resetGV();
+	gv->defineVertexColor("blue");
 	gv->defineEdgeColor("black");
 	gv->defineEdgeCurved(false);
+
+	vector<pair<int, long long> > processed;
 	for (int i = 0; i < g.getVertexSet().size(); i++)
 	{
 		pair<int, int> coord = mapCoordToXY(g.getVertexSet().at(i)->getInfo());
-		gv->addNode(0, coord.first, coord.second);
-		gv->setVertexSize(0, 5);
+		gv->addNode(i, coord.first, coord.second);
+		gv->setVertexSize(i, 5);
+		if (getIndexOfMarket(g.getVertexSet().at(i)->getInfo()) != -1)
+		{
+			gv->setVertexColor(i, RED);
+			gv->setVertexLabel(i, getMarketName(g.getVertexSet().at(i)->getInfo()));
+		}
+		processed.push_back(pair<int, long long>(i, g.getVertexSet().at(i)->getInfo().getID()));
 	}
 	lastNodeID = g.getVertexSet().size() - 1;
+
 	int edgeID = 0;
 	for (int i = 0; i < g.getVertexSet().size(); i++)
 	{
 		Vertex<RoadNode>* n = g.getVertexSet().at(i);
 		for (int j = 0; j < n->getAdj().size(); j++)
 		{
-			int id1 = n->getInfo().getID();
-			int id2 = n->getAdj().at(j).getDest()->getInfo().getID();
+			int id1, id2;
+			for (int k = 0; k < processed.size(); k++)
+			{
+				if (processed.at(k).second == n->getInfo().getID())
+					id1 = processed.at(k).first;
+				if (processed.at(k).second == n->getAdj().at(j).getDest()->getInfo().getID())
+					id2 = processed.at(k).first;
+			}
 			gv->addEdge(edgeID, id1, id2, EdgeType::DIRECTED);
 			gv->setEdgeWeight(edgeID, n->getAdj().at(j).getWeight());
 			edgeID++;
 		}
 	}
 	lastEdgeID = edgeID;
-	gv->rearrange();*/
+	gv->rearrange();
 
 }
 
@@ -476,8 +499,6 @@ string Program::getMarketName(RoadNode n)
 void Program::displaySubGraph(vector<Vertex<RoadNode>* > path)
 {
 	resetGV();
-//	gv->setBackground(mapName);
-//	gv->createWindow(xRes, yRes);
 	gv->defineVertexColor("blue");
 	gv->defineEdgeColor("black");
 	gv->defineEdgeCurved(false);
@@ -645,10 +666,12 @@ void Program::allMarketsAllClients()
 			if (purchases.at(j).getClosestMarketIndex() == i)
 				closest.push_back(purchases.at(j).getAddr());
 		}
+		vector<RoadNode> backupVP = closest;
 		int closestSize = closest.size();
 		cout << "There are " << closestSize << " clients to be served by this market\n";
 		graph.dijkstraShortestPath(markets.at(i));
 		int pathId = 1;
+		vector<vector<RoadNode> > paths;
 		while (!closest.empty())
 		{
 			int distance;
@@ -657,8 +680,12 @@ void Program::allMarketsAllClients()
 			cout << distance << " meters (" << distance / 1000.0 << " Km), estimated time is " <<
 					calculateTime(distance, closestSize - closest.size()) << " min\n";
 			closestSize = closest.size();
+			paths.push_back(path);
 			pathId++;
 		}
+		displaySetOfPaths(paths, backupVP);
+		cout << "Press any key to continue to the next market...";
+		getch();
 	}
 }
 
@@ -681,12 +708,85 @@ void Program::resetGV()
 		gv->removeEdge(i);
 	for (int i = 0; i <= lastNodeID; i++)
 		gv->removeNode(i);
+	lastEdgeID = -1;
+	lastNodeID = -1;
 	gv->rearrange();
 }
 
 void Program::displaySetOfPaths(vector<vector<RoadNode> > paths, vector<RoadNode> clients)
 {
+	resetGV();
+	vector<pair<RoadNode, int> > processed;
+	gv->defineVertexColor("blue");
+	gv->defineEdgeColor("black");
+	gv->defineEdgeCurved(false);
 
+	pair<int, int> coord = mapCoordToXY(paths.at(0).at(0));
+	gv->addNode(0, coord.first, coord.second);
+	gv->setVertexSize(0, 5);
+	int nodeID = 1;
+	for (int i = 0; i < paths.size(); i++)
+	{
+		for (int j = 0; j < paths.at(i).size(); j++)
+		{
+			bool found = false;
+			for (int k = 0; k < processed.size(); k++)
+			{
+				if (processed.at(k).first == paths.at(i).at(j))
+				{
+					found = true;
+					break;
+				}
+			}
+			if (!found)
+			{
+				coord = mapCoordToXY(paths.at(i).at(j));
+				gv->addNode(nodeID, coord.first, coord.second);
+				if (find(clients.begin(), clients.end(), paths.at(i).at(j)) != clients.end())
+				{
+					gv->setVertexColor(nodeID, GREEN);
+					ostringstream ss;
+					ss << "Path " << i + 1;
+					gv->setVertexLabel(nodeID, ss.str());
+				}
+				gv->setVertexSize(nodeID, 5);
+				processed.push_back(pair<RoadNode, int>(paths.at(i).at(j), nodeID));
+				nodeID++;
+			}
+		}
+	}
+	gv->setVertexColor(0, RED);
+	gv->setVertexLabel(0, getMarketName(paths.at(0).at(0)));
+	lastNodeID = nodeID;
+	int edgeID = 0;
+	vector<pair<int, int> > edgesProcessed;
+	for (int i = 0; i < paths.size(); i++)
+	{
+		for (int j = 1; j < paths.at(i).size(); j++)
+		{
+			pair <RoadNode, int> n1, n2;
+			for (int k = 0; k < processed.size(); k++)
+			{
+				if (processed.at(k).first == paths.at(i).at(j - 1))
+					n1 = processed.at(k);
+				if (processed.at(k).first == paths.at(i).at(j))
+					n2 = processed.at(k);
+			}
+			pair <int, int> edge(n1.second, n2.second);
+			vector<pair <int, int> >::iterator it = find(edgesProcessed.begin(),
+														edgesProcessed.end(),
+														edge);
+			if (it == edgesProcessed.end())
+			{
+				gv->addEdge(edgeID, n1.second, n2.second, EdgeType::DIRECTED);
+				gv->setEdgeWeight(edgeID, n1.first.getDistanceBetween(n2.first));
+				edgesProcessed.push_back(edge);
+				edgeID++;
+			}
+		}
+	}
+	lastEdgeID = edgeID;
+	gv->rearrange();
 }
 
 void Program::changeParameters()

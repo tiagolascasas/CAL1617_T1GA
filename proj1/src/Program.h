@@ -94,9 +94,9 @@ private:
 	void displayClosestMarketsToClients();
 
 	/**
-	 *
-	 * @param paths
-	 * @param clients
+	 * Displays multiple paths at once, signalling the clients of each path appropriately
+	 * @param paths a vector with paths (each path is a vector of RoadNodes)
+	 * @param clients a vector of the clients to be signalled
 	 */
 	void displaySetOfPaths(vector<vector<RoadNode> > paths, vector<RoadNode> clients);
 
@@ -113,7 +113,7 @@ private:
 
 	/**
 	 * Calculates the average amount of time needed to travel a specified distance
-	 * @param length traveled distance
+	 * @param length travelled distance
 	 * @return average time to travel specified distance (in minutes)
 	 */
 	int calculateTime(int length, int numberOfClients);
