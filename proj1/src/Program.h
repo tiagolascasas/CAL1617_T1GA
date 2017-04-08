@@ -95,7 +95,7 @@ private:
 
 	void dfsConnectivity(Vertex<RoadNode>* v, RoadNode market);
 	void setClosestMarketToAllClients();
-	vector<RoadNode> getTruckPath(RoadNode market, vector<RoadNode> *clients, int &distance);
+	vector<RoadNode> getTruckPath(RoadNode market, vector<RoadNode> &clients, int &distance);
 
 	void singleMarketSingleClient();
 	void allMarketsSingleClient();
