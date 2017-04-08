@@ -16,7 +16,7 @@
 
 #define DEFAULT_PURCHASES 10
 
-Program::Program(char** files): avgVelocity(30), running(true), lastEdgeID(-1), lastNodeID(-1)
+Program::Program(char** files): avgVelocity(30), running(true), lastEdgeID(-1), lastNodeID(-1), deliveryTime(2)
 {
 	loadGraph(files[1], files[2], files[3]);
 	loadMarkets(files[4]);
@@ -198,21 +198,21 @@ void Program::run()
 		switch (choice)
 		{
 		case 1:
-			displayMarketsInfo();
-			break;
-		case 2:
 			displayGraphStatistics(graph);
 			displayGraph(graph);
 			break;
+		case 2:
+			displayMarketsInfo();
+			break;
 		case 3:
+			displayPurchasesInfo();
+			break;
+		case 4:
 			cout << "\nNumber of purchases to generate:";
 			int n;
 			cin >> n;
 			generatePurchases(n);
 			cout << n << " purchases generated\n";
-			break;
-		case 4:
-			displayPurchasesInfo();
 			break;
 		case 5:
 			displayConnectivity();
@@ -229,6 +229,9 @@ void Program::run()
 		case 9:
 			allMarketsAllClients();
 			break;
+		case 10:
+			changeParameters();
+			break;
 		case 0:
 			running = false;
 			break;
@@ -241,16 +244,17 @@ void Program::run()
 void Program::displayMenu()
 {
 	cout << endl;
-	cout << "1. Display all markets\n";
-	cout << "2. Display the whole graph\n";
-	cout << "3. Generate random clients/purchases\n";
-	cout << "4. Display all clients/purchases\n";
-	cout << "5. Check connectivity between all clients and all markets\n";	//Conectividade para gr�ficos dirigidos
-	cout << "6. Distribute from a single market to a single client\n";		//Dijkstra	- feito, falta mostrar o grafo
-	cout << "7. Distribute from all markets to a single client\n";			//Dijkstra	- feito, falta mostrar o grafo
-	cout << "8. Distribute from a single market to all clients\n";			//Dijkstra, minimum spanning tree
-	cout << "9. Distribute from all markets to all clients\n";				//Mesmo que o anterior, mas com um preprocessamento
-	cout << "0. Quit program\n";											//que indica o supermercado mais pr�ximo de cada cliente
+	cout << "1.  Display the whole graph\n";
+	cout << "2.  Display all markets\n";
+	cout << "3.  Display all clients/purchases\n";
+	cout << "4.  Generate random clients/purchases\n";
+	cout << "5.  Check connectivity between all clients and all markets\n";
+	cout << "6.  Distribute from a single market to a single client\n";
+	cout << "7.  Distribute from all markets to a single client\n";
+	cout << "8.  Distribute from a single market to all clients\n";
+	cout << "9.  Distribute from all markets to all clients\n";
+	cout << "10. Change delivery parameters\n";
+	cout << "0.  Quit program\n";
 	cout << endl;
 }
 
@@ -346,7 +350,7 @@ void Program::singleMarketSingleClient()
 			}
 			cout << "Shortest path from market "<< marketIdx + 1 << " (" << getMarketName(marketIdx) <<
 					") is " << length << " meters (" << setprecision(2) << length / 1000.0 <<
-					" Km), estimated time is " << calculateTime(length) << " min\n";
+					" Km), estimated time is " << calculateTime(length, 1) << " min\n";
 		}
 	}
 	catch (out_of_range &ex)
@@ -442,7 +446,7 @@ void Program::allMarketsSingleClient()
 			int length = graph.dijkstraShortestPath(purchases.at(clientIdx).getValidMarkets().at(i),
 													purchases.at(clientIdx).getAddr());
 			cout << "Shortest path from market "<< i + 1 << " (" << getMarketName(i) << ") is " << length << " meters (" <<
-					setprecision(2) << length / 1000.0 << " Km), estimated time is " << calculateTime(length) << " min\n";
+					setprecision(2) << length / 1000.0 << " Km), estimated time is " << calculateTime(length, 1) << " min\n";
 		}
 	}
 	catch (out_of_range &ex)
@@ -453,11 +457,11 @@ void Program::allMarketsSingleClient()
 	return;
 }
 
-int Program::calculateTime(int length)
+int Program::calculateTime(int length, int numberOfClients)
 {
 	float v = avgVelocity / 3.6;
 	float t = length / v;
-	return static_cast<int>(t / 60);
+	return static_cast<int>(t / 60 + deliveryTime * numberOfClients);
 }
 
 string Program::getMarketName(RoadNode n)
@@ -607,18 +611,23 @@ void Program::singleMarketAllClients()
 				validPurchases.push_back(purchases.at(i).getAddr());
 		}
 	}
+	vector<RoadNode> backupVP = validPurchases;
 	int validPurchasesSize = validPurchases.size();
 	graph.dijkstraShortestPath(markets.at(marketIdx));
 	int pathId = 1;
+	vector<vector<RoadNode> > paths;
 	while (!validPurchases.empty())
 	{
 		int distance;
 		vector<RoadNode> path = getTruckPath(markets.at(marketIdx), validPurchases, distance);
 		cout << "Path " << pathId << ": " << validPurchasesSize - validPurchases.size() << " clients served, length is ";
-		cout << distance << " meters (" << distance / 1000.0 << " Km), estimated time is " << calculateTime(distance) << " min\n";
+		cout << distance << " meters (" << distance / 1000.0 << " Km), estimated time is " <<
+				calculateTime(distance, validPurchasesSize - validPurchases.size()) << " min\n";
 		validPurchasesSize = validPurchases.size();
+		paths.push_back(path);
 		pathId++;
 	}
+	displaySetOfPaths(paths, backupVP);
 	return;
 }
 
@@ -645,7 +654,8 @@ void Program::allMarketsAllClients()
 			int distance;
 			vector<RoadNode> path = getTruckPath(markets.at(i), closest, distance);
 			cout << "Path " << pathId << ": " << closestSize - closest.size() << " clients served, length is ";
-			cout << distance << " meters (" << distance / 1000.0 << " Km), estimated time is " << calculateTime(distance) << " min\n";
+			cout << distance << " meters (" << distance / 1000.0 << " Km), estimated time is " <<
+					calculateTime(distance, closestSize - closest.size()) << " min\n";
 			closestSize = closest.size();
 			pathId++;
 		}
@@ -672,4 +682,29 @@ void Program::resetGV()
 	for (int i = 0; i <= lastNodeID; i++)
 		gv->removeNode(i);
 	gv->rearrange();
+}
+
+void Program::displaySetOfPaths(vector<vector<RoadNode> > paths, vector<RoadNode> clients)
+{
+
+}
+
+void Program::changeParameters()
+{
+	cout << "Current average velocity: " << avgVelocity << " Km/h\n";
+	cout << "Current time spent per delivery: " << deliveryTime << " min\n\n";
+	cout << "New average velocity (between 5 Km/h and 80 Km/h): ";
+	float v = 0;
+	cin >> v;
+	if (v < 5.0 || v > 80.0)
+		cout << "Invalid velocity, no changes were made\n";
+	else
+		avgVelocity = v;
+	int i = 0;
+	cout << "New time per delivery (between 1 and 10): ";
+	cin >> i;
+	if (i < 1 || i > 10)
+		cout << "Invalid time, no changes were made\n";
+	else
+		deliveryTime = i;
 }

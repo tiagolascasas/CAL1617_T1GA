@@ -24,6 +24,7 @@ private:
 	pair<float, float> yMax;	/// The geographical coordinate of the map's bottom left corner
 	bool running;				/// Flag which tells if the main loop is running
 	float avgVelocity;			/// Average velocity value for the trucks (in Km/h)
+	int deliveryTime;			/// Time spent on a single delivery (in min)
 	int lastEdgeID;				/// Last id used for an Edge on GraphViewer
 	int lastNodeID;				/// Last id used for a Node on GraphViewer
 
@@ -81,10 +82,11 @@ private:
 	void displayConnectivity();
 	void displaySubGraph(vector<Vertex<RoadNode>* > path);
 	void displayClosestMarketsToClients();
+	void displaySetOfPaths(vector<vector<RoadNode> > paths, vector<RoadNode> clients);
 
 	void resetGV();
 	void generatePurchases(int n);
-	int calculateTime(int length);
+	int calculateTime(int length, int numberOfClients);
 	pair<int, int> mapCoordToXY(RoadNode n);
 
 	int getIndexOfMarket(RoadNode m);
@@ -94,6 +96,7 @@ private:
 	void addMarketToPurchase(RoadNode market, RoadNode purchaseAddr);
 
 	void dfsConnectivity(Vertex<RoadNode>* v, RoadNode market);
+	void changeParameters();
 	void setClosestMarketToAllClients();
 	vector<RoadNode> getTruckPath(RoadNode market, vector<RoadNode> &clients, int &distance);
 
