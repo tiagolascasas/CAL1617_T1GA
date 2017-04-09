@@ -2,7 +2,8 @@ Instruções de compilação:
 
 Windows: basta compilar o projeto num compilador que reconheça a sintaxe C++11,
 visto que faz uso dela (expressões lambda, mais especificamente). Em Windows o programa usa
-a biblioteca winsock2.h.
+a biblioteca winsock2.h que, dependendo do compilador e/ou IDE, poderá ser necessário juntar
+manualmente a biblioteca winwsock32.
 
 Linux: para além do mencionado acima, em Linux o programa usa a biblioteca curses.h,
 que permite a leitura de um caracter do teclado sem echo (semelhante a getch() em Windows).
