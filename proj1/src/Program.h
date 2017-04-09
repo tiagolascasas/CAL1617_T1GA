@@ -101,7 +101,7 @@ private:
 	void displaySetOfPaths(vector<vector<RoadNode> > paths, vector<RoadNode> clients);
 
 	/**
-	 * Clears the graph viewer of all edges and nodes
+	 * Clears the graphviewer of all edges and nodes
 	 */
 	void resetGV();
 

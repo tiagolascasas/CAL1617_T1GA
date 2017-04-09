@@ -841,6 +841,12 @@ void Program::analyzeData(vector<pair<int, int> > distTime)
 	cout << "Enter the number of trucks within the aforementioned numbers: ";
 	int nTrucks;
 	cin >> nTrucks;
+	if (nTrucks < 0 || nTrucks > distTime.size())
+	{
+		cout << "Invalid number, number of trucks defaulted to " << distTime.size() / 2;
+		nTrucks = distTime.size() / 2;
+	}
+
 	vector<vector<int> > trucks(nTrucks);
 	while(timeTotal)
 	{
