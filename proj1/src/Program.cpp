@@ -16,6 +16,7 @@
 
 #ifdef __linux__
 #include <curses.h>
+#include <signal.h>
 #else
 #include <conio.h>
 #endif
@@ -239,6 +240,10 @@ void Program::run()
 			changeParameters();
 			break;
 		case 0:
+#ifdef __linux__
+			close(GraphViewer::port -1);
+			kill(GraphViewer::procId, SIGTERM);
+#endif
 			running = false;
 			break;
 		default:
@@ -732,7 +737,8 @@ void Program::resetGV()
 	gv->closeWindow();
 	delete(gv);
 #ifdef __linux__
-	system("pkill java");
+	close(GraphViewer::port -1);
+	kill(GraphViewer::procId, SIGTERM);
 #else
 	system("taskkill /im java.exe /f");
 #endif
