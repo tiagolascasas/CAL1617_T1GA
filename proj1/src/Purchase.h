@@ -50,6 +50,12 @@ public:
 	int getClosestMarketIndex() const;
 
 	/**
+	 * Gets the distance to the closest market in meters
+	 * @return the distance to the cloest market in meters
+	 */
+	int getClosestMarketDist() const;
+
+	/**
 	 * Receives the info for a potential closest market and compares its distance against the current one's distance to the client
 	 * @param index market's index in the Program::markets vector
 	 * @param distance distance between this client and the given market

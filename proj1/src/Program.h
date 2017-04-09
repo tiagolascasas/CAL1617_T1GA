@@ -189,6 +189,14 @@ private:
 	 */
 	vector<RoadNode> getTruckPath(RoadNode market, vector<RoadNode> &clients, int &distance);
 
+	/*
+	 * Analyzes data about several paths (their distance and duration)
+	 * and displays various alternatives based on possible number of trucks
+	 * @param distTime a vector with pairs holding info about paths. Each
+	 * pair holds the distance of a path and its duration, by this order
+	 */
+	void analyzeData(vector<pair<int, int> > distTime);
+
 	/**
 	 * Distributes from a single market to a single client
 	 */

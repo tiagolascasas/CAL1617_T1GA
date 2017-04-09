@@ -28,6 +28,11 @@ int Purchase::getClosestMarketIndex() const
 	return closestMarket.first;
 }
 
+int Purchase::getClosestMarketDist() const
+{
+	return closestMarket.second;
+}
+
 bool Purchase::setClosestMarketIndex(int index, int distance)
 {
 	if (closestMarket.second > distance)
