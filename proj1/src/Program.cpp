@@ -14,7 +14,7 @@
 #include <cmath>
 #include <functional>
 
-#ifdef linux
+#ifdef __linux__
 #include <curses.h>
 #else
 #include <conio.h>
@@ -698,7 +698,7 @@ void Program::allMarketsAllClients()
 			}
 			closestSize = closest.size();
 		}
-		cout << closestSize << " clients served by " << paths.size() << "paths\n";
+		cout << clientCounter << " clients served by " << paths.size() << "paths\n";
 	//	displaySetOfPaths(paths, backupVP);
 		analyzeData(distTime);
 		cout << "Press any key to continue to the next market...";
