@@ -1,5 +1,6 @@
 var searchData=
 [
+  ['generatepurchases',['generatePurchases',['../class_program.html#a0879a8e174d3c48385cf6584bb5dee2f',1,'Program']]],
   ['getaddr',['getAddr',['../class_purchase.html#a7c35c57d74d229a482b55c3604920fab',1,'Purchase']]],
   ['getadj',['getAdj',['../class_vertex.html#a9e1300215d2014098d3973f76aaa7fea',1,'Vertex']]],
   ['getclosestmarketdist',['getClosestMarketDist',['../class_purchase.html#a31c1c72e802a897d8378cabf69f83a16',1,'Purchase']]],
@@ -12,7 +13,9 @@ var searchData=
   ['getdistancebetween',['getDistanceBetween',['../class_road_node.html#ad740adfd4fa4f8210c6e53a59e45f052',1,'RoadNode']]],
   ['getid',['getID',['../class_edge.html#a7fc99513075d0b4fa36b439382be704e',1,'Edge::getID()'],['../class_road_node.html#a03aabe21ee3905bb843d8f61278b2003',1,'RoadNode::getID()']]],
   ['getindegree',['getIndegree',['../class_vertex.html#ac78980191ea1f9d22e6617e9e511b755',1,'Vertex']]],
+  ['getindexofmarket',['getIndexOfMarket',['../class_program.html#abb3e19f3e75c51a9e9737f916698582d',1,'Program']]],
   ['getinfo',['getInfo',['../class_vertex.html#a48eae2f7af2362634adab02b7b2dbec6',1,'Vertex']]],
+  ['getmarketname',['getMarketName',['../class_program.html#a5e15868a1112011b303400f8c25db760',1,'Program::getMarketName(int idx)'],['../class_program.html#a535a29b4ef97ecb61238139bcd4e0a61',1,'Program::getMarketName(RoadNode n)']]],
   ['getnumvertex',['getNumVertex',['../class_graph.html#a0853eac15cdf0f06d63f4b8a7820ec71',1,'Graph']]],
   ['getpath',['getPath',['../class_graph.html#ab4054ca572c10669dd3e05d6d41c116c',1,'Graph']]],
   ['getpathvertex',['getPathVertex',['../class_graph.html#a115a68614027046d5640f3b58c10b62e',1,'Graph']]],
@@ -20,6 +23,7 @@ var searchData=
   ['getradlocation',['getRadLocation',['../class_road_node.html#ad31051563ba50b18db58dadcde6615b9',1,'RoadNode']]],
   ['getradlong',['getRadLong',['../class_road_node.html#a4723a27e37c285795c6250dbd5ae393f',1,'RoadNode']]],
   ['getsources',['getSources',['../class_graph.html#a947115150a94f88ac9aedbcec59dd07e',1,'Graph']]],
+  ['gettruckpath',['getTruckPath',['../class_program.html#a45e938b6898d05da586186646d319adb',1,'Program']]],
   ['getvalidmarkets',['getValidMarkets',['../class_purchase.html#ab12602585b97cb06c530772a1226b34b',1,'Purchase']]],
   ['getvertex',['getVertex',['../class_graph.html#aa5734ebc48051b8df54f4929a57c1427',1,'Graph']]],
   ['getvertexset',['getVertexSet',['../class_graph.html#a135e8f915af85904abca9eafaa4f13ce',1,'Graph']]],

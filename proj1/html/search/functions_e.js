@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['vertex',['Vertex',['../class_vertex.html#afcbdd4d4198b672356559cb8fa088408',1,'Vertex']]]
+  ['topologicalorder',['topologicalOrder',['../class_graph.html#a2e75512c089c3916dda9cf61e1185d9d',1,'Graph']]]
 ];
