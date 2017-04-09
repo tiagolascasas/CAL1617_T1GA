@@ -305,7 +305,7 @@ void Program::displayGraph(Graph<RoadNode> g)
 			edgeID++;
 		}
 	}
-	lastEdgeID = edgeID;
+	lastEdgeID = --edgeID;
 	while(!gv->rearrange());
 
 }
@@ -357,6 +357,7 @@ void Program::singleMarketSingleClient()
 	{
 		int length = graph.dijkstraShortestPath(markets.at(marketIdx), purchases.at(clientIdx).getAddr());
 		vector<Vertex<RoadNode>* > path = graph.getPathVertex(markets.at(marketIdx), purchases.at(clientIdx).getAddr());
+		cout << getMarketName(path.at(0)->getInfo()) << endl;
 
 		if (length == INT_INFINITY)
 			cout << "There is no connection between the market and the client\n";
@@ -699,7 +700,14 @@ void Program::allMarketsAllClients()
 			closestSize = closest.size();
 		}
 		cout << clientCounter << " clients served by " << paths.size() << "paths\n";
-	//	displaySetOfPaths(paths, backupVP);
+		try
+		{
+			displaySetOfPaths(paths, backupVP);
+		}
+		catch(...)
+		{
+			cout << "It wasn't possible to display the graph\n";
+		}
 		analyzeData(distTime);
 		cout << "Press any key to continue to the next market...";
 		getch();
@@ -708,12 +716,12 @@ void Program::allMarketsAllClients()
 
 pair<int, int> Program::mapCoordToXY(RoadNode n)
 {
-	float lond = abs(origin.second - xMax.second) / xRes;
-	float lond2 = abs(origin.second - n.getDegLong());
+	float lond = (origin.second - xMax.second) / xRes;
+	float lond2 = (origin.second - n.getDegLong());
 	int x = static_cast<int>(lond2 / lond);
 
-	float latd = abs(origin.first - yMax.first) / yRes;
-	float latd2 = abs(origin.first - n.getDegLat());
+	float latd = (origin.first - yMax.first) / yRes;
+	float latd2 = (origin.first - n.getDegLat());
 	int y = static_cast<int>(latd2 / latd);
 
 	return pair<int, int>(x, y);
@@ -721,13 +729,16 @@ pair<int, int> Program::mapCoordToXY(RoadNode n)
 
 void Program::resetGV()
 {
-	for (int i = 0; i <= lastEdgeID; i++)
-		while(!gv->removeEdge(i));
-	for (int i = 0; i <= lastNodeID; i++)
-		while(!gv->removeNode(i));
-	lastEdgeID = -1;
-	lastNodeID = -1;
-	while(!gv->rearrange());
+	gv->closeWindow();
+	delete(gv);
+#ifdef __linux__
+	system("pkill java");
+#else
+	system("taskkill /im java.exe /f");
+#endif
+	this->gv = new GraphViewer(xRes, yRes, false);
+	while(!gv->setBackground(mapName));
+	while(!gv->createWindow(xRes, yRes));
 }
 
 void Program::displaySetOfPaths(vector<vector<RoadNode> > paths, vector<RoadNode> clients)
@@ -774,7 +785,7 @@ void Program::displaySetOfPaths(vector<vector<RoadNode> > paths, vector<RoadNode
 	}
 	while(!gv->setVertexColor(0, RED));
 	while(!gv->setVertexLabel(0, getMarketName(paths.at(0).at(0))));
-	lastNodeID = nodeID;
+	lastNodeID = --nodeID;
 	int edgeID = 0;
 	vector<pair<int, int> > edgesProcessed;
 	for (int i = 0; i < paths.size(); i++)
@@ -802,7 +813,7 @@ void Program::displaySetOfPaths(vector<vector<RoadNode> > paths, vector<RoadNode
 			}
 		}
 	}
-	lastEdgeID = edgeID;
+	lastEdgeID = --edgeID;
 	while(!gv->rearrange());
 }
 
