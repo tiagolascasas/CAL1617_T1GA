@@ -1,6 +1,25 @@
 var searchData=
 [
-  ['vertex',['Vertex',['../class_vertex.html',1,'Vertex&lt; T &gt;'],['../class_vertex.html#afcbdd4d4198b672356559cb8fa088408',1,'Vertex::Vertex()']]],
-  ['vertex_3c_20t_20_3e',['Vertex&lt; T &gt;',['../class_edge.html#a2e120a12dec663fa334633b4f26cbed8',1,'Edge']]],
-  ['vertex_5fgreater_5fthan',['vertex_greater_than',['../structvertex__greater__than.html',1,'']]]
+  ['r',['r',['../class_program.html#a21c9a108ce351e48198b0a959da7c57e',1,'Program']]],
+  ['radius',['RADIUS',['../class_road_node.html#a002ec81099c3eb296b8123d832d4fc21',1,'RoadNode']]],
+  ['radlat',['radLat',['../class_road_node.html#a9e6e2eb3f96e408fab07106557aa9e55',1,'RoadNode']]],
+  ['radlong',['radLong',['../class_road_node.html#a4fd0153aea2a421efb434c0e0a758943',1,'RoadNode']]],
+  ['readline',['readLine',['../class_connection.html#a1df16b436751b686d96c24ca0c498659',1,'Connection']]],
+  ['rearrange',['rearrange',['../class_graph_viewer.html#a3009a66958686ccb7e78b68e37c3c423',1,'GraphViewer']]],
+  ['red',['RED',['../graphviewer_8h.html#a8d23feea868a983c8c2b661e1e16972f',1,'graphviewer.h']]],
+  ['removeedge',['removeEdge',['../class_graph.html#a1106092a37366486cf55576f9ec01692',1,'Graph::removeEdge()'],['../class_graph_viewer.html#a9a8ee68c7c12b373affbe4069dd95d72',1,'GraphViewer::removeEdge()']]],
+  ['removenode',['removeNode',['../class_graph_viewer.html#a0c418639bb911eb827cabf895915f775',1,'GraphViewer']]],
+  ['removevertex',['removeVertex',['../class_graph.html#af9c903104ad69a7782979fa9caedf163',1,'Graph']]],
+  ['resetedgecolor',['resetEdgeColor',['../class_graph_viewer.html#a1df1a30f4668bf70364fac232f8d0600',1,'GraphViewer']]],
+  ['resetgv',['resetGV',['../class_program.html#a0f0e50b609c0f43ccb975f629e26a7c4',1,'Program']]],
+  ['resetindegrees',['resetIndegrees',['../class_graph.html#af34eb86d804272e6e3e221a9ed688c53',1,'Graph']]],
+  ['resetvertexcolor',['resetVertexColor',['../class_graph_viewer.html#acd95eee309d5e9b1935ec39c5ed45cac',1,'GraphViewer']]],
+  ['resetvertexicon',['resetVertexIcon',['../class_graph_viewer.html#ae2b602cfdfb49ec0a67f2bcd11b0fbdb',1,'GraphViewer']]],
+  ['resetvisited',['resetVisited',['../class_graph.html#ada2ab6b203763588b7f9a8e7ad8a2102',1,'Graph']]],
+  ['road_5ft',['road_t',['../structroad__t.html',1,'']]],
+  ['roadnode',['RoadNode',['../class_road_node.html',1,'RoadNode'],['../class_road_node.html#a7f6b59e3f2f7c40945a2af7584126b66',1,'RoadNode::RoadNode()'],['../class_road_node.html#ad00c3c0843fe8c68b947a60eddd68c6b',1,'RoadNode::RoadNode(long long id, float degLat, float radLat, float degLong, float radLong)']]],
+  ['roadnode_2ecpp',['RoadNode.cpp',['../_road_node_8cpp.html',1,'']]],
+  ['roadnode_2eh',['RoadNode.h',['../_road_node_8h.html',1,'']]],
+  ['run',['run',['../class_program.html#a6adbc9a50861c35f3229cfb277b4afdb',1,'Program']]],
+  ['running',['running',['../class_program.html#a1ff71a6d3713ba4df04f49766719bf3d',1,'Program']]]
 ];
