@@ -60,16 +60,19 @@ $(function() {
 <div class="header">
   <div class="summary">
 <a href="#pub-methods">Public Member Functions</a> &#124;
+<a href="#pri-attribs">Private Attributes</a> &#124;
 <a href="#friends">Friends</a> &#124;
 <a href="class_edge-members.html">List of all members</a>  </div>
   <div class="headertitle">
 <div class="title">Edge&lt; T &gt; Class Template Reference</div>  </div>
 </div><!--header-->
 <div class="contents">
+
+<p><code>#include &lt;<a class="el" href="_graph_8h_source.html">Graph.h</a>&gt;</code></p>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
-<tr class="memitem:a5add774efcea94577be9050a531a1d72"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_edge.html#a5add774efcea94577be9050a531a1d72">Edge</a> (<a class="el" href="class_vertex.html">Vertex</a>&lt; T &gt; *d, double w, int id)</td></tr>
+<tr class="memitem:a5add774efcea94577be9050a531a1d72"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_edge.html#a5add774efcea94577be9050a531a1d72">Edge</a> (<a class="el" href="class_vertex.html">Vertex</a>&lt; T &gt; *d, double w, int <a class="el" href="class_edge.html#ac08b8fac09b510f361c148fa8cea1119">id</a>)</td></tr>
 <tr class="memdesc:a5add774efcea94577be9050a531a1d72"><td class="mdescLeft">&#160;</td><td class="mdescRight"><a class="el" href="class_edge.html">Edge</a>'s id.  <a href="#a5add774efcea94577be9050a531a1d72">More...</a><br /></td></tr>
 <tr class="separator:a5add774efcea94577be9050a531a1d72"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a7fc99513075d0b4fa36b439382be704e"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_edge.html#a7fc99513075d0b4fa36b439382be704e">getID</a> () const</td></tr>
@@ -78,6 +81,17 @@ Public Member Functions</h2></td></tr>
 <tr class="separator:a9a2de066dff8513dd788d553fc1d0c81"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a3df378e283d6c8be5be4170ac8d7f4e8"><td class="memItemLeft" align="right" valign="top">double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_edge.html#a3df378e283d6c8be5be4170ac8d7f4e8">getWeight</a> () const</td></tr>
 <tr class="separator:a3df378e283d6c8be5be4170ac8d7f4e8"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pri-attribs"></a>
+Private Attributes</h2></td></tr>
+<tr class="memitem:ae4d65678b91bd9d814af4720ad87cd0c"><td class="memItemLeft" align="right" valign="top"><a class="el" href="class_vertex.html">Vertex</a>&lt; T &gt; *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_edge.html#ae4d65678b91bd9d814af4720ad87cd0c">dest</a></td></tr>
+<tr class="separator:ae4d65678b91bd9d814af4720ad87cd0c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:af188b57b604f0d65e2da48733bd76426"><td class="memItemLeft" align="right" valign="top">double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_edge.html#af188b57b604f0d65e2da48733bd76426">weight</a></td></tr>
+<tr class="memdesc:af188b57b604f0d65e2da48733bd76426"><td class="mdescLeft">&#160;</td><td class="mdescRight">Pointer to the vertex the edge leads to.  <a href="#af188b57b604f0d65e2da48733bd76426">More...</a><br /></td></tr>
+<tr class="separator:af188b57b604f0d65e2da48733bd76426"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ac08b8fac09b510f361c148fa8cea1119"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_edge.html#ac08b8fac09b510f361c148fa8cea1119">id</a></td></tr>
+<tr class="memdesc:ac08b8fac09b510f361c148fa8cea1119"><td class="mdescLeft">&#160;</td><td class="mdescRight"><a class="el" href="class_edge.html">Edge</a>'s weight.  <a href="#ac08b8fac09b510f361c148fa8cea1119">More...</a><br /></td></tr>
+<tr class="separator:ac08b8fac09b510f361c148fa8cea1119"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="friends"></a>
 Friends</h2></td></tr>
@@ -150,7 +164,7 @@ template&lt;class T &gt; </div>
         </tr>
       </table>
 </div><div class="memdoc">
-<p>Gets a pointer to the vertex this edge points to </p><dl class="section return"><dt>Returns</dt><dd>content of Edge::dest </dd></dl>
+<p>Gets a pointer to the vertex this edge points to </p><dl class="section return"><dt>Returns</dt><dd>content of <a class="el" href="class_edge.html#ae4d65678b91bd9d814af4720ad87cd0c">Edge::dest</a> </dd></dl>
 
 </div>
 </div>
@@ -170,7 +184,7 @@ template&lt;class T &gt; </div>
         </tr>
       </table>
 </div><div class="memdoc">
-<p>Gets the edge's id </p><dl class="section return"><dt>Returns</dt><dd>content of Edge::id </dd></dl>
+<p>Gets the edge's id </p><dl class="section return"><dt>Returns</dt><dd>content of <a class="el" href="class_edge.html#ac08b8fac09b510f361c148fa8cea1119" title="Edge&#39;s weight. ">Edge::id</a> </dd></dl>
 
 </div>
 </div>
@@ -190,7 +204,7 @@ template&lt;class T &gt; </div>
         </tr>
       </table>
 </div><div class="memdoc">
-<p>Gets the edge's weight </p><dl class="section return"><dt>Returns</dt><dd>weight stored in Edge::weight </dd></dl>
+<p>Gets the edge's weight </p><dl class="section return"><dt>Returns</dt><dd>weight stored in <a class="el" href="class_edge.html#af188b57b604f0d65e2da48733bd76426" title="Pointer to the vertex the edge leads to. ">Edge::weight</a> </dd></dl>
 
 </div>
 </div>
@@ -242,6 +256,83 @@ template&lt;class T &gt; </div>
 </table>
 </div><div class="memdoc">
 <p>Declares the <a class="el" href="class_vertex.html">Vertex</a> class as friend </p><dl class="section see"><dt>See also</dt><dd><a class="el" href="class_vertex.html">Vertex</a> </dd></dl>
+
+</div>
+</div>
+<h2 class="groupheader">Member Data Documentation</h2>
+<a id="ae4d65678b91bd9d814af4720ad87cd0c"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ae4d65678b91bd9d814af4720ad87cd0c">&#9670;&nbsp;</a></span>dest</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class T &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="class_vertex.html">Vertex</a>&lt;T&gt;* <a class="el" href="class_edge.html">Edge</a>&lt; T &gt;::dest</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="ac08b8fac09b510f361c148fa8cea1119"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ac08b8fac09b510f361c148fa8cea1119">&#9670;&nbsp;</a></span>id</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class T &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">int <a class="el" href="class_edge.html">Edge</a>&lt; T &gt;::id</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p><a class="el" href="class_edge.html">Edge</a>'s weight. </p>
+
+</div>
+</div>
+<a id="af188b57b604f0d65e2da48733bd76426"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#af188b57b604f0d65e2da48733bd76426">&#9670;&nbsp;</a></span>weight</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class T &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">double <a class="el" href="class_edge.html">Edge</a>&lt; T &gt;::weight</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Pointer to the vertex the edge leads to. </p>
 
 </div>
 </div>

@@ -61,12 +61,15 @@ $(function() {
   <div class="summary">
 <a href="#pub-methods">Public Member Functions</a> &#124;
 <a href="#pub-attribs">Public Attributes</a> &#124;
+<a href="#pri-attribs">Private Attributes</a> &#124;
 <a href="#friends">Friends</a> &#124;
 <a href="class_vertex-members.html">List of all members</a>  </div>
   <div class="headertitle">
 <div class="title">Vertex&lt; T &gt; Class Template Reference</div>  </div>
 </div><!--header-->
 <div class="contents">
+
+<p><code>#include &lt;<a class="el" href="_graph_8h_source.html">Graph.h</a>&gt;</code></p>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
@@ -83,14 +86,33 @@ Public Member Functions</h2></td></tr>
 <tr class="separator:a645a81161bc9f70ebfda8e292b91c24b"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a68750e8a76f57ef5172583c40bef3b38"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_vertex.html#a68750e8a76f57ef5172583c40bef3b38">getVisited</a> () const</td></tr>
 <tr class="separator:a68750e8a76f57ef5172583c40bef3b38"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a95a3f3c55f2ba371fae51d3fe0e76c23"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_vertex.html#a95a3f3c55f2ba371fae51d3fe0e76c23">setVisited</a> (bool visited)</td></tr>
+<tr class="memitem:a95a3f3c55f2ba371fae51d3fe0e76c23"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_vertex.html#a95a3f3c55f2ba371fae51d3fe0e76c23">setVisited</a> (bool <a class="el" href="class_vertex.html#a187a2fe4ff50261cf3c15b8cda7dfc56">visited</a>)</td></tr>
 <tr class="separator:a95a3f3c55f2ba371fae51d3fe0e76c23"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-attribs"></a>
 Public Attributes</h2></td></tr>
-<tr class="memitem:ab968bdd80f912a6f21f30e479bf735ce"><td class="memItemLeft" align="right" valign="top"><a id="ab968bdd80f912a6f21f30e479bf735ce"></a>
-<a class="el" href="class_vertex.html">Vertex</a>&lt; T &gt; *&#160;</td><td class="memItemRight" valign="bottom"><b>path</b></td></tr>
+<tr class="memitem:ab968bdd80f912a6f21f30e479bf735ce"><td class="memItemLeft" align="right" valign="top"><a class="el" href="class_vertex.html">Vertex</a>&lt; T &gt; *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_vertex.html#ab968bdd80f912a6f21f30e479bf735ce">path</a></td></tr>
 <tr class="separator:ab968bdd80f912a6f21f30e479bf735ce"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pri-attribs"></a>
+Private Attributes</h2></td></tr>
+<tr class="memitem:a415d7811eef6cdd992f0dca1f35a49cd"><td class="memItemLeft" align="right" valign="top">T&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_vertex.html#a415d7811eef6cdd992f0dca1f35a49cd">info</a></td></tr>
+<tr class="separator:a415d7811eef6cdd992f0dca1f35a49cd"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a5d9dfdd2caee11e300ff5142799345a1"><td class="memItemLeft" align="right" valign="top">vector&lt; <a class="el" href="class_edge.html">Edge</a>&lt; T &gt; &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_vertex.html#a5d9dfdd2caee11e300ff5142799345a1">adj</a></td></tr>
+<tr class="memdesc:a5d9dfdd2caee11e300ff5142799345a1"><td class="mdescLeft">&#160;</td><td class="mdescRight">Information on vertex's content.  <a href="#a5d9dfdd2caee11e300ff5142799345a1">More...</a><br /></td></tr>
+<tr class="separator:a5d9dfdd2caee11e300ff5142799345a1"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a187a2fe4ff50261cf3c15b8cda7dfc56"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_vertex.html#a187a2fe4ff50261cf3c15b8cda7dfc56">visited</a></td></tr>
+<tr class="memdesc:a187a2fe4ff50261cf3c15b8cda7dfc56"><td class="mdescLeft">&#160;</td><td class="mdescRight"><a class="el" href="class_edge.html">Edge</a> that connects this vertex to another.  <a href="#a187a2fe4ff50261cf3c15b8cda7dfc56">More...</a><br /></td></tr>
+<tr class="separator:a187a2fe4ff50261cf3c15b8cda7dfc56"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ae99f5ca50ac3dff3ac9c825b4fe11589"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_vertex.html#ae99f5ca50ac3dff3ac9c825b4fe11589">processed</a></td></tr>
+<tr class="memdesc:ae99f5ca50ac3dff3ac9c825b4fe11589"><td class="mdescLeft">&#160;</td><td class="mdescRight">Keeps track whether the vertex was already visited or not.  <a href="#ae99f5ca50ac3dff3ac9c825b4fe11589">More...</a><br /></td></tr>
+<tr class="separator:ae99f5ca50ac3dff3ac9c825b4fe11589"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ab29ac1b694fc673ba26cfc6d3e9bda13"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_vertex.html#ab29ac1b694fc673ba26cfc6d3e9bda13">indegree</a></td></tr>
+<tr class="memdesc:ab29ac1b694fc673ba26cfc6d3e9bda13"><td class="mdescLeft">&#160;</td><td class="mdescRight">Keeps track whether the vertex was processed or not.  <a href="#ab29ac1b694fc673ba26cfc6d3e9bda13">More...</a><br /></td></tr>
+<tr class="separator:ab29ac1b694fc673ba26cfc6d3e9bda13"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ab2e06daa1acc81f7bd75f3d45c73a49a"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_vertex.html#ab2e06daa1acc81f7bd75f3d45c73a49a">dist</a></td></tr>
+<tr class="memdesc:ab2e06daa1acc81f7bd75f3d45c73a49a"><td class="mdescLeft">&#160;</td><td class="mdescRight">Number of edges leading to this vertex.  <a href="#ab2e06daa1acc81f7bd75f3d45c73a49a">More...</a><br /></td></tr>
+<tr class="separator:ab2e06daa1acc81f7bd75f3d45c73a49a"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="friends"></a>
 Friends</h2></td></tr>
@@ -143,7 +165,7 @@ template&lt;class T &gt; </div>
         </tr>
       </table>
 </div><div class="memdoc">
-<p>Gets the edges starting from the vertex </p><dl class="section return"><dt>Returns</dt><dd>vector of edges stored in Vertex::adj </dd></dl>
+<p>Gets the edges starting from the vertex </p><dl class="section return"><dt>Returns</dt><dd>vector of edges stored in <a class="el" href="class_vertex.html#a5d9dfdd2caee11e300ff5142799345a1" title="Information on vertex&#39;s content. ">Vertex::adj</a> </dd></dl>
 
 </div>
 </div>
@@ -163,7 +185,7 @@ template&lt;class T &gt; </div>
         </tr>
       </table>
 </div><div class="memdoc">
-<p>Gets distance to starting vertex of an algorithm </p><dl class="section return"><dt>Returns</dt><dd>Vertex::dist </dd></dl>
+<p>Gets distance to starting vertex of an algorithm </p><dl class="section return"><dt>Returns</dt><dd><a class="el" href="class_vertex.html#ab2e06daa1acc81f7bd75f3d45c73a49a" title="Number of edges leading to this vertex. ">Vertex::dist</a> </dd></dl>
 
 </div>
 </div>
@@ -183,7 +205,7 @@ template&lt;class T &gt; </div>
         </tr>
       </table>
 </div><div class="memdoc">
-<p>Gets the number of edges leading into the vertex </p><dl class="section return"><dt>Returns</dt><dd>Vertex::indegree </dd></dl>
+<p>Gets the number of edges leading into the vertex </p><dl class="section return"><dt>Returns</dt><dd><a class="el" href="class_vertex.html#ab29ac1b694fc673ba26cfc6d3e9bda13" title="Keeps track whether the vertex was processed or not. ">Vertex::indegree</a> </dd></dl>
 
 </div>
 </div>
@@ -223,7 +245,7 @@ template&lt;class T &gt; </div>
         </tr>
       </table>
 </div><div class="memdoc">
-<p>Gets the boolean value of Vertex::visited </p><dl class="section return"><dt>Returns</dt><dd>value of Vertex::visited </dd></dl>
+<p>Gets the boolean value of <a class="el" href="class_vertex.html#a187a2fe4ff50261cf3c15b8cda7dfc56" title="Edge that connects this vertex to another. ">Vertex::visited</a> </p><dl class="section return"><dt>Returns</dt><dd>value of <a class="el" href="class_vertex.html#a187a2fe4ff50261cf3c15b8cda7dfc56" title="Edge that connects this vertex to another. ">Vertex::visited</a> </dd></dl>
 
 </div>
 </div>
@@ -244,7 +266,7 @@ template&lt;class T &gt; </div>
         </tr>
       </table>
 </div><div class="memdoc">
-<p>Sets Vertex::visited as true or false according to the visited parameter </p><dl class="params"><dt>Parameters</dt><dd>
+<p>Sets <a class="el" href="class_vertex.html#a187a2fe4ff50261cf3c15b8cda7dfc56" title="Edge that connects this vertex to another. ">Vertex::visited</a> as true or false according to the visited parameter </p><dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramname">visited</td><td></td></tr>
   </table>
@@ -276,6 +298,177 @@ template&lt;class T&gt; </div>
 </table>
 </div><div class="memdoc">
 <p>Declares the <a class="el" href="class_graph.html">Graph</a> class as friend </p><dl class="section see"><dt>See also</dt><dd><a class="el" href="class_graph.html">Graph</a> </dd></dl>
+
+</div>
+</div>
+<h2 class="groupheader">Member Data Documentation</h2>
+<a id="a5d9dfdd2caee11e300ff5142799345a1"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a5d9dfdd2caee11e300ff5142799345a1">&#9670;&nbsp;</a></span>adj</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class T&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">vector&lt;<a class="el" href="class_edge.html">Edge</a>&lt;T&gt; &gt; <a class="el" href="class_vertex.html">Vertex</a>&lt; T &gt;::adj</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Information on vertex's content. </p>
+
+</div>
+</div>
+<a id="ab2e06daa1acc81f7bd75f3d45c73a49a"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ab2e06daa1acc81f7bd75f3d45c73a49a">&#9670;&nbsp;</a></span>dist</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class T&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">int <a class="el" href="class_vertex.html">Vertex</a>&lt; T &gt;::dist</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Number of edges leading to this vertex. </p>
+
+</div>
+</div>
+<a id="ab29ac1b694fc673ba26cfc6d3e9bda13"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ab29ac1b694fc673ba26cfc6d3e9bda13">&#9670;&nbsp;</a></span>indegree</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class T&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">int <a class="el" href="class_vertex.html">Vertex</a>&lt; T &gt;::indegree</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Keeps track whether the vertex was processed or not. </p>
+
+</div>
+</div>
+<a id="a415d7811eef6cdd992f0dca1f35a49cd"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a415d7811eef6cdd992f0dca1f35a49cd">&#9670;&nbsp;</a></span>info</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class T&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">T <a class="el" href="class_vertex.html">Vertex</a>&lt; T &gt;::info</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="ab968bdd80f912a6f21f30e479bf735ce"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ab968bdd80f912a6f21f30e479bf735ce">&#9670;&nbsp;</a></span>path</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class T&gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="class_vertex.html">Vertex</a>&lt;T&gt;* <a class="el" href="class_vertex.html">Vertex</a>&lt; T &gt;::path</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="ae99f5ca50ac3dff3ac9c825b4fe11589"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ae99f5ca50ac3dff3ac9c825b4fe11589">&#9670;&nbsp;</a></span>processed</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class T&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool <a class="el" href="class_vertex.html">Vertex</a>&lt; T &gt;::processed</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Keeps track whether the vertex was already visited or not. </p>
+
+</div>
+</div>
+<a id="a187a2fe4ff50261cf3c15b8cda7dfc56"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a187a2fe4ff50261cf3c15b8cda7dfc56">&#9670;&nbsp;</a></span>visited</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class T&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool <a class="el" href="class_vertex.html">Vertex</a>&lt; T &gt;::visited</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p><a class="el" href="class_edge.html">Edge</a> that connects this vertex to another. </p>
 
 </div>
 </div>

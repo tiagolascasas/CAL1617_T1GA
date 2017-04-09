@@ -60,11 +60,14 @@ $(function() {
 <div class="header">
   <div class="summary">
 <a href="#pub-methods">Public Member Functions</a> &#124;
+<a href="#pri-attribs">Private Attributes</a> &#124;
 <a href="class_graph-members.html">List of all members</a>  </div>
   <div class="headertitle">
 <div class="title">Graph&lt; T &gt; Class Template Reference</div>  </div>
 </div><!--header-->
 <div class="contents">
+
+<p><code>#include &lt;<a class="el" href="_graph_8h_source.html">Graph.h</a>&gt;</code></p>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
@@ -117,6 +120,17 @@ Public Member Functions</h2></td></tr>
 <tr class="separator:a133f3d865b87688976a24bb1d3264d17"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a60ee2d1d8be6d605a5a1d08a7c3bc247"><td class="memItemLeft" align="right" valign="top">vector&lt; <a class="el" href="class_vertex.html">Vertex</a>&lt; T &gt; *&gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_graph.html#a60ee2d1d8be6d605a5a1d08a7c3bc247">incompletePrimMST</a> (const T &amp;s, vector&lt; T &gt; elem, int &amp;distance)</td></tr>
 <tr class="separator:a60ee2d1d8be6d605a5a1d08a7c3bc247"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pri-attribs"></a>
+Private Attributes</h2></td></tr>
+<tr class="memitem:a73d4e735fc0a7c83c9c689a2b53fa623"><td class="memItemLeft" align="right" valign="top">vector&lt; <a class="el" href="class_vertex.html">Vertex</a>&lt; T &gt; * &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_graph.html#a73d4e735fc0a7c83c9c689a2b53fa623">vertexSet</a></td></tr>
+<tr class="separator:a73d4e735fc0a7c83c9c689a2b53fa623"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a27c7760e02cad3d243e2204908a03f70"><td class="memItemLeft" align="right" valign="top">vector&lt; T &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_graph.html#a27c7760e02cad3d243e2204908a03f70">dfsResult</a></td></tr>
+<tr class="memdesc:a27c7760e02cad3d243e2204908a03f70"><td class="mdescLeft">&#160;</td><td class="mdescRight">Vector containing pointers to all the vertexes in the graph.  <a href="#a27c7760e02cad3d243e2204908a03f70">More...</a><br /></td></tr>
+<tr class="separator:a27c7760e02cad3d243e2204908a03f70"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a3f9e089b9b70c72347e9714a30ba7895"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_graph.html#a3f9e089b9b70c72347e9714a30ba7895">isDAGflag</a></td></tr>
+<tr class="memdesc:a3f9e089b9b70c72347e9714a30ba7895"><td class="mdescLeft">&#160;</td><td class="mdescRight">Vector containing the result of the last Depth-First Search.  <a href="#a3f9e089b9b70c72347e9714a30ba7895">More...</a><br /></td></tr>
+<tr class="separator:a3f9e089b9b70c72347e9714a30ba7895"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <h2 class="groupheader">Member Function Documentation</h2>
 <a id="ad1127afabf4d9941aa1885aa34a7bda4"></a>
@@ -286,7 +300,7 @@ template&lt;class T &gt; </div>
         </tr>
       </table>
 </div><div class="memdoc">
-<p>Sets Graph::isDAGflag as false and does a Depth-First Search </p><dl class="section return"><dt>Returns</dt><dd>content of Graph::dfsResult </dd></dl>
+<p>Sets <a class="el" href="class_graph.html#a3f9e089b9b70c72347e9714a30ba7895" title="Vector containing the result of the last Depth-First Search. ">Graph::isDAGflag</a> as false and does a Depth-First Search </p><dl class="section return"><dt>Returns</dt><dd>content of <a class="el" href="class_graph.html#a27c7760e02cad3d243e2204908a03f70" title="Vector containing pointers to all the vertexes in the graph. ">Graph::dfsResult</a> </dd></dl>
 
 </div>
 </div>
@@ -307,7 +321,7 @@ template&lt;class T&gt; </div>
         </tr>
       </table>
 </div><div class="memdoc">
-<p>Does a Depth-First Search updating the result in Graph::dfsResult </p><dl class="params"><dt>Parameters</dt><dd>
+<p>Does a Depth-First Search updating the result in <a class="el" href="class_graph.html#a27c7760e02cad3d243e2204908a03f70" title="Vector containing pointers to all the vertexes in the graph. ">Graph::dfsResult</a> </p><dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramname">v</td><td>intended vertex for the dfs </td></tr>
   </table>
@@ -396,7 +410,7 @@ template&lt;class T &gt; </div>
         </tr>
       </table>
 </div><div class="memdoc">
-<p>Gets the amount of vertexes in the graph </p><dl class="section return"><dt>Returns</dt><dd>size of Graph::vertexSet </dd></dl>
+<p>Gets the amount of vertexes in the graph </p><dl class="section return"><dt>Returns</dt><dd>size of <a class="el" href="class_graph.html#a73d4e735fc0a7c83c9c689a2b53fa623">Graph::vertexSet</a> </dd></dl>
 
 </div>
 </div>
@@ -492,7 +506,7 @@ template&lt;class T &gt; </div>
         </tr>
       </table>
 </div><div class="memdoc">
-<p>Gets vertexes that aren't any edge's destiny </p><dl class="section return"><dt>Returns</dt><dd>vector of pointers to vertexes with Vertex::indegree set to 0 </dd></dl>
+<p>Gets vertexes that aren't any edge's destiny </p><dl class="section return"><dt>Returns</dt><dd>vector of pointers to vertexes with <a class="el" href="class_vertex.html#ab29ac1b694fc673ba26cfc6d3e9bda13" title="Keeps track whether the vertex was processed or not. ">Vertex::indegree</a> set to 0 </dd></dl>
 
 </div>
 </div>
@@ -541,7 +555,7 @@ template&lt;class T &gt; </div>
 </div><div class="memdoc">
 
 <p>Set to True if this is a Directed acyclic-graph and false otherwise. </p>
-<p>Gets the vector containing pointers to all the vertexes of the graph </p><dl class="section return"><dt>Returns</dt><dd>content of Graph::vertexSet </dd></dl>
+<p>Gets the vector containing pointers to all the vertexes of the graph </p><dl class="section return"><dt>Returns</dt><dd>content of <a class="el" href="class_graph.html#a73d4e735fc0a7c83c9c689a2b53fa623">Graph::vertexSet</a> </dd></dl>
 
 </div>
 </div>
@@ -606,7 +620,7 @@ template&lt;class T &gt; </div>
         </tr>
       </table>
 </div><div class="memdoc">
-<p>Sets Graph::isDAGflag and calls <a class="el" href="class_graph.html#a61c3cf025b9200d0ec866612df06048c">Graph::dfs()</a> </p><dl class="section return"><dt>Returns</dt><dd>value of Graph::isDAGflag </dd></dl>
+<p>Sets <a class="el" href="class_graph.html#a3f9e089b9b70c72347e9714a30ba7895" title="Vector containing the result of the last Depth-First Search. ">Graph::isDAGflag</a> and calls <a class="el" href="class_graph.html#a61c3cf025b9200d0ec866612df06048c">Graph::dfs()</a> </p><dl class="section return"><dt>Returns</dt><dd>value of <a class="el" href="class_graph.html#a3f9e089b9b70c72347e9714a30ba7895" title="Vector containing the result of the last Depth-First Search. ">Graph::isDAGflag</a> </dd></dl>
 
 </div>
 </div>
@@ -767,7 +781,7 @@ template&lt;class T &gt; </div>
         </tr>
       </table>
 </div><div class="memdoc">
-<p>Sets the Vertex::indegree to match the amount of edges that have said vertex as destiny </p>
+<p>Sets the <a class="el" href="class_vertex.html#ab29ac1b694fc673ba26cfc6d3e9bda13" title="Keeps track whether the vertex was processed or not. ">Vertex::indegree</a> to match the amount of edges that have said vertex as destiny </p>
 
 </div>
 </div>
@@ -834,6 +848,83 @@ template&lt;class T&gt; </div>
   </table>
   </dd>
 </dl>
+
+</div>
+</div>
+<h2 class="groupheader">Member Data Documentation</h2>
+<a id="a27c7760e02cad3d243e2204908a03f70"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a27c7760e02cad3d243e2204908a03f70">&#9670;&nbsp;</a></span>dfsResult</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class T&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">vector&lt;T&gt; <a class="el" href="class_graph.html">Graph</a>&lt; T &gt;::dfsResult</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Vector containing pointers to all the vertexes in the graph. </p>
+
+</div>
+</div>
+<a id="a3f9e089b9b70c72347e9714a30ba7895"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a3f9e089b9b70c72347e9714a30ba7895">&#9670;&nbsp;</a></span>isDAGflag</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class T&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool <a class="el" href="class_graph.html">Graph</a>&lt; T &gt;::isDAGflag</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Vector containing the result of the last Depth-First Search. </p>
+
+</div>
+</div>
+<a id="a73d4e735fc0a7c83c9c689a2b53fa623"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a73d4e735fc0a7c83c9c689a2b53fa623">&#9670;&nbsp;</a></span>vertexSet</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class T&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">vector&lt;<a class="el" href="class_vertex.html">Vertex</a>&lt;T&gt; *&gt; <a class="el" href="class_graph.html">Graph</a>&lt; T &gt;::vertexSet</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
 
 </div>
 </div>

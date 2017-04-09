@@ -60,16 +60,19 @@ $(function() {
 <div class="header">
   <div class="summary">
 <a href="#pub-methods">Public Member Functions</a> &#124;
+<a href="#pri-attribs">Private Attributes</a> &#124;
 <a href="class_purchase-members.html">List of all members</a>  </div>
   <div class="headertitle">
 <div class="title">Purchase Class Reference</div>  </div>
 </div><!--header-->
 <div class="contents">
+
+<p><code>#include &lt;<a class="el" href="_purchase_8h_source.html">Purchase.h</a>&gt;</code></p>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
 <tr class="memitem:a25362ce8b54040cba4edd26004bb0727"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_purchase.html#a25362ce8b54040cba4edd26004bb0727">Purchase</a> (<a class="el" href="class_road_node.html">RoadNode</a> &amp;address)</td></tr>
-<tr class="memdesc:a25362ce8b54040cba4edd26004bb0727"><td class="mdescLeft">&#160;</td><td class="mdescRight">Closest market given by its index (in the Program::markets vector) and the distance to this client.  <a href="#a25362ce8b54040cba4edd26004bb0727">More...</a><br /></td></tr>
+<tr class="memdesc:a25362ce8b54040cba4edd26004bb0727"><td class="mdescLeft">&#160;</td><td class="mdescRight">Closest market given by its index (in the <a class="el" href="class_program.html#a2054fdf098566e8f3a9b42b7cf8cb0cd" title="A vector which holds information about all roads. ">Program::markets</a> vector) and the distance to this client.  <a href="#a25362ce8b54040cba4edd26004bb0727">More...</a><br /></td></tr>
 <tr class="separator:a25362ce8b54040cba4edd26004bb0727"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a7c35c57d74d229a482b55c3604920fab"><td class="memItemLeft" align="right" valign="top"><a class="el" href="class_road_node.html">RoadNode</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_purchase.html#a7c35c57d74d229a482b55c3604920fab">getAddr</a> () const</td></tr>
 <tr class="separator:a7c35c57d74d229a482b55c3604920fab"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -85,6 +88,17 @@ Public Member Functions</h2></td></tr>
 <tr class="separator:a31c1c72e802a897d8378cabf69f83a16"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a8ee06375e3cdfcd21fb052bef19fe686"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_purchase.html#a8ee06375e3cdfcd21fb052bef19fe686">setClosestMarketIndex</a> (int index, int distance)</td></tr>
 <tr class="separator:a8ee06375e3cdfcd21fb052bef19fe686"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pri-attribs"></a>
+Private Attributes</h2></td></tr>
+<tr class="memitem:a9784b5a95be67acb1226527725196d6d"><td class="memItemLeft" align="right" valign="top"><a class="el" href="class_road_node.html">RoadNode</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_purchase.html#a9784b5a95be67acb1226527725196d6d">addr</a></td></tr>
+<tr class="separator:a9784b5a95be67acb1226527725196d6d"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:af030a1093d39be775bbe530cd5a30740"><td class="memItemLeft" align="right" valign="top">vector&lt; <a class="el" href="class_road_node.html">RoadNode</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_purchase.html#af030a1093d39be775bbe530cd5a30740">validMarkets</a></td></tr>
+<tr class="memdesc:af030a1093d39be775bbe530cd5a30740"><td class="mdescLeft">&#160;</td><td class="mdescRight">Client's address and delivery point.  <a href="#af030a1093d39be775bbe530cd5a30740">More...</a><br /></td></tr>
+<tr class="separator:af030a1093d39be775bbe530cd5a30740"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ae9202489e2e182124196df4a879a1420"><td class="memItemLeft" align="right" valign="top">pair&lt; int, int &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_purchase.html#ae9202489e2e182124196df4a879a1420">closestMarket</a></td></tr>
+<tr class="memdesc:ae9202489e2e182124196df4a879a1420"><td class="mdescLeft">&#160;</td><td class="mdescRight">Vector containing closest market to this client.  <a href="#ae9202489e2e182124196df4a879a1420">More...</a><br /></td></tr>
+<tr class="separator:ae9202489e2e182124196df4a879a1420"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
 <a id="a25362ce8b54040cba4edd26004bb0727"></a>
@@ -103,7 +117,7 @@ Public Member Functions</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p>Closest market given by its index (in the Program::markets vector) and the distance to this client. </p>
+<p>Closest market given by its index (in the <a class="el" href="class_program.html#a2054fdf098566e8f3a9b42b7cf8cb0cd" title="A vector which holds information about all roads. ">Program::markets</a> vector) and the distance to this client. </p>
 <p>Creates an instance of <a class="el" href="class_purchase.html">Purchase</a> for a given client's address </p><dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramname">address</td><td>client's address </td></tr>
@@ -152,7 +166,7 @@ Public Member Functions</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
-<p>Gets the delivery's address </p><dl class="section return"><dt>Returns</dt><dd>value saved in Purchase::addr </dd></dl>
+<p>Gets the delivery's address </p><dl class="section return"><dt>Returns</dt><dd>value saved in <a class="el" href="class_purchase.html#a9784b5a95be67acb1226527725196d6d">Purchase::addr</a> </dd></dl>
 
 </div>
 </div>
@@ -261,7 +275,7 @@ Public Member Functions</h2></td></tr>
 </div><div class="memdoc">
 <p>Receives the info for a potential closest market and compares its distance against the current one's distance to the client </p><dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramname">index</td><td>market's index in the Program::markets vector </td></tr>
+    <tr><td class="paramname">index</td><td>market's index in the <a class="el" href="class_program.html#a2054fdf098566e8f3a9b42b7cf8cb0cd" title="A vector which holds information about all roads. ">Program::markets</a> vector </td></tr>
     <tr><td class="paramname">distance</td><td>distance between this client and the given market </td></tr>
   </table>
   </dd>
@@ -270,9 +284,80 @@ Public Member Functions</h2></td></tr>
 
 </div>
 </div>
+<h2 class="groupheader">Member Data Documentation</h2>
+<a id="a9784b5a95be67acb1226527725196d6d"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a9784b5a95be67acb1226527725196d6d">&#9670;&nbsp;</a></span>addr</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="class_road_node.html">RoadNode</a> Purchase::addr</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="ae9202489e2e182124196df4a879a1420"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ae9202489e2e182124196df4a879a1420">&#9670;&nbsp;</a></span>closestMarket</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">pair&lt;int, int&gt; Purchase::closestMarket</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Vector containing closest market to this client. </p>
+
+</div>
+</div>
+<a id="af030a1093d39be775bbe530cd5a30740"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#af030a1093d39be775bbe530cd5a30740">&#9670;&nbsp;</a></span>validMarkets</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">vector&lt;<a class="el" href="class_road_node.html">RoadNode</a>&gt; Purchase::validMarkets</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Client's address and delivery point. </p>
+
+</div>
+</div>
 <hr/>The documentation for this class was generated from the following files:<ul>
 <li>src/<a class="el" href="_purchase_8h_source.html">Purchase.h</a></li>
-<li>src/Purchase.cpp</li>
+<li>src/<a class="el" href="_purchase_8cpp.html">Purchase.cpp</a></li>
 </ul>
 </div><!-- contents -->
 <!-- start footer part -->

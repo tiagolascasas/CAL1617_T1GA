@@ -61,6 +61,8 @@ $(function() {
   <div class="summary">
 <a href="#pub-methods">Public Member Functions</a> &#124;
 <a href="#pub-static-attribs">Static Public Attributes</a> &#124;
+<a href="#pri-methods">Private Member Functions</a> &#124;
+<a href="#pri-attribs">Private Attributes</a> &#124;
 <a href="class_graph_viewer-members.html">List of all members</a>  </div>
   <div class="headertitle">
 <div class="title">GraphViewer Class Reference</div>  </div>
@@ -71,11 +73,11 @@ $(function() {
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
-<tr class="memitem:a8adc614f4fc290a3efcec7d7ceb1c58a"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_graph_viewer.html#a8adc614f4fc290a3efcec7d7ceb1c58a">GraphViewer</a> (int width, int height, bool dynamic)</td></tr>
+<tr class="memitem:a8adc614f4fc290a3efcec7d7ceb1c58a"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_graph_viewer.html#a8adc614f4fc290a3efcec7d7ceb1c58a">GraphViewer</a> (int <a class="el" href="class_graph_viewer.html#a5de27a1d20968b8494cd4bf5a4eb27e1">width</a>, int <a class="el" href="class_graph_viewer.html#a9a1000e492a66ac4301c7135275690da">height</a>, bool dynamic)</td></tr>
 <tr class="separator:a8adc614f4fc290a3efcec7d7ceb1c58a"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ad9d7b1d8b4ba8ef18517eae0e68568a2"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_graph_viewer.html#ad9d7b1d8b4ba8ef18517eae0e68568a2">GraphViewer</a> (int width, int height, bool dynamic, int port_n)</td></tr>
+<tr class="memitem:ad9d7b1d8b4ba8ef18517eae0e68568a2"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_graph_viewer.html#ad9d7b1d8b4ba8ef18517eae0e68568a2">GraphViewer</a> (int <a class="el" href="class_graph_viewer.html#a5de27a1d20968b8494cd4bf5a4eb27e1">width</a>, int <a class="el" href="class_graph_viewer.html#a9a1000e492a66ac4301c7135275690da">height</a>, bool dynamic, int port_n)</td></tr>
 <tr class="separator:ad9d7b1d8b4ba8ef18517eae0e68568a2"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ae5247dc66449dcd21fc5d531bbbaddfa"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_graph_viewer.html#ae5247dc66449dcd21fc5d531bbbaddfa">createWindow</a> (int width, int height)</td></tr>
+<tr class="memitem:ae5247dc66449dcd21fc5d531bbbaddfa"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_graph_viewer.html#ae5247dc66449dcd21fc5d531bbbaddfa">createWindow</a> (int <a class="el" href="class_graph_viewer.html#a5de27a1d20968b8494cd4bf5a4eb27e1">width</a>, int <a class="el" href="class_graph_viewer.html#a9a1000e492a66ac4301c7135275690da">height</a>)</td></tr>
 <tr class="separator:ae5247dc66449dcd21fc5d531bbbaddfa"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a85990c1eaac7feed3950960d4bd2fd4c"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_graph_viewer.html#a85990c1eaac7feed3950960d4bd2fd4c">closeWindow</a> ()</td></tr>
 <tr class="separator:a85990c1eaac7feed3950960d4bd2fd4c"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -91,18 +93,28 @@ Public Member Functions</h2></td></tr>
 <tr class="separator:a9a8ee68c7c12b373affbe4069dd95d72"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ac25d7d007022fda16799808ba136e909"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_graph_viewer.html#ac25d7d007022fda16799808ba136e909">setVertexLabel</a> (int id, string label)</td></tr>
 <tr class="separator:ac25d7d007022fda16799808ba136e909"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a007bd78a6959ac37119eb18a8e8bca4c"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_graph_viewer.html#a007bd78a6959ac37119eb18a8e8bca4c">clearVertexLabel</a> (int id)</td></tr>
+<tr class="separator:a007bd78a6959ac37119eb18a8e8bca4c"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a447cca0064e785654c2105602c2961ca"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_graph_viewer.html#a447cca0064e785654c2105602c2961ca">setEdgeLabel</a> (int id, string label)</td></tr>
 <tr class="separator:a447cca0064e785654c2105602c2961ca"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a8b90527371bd990806eb32620be765be"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_graph_viewer.html#a8b90527371bd990806eb32620be765be">clearEdgeLabel</a> (int id)</td></tr>
+<tr class="separator:a8b90527371bd990806eb32620be765be"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a07ccc96707efae4aa5f3ced3dca015af"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_graph_viewer.html#a07ccc96707efae4aa5f3ced3dca015af">setEdgeColor</a> (int id, string color)</td></tr>
 <tr class="separator:a07ccc96707efae4aa5f3ced3dca015af"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a0e3bb8f6d7290e141c141ca83c9eb67a"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_graph_viewer.html#a0e3bb8f6d7290e141c141ca83c9eb67a">clearEdgeColor</a> (int id)</td></tr>
+<tr class="separator:a0e3bb8f6d7290e141c141ca83c9eb67a"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a1698f1c6b3a8e7cabc7b7d7cf42fc7f0"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_graph_viewer.html#a1698f1c6b3a8e7cabc7b7d7cf42fc7f0">setEdgeDashed</a> (int id, bool dashed)</td></tr>
 <tr class="separator:a1698f1c6b3a8e7cabc7b7d7cf42fc7f0"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a8b542d7e09e81a45a74760c19233beb0"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_graph_viewer.html#a8b542d7e09e81a45a74760c19233beb0">setVertexColor</a> (int id, string color)</td></tr>
 <tr class="separator:a8b542d7e09e81a45a74760c19233beb0"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a70e2f6cc24e545a66312a92cf5839d25"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_graph_viewer.html#a70e2f6cc24e545a66312a92cf5839d25">clearVertexColor</a> (int id)</td></tr>
+<tr class="separator:a70e2f6cc24e545a66312a92cf5839d25"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ae930dfdfcdeb7a871eefb6028d74b9f9"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_graph_viewer.html#ae930dfdfcdeb7a871eefb6028d74b9f9">setVertexSize</a> (int id, int size)</td></tr>
 <tr class="separator:ae930dfdfcdeb7a871eefb6028d74b9f9"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a02d5f7393eab9a2d1b66719039597a64"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_graph_viewer.html#a02d5f7393eab9a2d1b66719039597a64">setVertexIcon</a> (int id, string filepath)</td></tr>
 <tr class="separator:a02d5f7393eab9a2d1b66719039597a64"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aecbeec01205b7f93cf73a65282f2daba"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_graph_viewer.html#aecbeec01205b7f93cf73a65282f2daba">clearVertexIcon</a> (int id)</td></tr>
+<tr class="separator:aecbeec01205b7f93cf73a65282f2daba"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a07f598272fe3515455eab13be749604a"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_graph_viewer.html#a07f598272fe3515455eab13be749604a">setEdgeThickness</a> (int id, int thickness)</td></tr>
 <tr class="separator:a07f598272fe3515455eab13be749604a"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ac211de009a0afe2e6d44f4f8d030a2cc"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_graph_viewer.html#ac211de009a0afe2e6d44f4f8d030a2cc">setEdgeWeight</a> (int id, int weight)</td></tr>
@@ -113,16 +125,24 @@ Public Member Functions</h2></td></tr>
 <tr class="separator:a08f362be0e682d91e7506dca8caae1b8"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a4102580b69826ba83251ef7bb262f8be"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_graph_viewer.html#a4102580b69826ba83251ef7bb262f8be">defineEdgeColor</a> (string color)</td></tr>
 <tr class="separator:a4102580b69826ba83251ef7bb262f8be"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a1df1a30f4668bf70364fac232f8d0600"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_graph_viewer.html#a1df1a30f4668bf70364fac232f8d0600">resetEdgeColor</a> ()</td></tr>
+<tr class="separator:a1df1a30f4668bf70364fac232f8d0600"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:af785279b5c204df0e274b20c36276fc3"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_graph_viewer.html#af785279b5c204df0e274b20c36276fc3">defineEdgeDashed</a> (bool dashed)</td></tr>
 <tr class="separator:af785279b5c204df0e274b20c36276fc3"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a76de8676b7a93d72af514b84cdaa4d21"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_graph_viewer.html#a76de8676b7a93d72af514b84cdaa4d21">defineVertexColor</a> (string color)</td></tr>
 <tr class="separator:a76de8676b7a93d72af514b84cdaa4d21"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:acd95eee309d5e9b1935ec39c5ed45cac"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_graph_viewer.html#acd95eee309d5e9b1935ec39c5ed45cac">resetVertexColor</a> ()</td></tr>
+<tr class="separator:acd95eee309d5e9b1935ec39c5ed45cac"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ac4b2a9fec74d38e64088aa79ca4b7d9b"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_graph_viewer.html#ac4b2a9fec74d38e64088aa79ca4b7d9b">defineVertexSize</a> (int size)</td></tr>
 <tr class="separator:ac4b2a9fec74d38e64088aa79ca4b7d9b"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:af1adb6a361457187a820e01dcf0a34b7"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_graph_viewer.html#af1adb6a361457187a820e01dcf0a34b7">defineVertexIcon</a> (string filepath)</td></tr>
 <tr class="separator:af1adb6a361457187a820e01dcf0a34b7"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ae2b602cfdfb49ec0a67f2bcd11b0fbdb"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_graph_viewer.html#ae2b602cfdfb49ec0a67f2bcd11b0fbdb">resetVertexIcon</a> ()</td></tr>
+<tr class="separator:ae2b602cfdfb49ec0a67f2bcd11b0fbdb"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a02437b5fecd8b90de24436068312d593"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_graph_viewer.html#a02437b5fecd8b90de24436068312d593">setBackground</a> (string path)</td></tr>
 <tr class="separator:a02437b5fecd8b90de24436068312d593"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a5a03467a98312f2fef5b337677b104a8"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_graph_viewer.html#a5a03467a98312f2fef5b337677b104a8">clearBackground</a> ()</td></tr>
+<tr class="separator:a5a03467a98312f2fef5b337677b104a8"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a3009a66958686ccb7e78b68e37c3c423"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_graph_viewer.html#a3009a66958686ccb7e78b68e37c3c423">rearrange</a> ()</td></tr>
 <tr class="separator:a3009a66958686ccb7e78b68e37c3c423"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
@@ -130,6 +150,22 @@ Public Member Functions</h2></td></tr>
 Static Public Attributes</h2></td></tr>
 <tr class="memitem:a89d0abe75f41feededc49497cc514342"><td class="memItemLeft" align="right" valign="top">static short&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_graph_viewer.html#a89d0abe75f41feededc49497cc514342">port</a> = 7772</td></tr>
 <tr class="separator:a89d0abe75f41feededc49497cc514342"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pri-methods"></a>
+Private Member Functions</h2></td></tr>
+<tr class="memitem:a1ce9dff4903c650d3b2d33a3ef1d1f61"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_graph_viewer.html#a1ce9dff4903c650d3b2d33a3ef1d1f61">initialize</a> (int, int, bool, int)</td></tr>
+<tr class="separator:a1ce9dff4903c650d3b2d33a3ef1d1f61"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pri-attribs"></a>
+Private Attributes</h2></td></tr>
+<tr class="memitem:a5de27a1d20968b8494cd4bf5a4eb27e1"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_graph_viewer.html#a5de27a1d20968b8494cd4bf5a4eb27e1">width</a></td></tr>
+<tr class="separator:a5de27a1d20968b8494cd4bf5a4eb27e1"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a9a1000e492a66ac4301c7135275690da"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_graph_viewer.html#a9a1000e492a66ac4301c7135275690da">height</a></td></tr>
+<tr class="separator:a9a1000e492a66ac4301c7135275690da"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a9d9947154bc63354c6d02a0680aad952"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_graph_viewer.html#a9d9947154bc63354c6d02a0680aad952">isDynamic</a></td></tr>
+<tr class="separator:a9d9947154bc63354c6d02a0680aad952"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a14a206f78c242e739e0908b06070ba4d"><td class="memItemLeft" align="right" valign="top"><a class="el" href="class_connection.html">Connection</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_graph_viewer.html#a14a206f78c242e739e0908b06070ba4d">con</a></td></tr>
+<tr class="separator:a14a206f78c242e739e0908b06070ba4d"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p>Classe que guarda o grafo e o representa. Todas as suas funções retornam um booleano a indicar se a sua execução decorreu ou não com sucesso. </p>
@@ -272,7 +308,7 @@ Static Public Attributes</h2></td></tr>
     <tr><td class="paramname">id</td><td>Identificador único da aresta. </td></tr>
     <tr><td class="paramname">v1</td><td>Identificador único do nó de origem da aresta. </td></tr>
     <tr><td class="paramname">v2</td><td>Identificador único do nó de destino da aresta. </td></tr>
-    <tr><td class="paramname">edgeType</td><td>EdgeType.DIRECTED caso a aresta seja unidirecional ou EdgeType.UNDIRECTED caso a aresta seja bidirecional. </td></tr>
+    <tr><td class="paramname">edgeType</td><td><a class="el" href="class_edge_type.html#a903017a534f2818c2d17145e4ae0321c">EdgeType.DIRECTED</a> caso a aresta seja unidirecional ou <a class="el" href="class_edge_type.html#a6533cc56d05c288a550b9980b66c9317">EdgeType.UNDIRECTED</a> caso a aresta seja bidirecional. </td></tr>
   </table>
   </dd>
 </dl>
@@ -341,6 +377,149 @@ Static Public Attributes</h2></td></tr>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramname">id</td><td>Identificador único do nó. </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a id="a5a03467a98312f2fef5b337677b104a8"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a5a03467a98312f2fef5b337677b104a8">&#9670;&nbsp;</a></span>clearBackground()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool GraphViewer::clearBackground </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>Apaga a imagem de fundo do grafo, se tiver sido previamente definida. </p>
+
+</div>
+</div>
+<a id="a0e3bb8f6d7290e141c141ca83c9eb67a"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a0e3bb8f6d7290e141c141ca83c9eb67a">&#9670;&nbsp;</a></span>clearEdgeColor()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool GraphViewer::clearEdgeColor </td>
+          <td>(</td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>id</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>Função que apaga a cor de uma aresta, caso tenha sido definida.</p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">id</td><td>Identificador único da aresta com a cor a apagar. </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a id="a8b90527371bd990806eb32620be765be"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a8b90527371bd990806eb32620be765be">&#9670;&nbsp;</a></span>clearEdgeLabel()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool GraphViewer::clearEdgeLabel </td>
+          <td>(</td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>id</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>Função que apaga o texto de uma aresta, caso o mesmo tenha sido definido anteriormente.</p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">id</td><td>Identificador único da aresta com o texto a apagar. </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a id="a70e2f6cc24e545a66312a92cf5839d25"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a70e2f6cc24e545a66312a92cf5839d25">&#9670;&nbsp;</a></span>clearVertexColor()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool GraphViewer::clearVertexColor </td>
+          <td>(</td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>id</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>Função que apaga a cor de um vértice, colocando-a com o valor por omissão.</p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">id</td><td>Identificador único do nó com a cor a apagar. </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a id="aecbeec01205b7f93cf73a65282f2daba"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aecbeec01205b7f93cf73a65282f2daba">&#9670;&nbsp;</a></span>clearVertexIcon()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool GraphViewer::clearVertexIcon </td>
+          <td>(</td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>id</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>Função que apaga o ícone de um nó, caso tenha sido definido.</p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">id</td><td>Identificador único do nó com o ícone a apagar. </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a id="a007bd78a6959ac37119eb18a8e8bca4c"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a007bd78a6959ac37119eb18a8e8bca4c">&#9670;&nbsp;</a></span>clearVertexLabel()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool GraphViewer::clearVertexLabel </td>
+          <td>(</td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>id</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>Função que apaga o texto de um nó, caso o mesmo tenha sido definido anteriormente.</p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">id</td><td>Identificador único do nó com o texto a apagar. </td></tr>
   </table>
   </dd>
 </dl>
@@ -419,7 +598,7 @@ Static Public Attributes</h2></td></tr>
 <p>Função que define a cor global das arestas. Exemplo, para um apontador gv onde foi instanciada a classe <a class="el" href="class_graph_viewer.html">GraphViewer</a>: gv-&gt;defineEdgeColor(GRAY); modifica a cor por defeito das arestas para cinzento</p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramname">color</td><td>Nova cor das arestas, utilizar as constantes definidas no <a class="el" href="graphviewer_8h_source.html">graphviewer.h</a> para conveniência. </td></tr>
+    <tr><td class="paramname">color</td><td>Nova cor das arestas, utilizar as constantes definidas no <a class="el" href="graphviewer_8h.html">graphviewer.h</a> para conveniência. </td></tr>
   </table>
   </dd>
 </dl>
@@ -494,7 +673,7 @@ Static Public Attributes</h2></td></tr>
 <p>Função que define a cor global dos nós. Exemplo, para um apontador gv onde foi instanciada a classe <a class="el" href="class_graph_viewer.html">GraphViewer</a>: gv-&gt;defineVertexColor(RED); modifica a cor por defeito dos nós para vermelho</p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramname">color</td><td>Nova cor dos nós, utilizar as constantes definidas no <a class="el" href="graphviewer_8h_source.html">graphviewer.h</a> para conveniência. </td></tr>
+    <tr><td class="paramname">color</td><td>Nova cor dos nós, utilizar as constantes definidas no <a class="el" href="graphviewer_8h.html">graphviewer.h</a> para conveniência. </td></tr>
   </table>
   </dd>
 </dl>
@@ -516,7 +695,7 @@ Static Public Attributes</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
-<p>Função que define um ícone para um nó. Exemplo, para um apontador gv onde foi instanciada a classe <a class="el" href="class_graph_viewer.html">GraphViewer</a>: gv-&gt;defineVertexIcon("icon.gif"); faz com que por defeito os nós, quando desenhados, não sejam um círculo, mas sim a imagem icon.gif</p>
+<p>Função que define um ícone global para os nós. Exemplo, para um apontador gv onde foi instanciada a classe <a class="el" href="class_graph_viewer.html">GraphViewer</a>: gv-&gt;defineVertexIcon("icon.gif"); faz com que por defeito os nós, quando desenhados, não sejam um círculo, mas sim a imagem icon.gif</p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramname">filepath</td><td>Caminho do ficheiro a utilizar como novo ícone do nó. </td></tr>
@@ -544,10 +723,58 @@ Static Public Attributes</h2></td></tr>
 <p>Função que define o tamanho global dos nós. Exemplo, para um apontador gv onde foi instanciada a classe <a class="el" href="class_graph_viewer.html">GraphViewer</a>: gv-&gt;defineVertexSize(20); modifica o tamanho por defeito dos nós para 20</p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramname">size</td><td>Nova cor dos nós, utilizar as constantes definidas no <a class="el" href="graphviewer_8h_source.html">graphviewer.h</a> para conveniência. </td></tr>
+    <tr><td class="paramname">size</td><td>Nova cor dos nós, utilizar as constantes definidas no <a class="el" href="graphviewer_8h.html">graphviewer.h</a> para conveniência. </td></tr>
   </table>
   </dd>
 </dl>
+
+</div>
+</div>
+<a id="a1ce9dff4903c650d3b2d33a3ef1d1f61"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a1ce9dff4903c650d3b2d33a3ef1d1f61">&#9670;&nbsp;</a></span>initialize()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void GraphViewer::initialize </td>
+          <td>(</td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>width</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>height</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">bool&#160;</td>
+          <td class="paramname"><em>dynamic</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>port_n</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
 
 </div>
 </div>
@@ -619,6 +846,60 @@ Static Public Attributes</h2></td></tr>
 
 </div>
 </div>
+<a id="a1df1a30f4668bf70364fac232f8d0600"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a1df1a30f4668bf70364fac232f8d0600">&#9670;&nbsp;</a></span>resetEdgeColor()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool GraphViewer::resetEdgeColor </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>Função que restaura a cor global das arestas. </p>
+
+</div>
+</div>
+<a id="acd95eee309d5e9b1935ec39c5ed45cac"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#acd95eee309d5e9b1935ec39c5ed45cac">&#9670;&nbsp;</a></span>resetVertexColor()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool GraphViewer::resetVertexColor </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>Função que restaura a cor global dos nós. </p>
+
+</div>
+</div>
+<a id="ae2b602cfdfb49ec0a67f2bcd11b0fbdb"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ae2b602cfdfb49ec0a67f2bcd11b0fbdb">&#9670;&nbsp;</a></span>resetVertexIcon()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool GraphViewer::resetVertexIcon </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>Função que apaga o ícone global para os nós. </p>
+
+</div>
+</div>
 <a id="a02437b5fecd8b90de24436068312d593"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a02437b5fecd8b90de24436068312d593">&#9670;&nbsp;</a></span>setBackground()</h2>
 
@@ -673,7 +954,7 @@ Static Public Attributes</h2></td></tr>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramname">id</td><td>Identificador único da aresta com a cor a alterar. </td></tr>
-    <tr><td class="paramname">color</td><td>Nova cor da aresta, utilizar as constantes definidas no <a class="el" href="graphviewer_8h_source.html">graphviewer.h</a> para conveniência. </td></tr>
+    <tr><td class="paramname">color</td><td>Nova cor da aresta, utilizar as constantes definidas no <a class="el" href="graphviewer_8h.html">graphviewer.h</a> para conveniência. </td></tr>
   </table>
   </dd>
 </dl>
@@ -709,7 +990,7 @@ Static Public Attributes</h2></td></tr>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramname">id</td><td>Identificador único da aresta com a cor a alterar. </td></tr>
-    <tr><td class="paramname">dashed</td><td>Nova cor da aresta, utilizar as constantes definidas no <a class="el" href="graphviewer_8h_source.html">graphviewer.h</a> para conveniência. </td></tr>
+    <tr><td class="paramname">dashed</td><td>Nova cor da aresta, utilizar as constantes definidas no <a class="el" href="graphviewer_8h.html">graphviewer.h</a> para conveniência. </td></tr>
   </table>
   </dd>
 </dl>
@@ -889,7 +1170,7 @@ Static Public Attributes</h2></td></tr>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramname">id</td><td>Identificador único do nó com a cor a alterar. </td></tr>
-    <tr><td class="paramname">color</td><td>Nova cor do nó, utilizar as constantes definidas no <a class="el" href="graphviewer_8h_source.html">graphviewer.h</a> para conveniência. </td></tr>
+    <tr><td class="paramname">color</td><td>Nova cor do nó, utilizar as constantes definidas no <a class="el" href="graphviewer_8h.html">graphviewer.h</a> para conveniência. </td></tr>
   </table>
   </dd>
 </dl>
@@ -1005,6 +1286,72 @@ Static Public Attributes</h2></td></tr>
 </div>
 </div>
 <h2 class="groupheader">Member Data Documentation</h2>
+<a id="a14a206f78c242e739e0908b06070ba4d"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a14a206f78c242e739e0908b06070ba4d">&#9670;&nbsp;</a></span>con</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="class_connection.html">Connection</a>* GraphViewer::con</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a9a1000e492a66ac4301c7135275690da"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a9a1000e492a66ac4301c7135275690da">&#9670;&nbsp;</a></span>height</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">int GraphViewer::height</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a9d9947154bc63354c6d02a0680aad952"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a9d9947154bc63354c6d02a0680aad952">&#9670;&nbsp;</a></span>isDynamic</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool GraphViewer::isDynamic</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
 <a id="a89d0abe75f41feededc49497cc514342"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a89d0abe75f41feededc49497cc514342">&#9670;&nbsp;</a></span>port</h2>
 
@@ -1028,9 +1375,31 @@ Static Public Attributes</h2></td></tr>
 
 </div>
 </div>
+<a id="a5de27a1d20968b8494cd4bf5a4eb27e1"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a5de27a1d20968b8494cd4bf5a4eb27e1">&#9670;&nbsp;</a></span>width</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">int GraphViewer::width</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
 <hr/>The documentation for this class was generated from the following files:<ul>
 <li>src/<a class="el" href="graphviewer_8h_source.html">graphviewer.h</a></li>
-<li>src/graphviewer.cpp</li>
+<li>src/<a class="el" href="graphviewer_8cpp.html">graphviewer.cpp</a></li>
 </ul>
 </div><!-- contents -->
 <!-- start footer part -->
