@@ -636,26 +636,34 @@ void Program::singleMarketAllClients()
 	int validPurchasesSize = validPurchases.size();
 	graph.dijkstraShortestPath(markets.at(marketIdx));
 	int pathId = 1;
+	int clientCounter = 0;
 	vector<vector<RoadNode> > paths;
+	vector<pair<int, int> > distTime;
 	while (!validPurchases.empty())
 	{
 		int distance;
 		vector<RoadNode> path = getTruckPath(markets.at(marketIdx), validPurchases, distance);
-		cout << "Path " << pathId << ": " << validPurchasesSize - validPurchases.size() << " clients served, length is ";
-		cout << distance << " meters (" << distance / 1000.0 << " Km), estimated time is " <<
-				calculateTime(distance, validPurchasesSize - validPurchases.size()) << " min\n";
-		validPurchasesSize = validPurchases.size();
-		paths.push_back(path);
-		pathId++;
+		if (distance != INT_INFINITY)
+		{
+			cout << "Path " << pathId << ": " << validPurchasesSize - validPurchases.size() << " clients served, length is ";
+			cout << distance << " meters (" << distance / 1000.0 << " Km), estimated time is " <<
+					calculateTime(distance, validPurchasesSize - validPurchases.size()) << " min\n";
+			clientCounter += validPurchasesSize - validPurchases.size();
+			validPurchasesSize = validPurchases.size();
+			paths.push_back(path);
+			distTime.push_back(pair<int, int>(distance, calculateTime(distance, validPurchasesSize - validPurchases.size())));
+			pathId++;
+		}
 	}
+	cout << clientCounter << " clients are served by " << paths.size() << " paths\n";
 	displaySetOfPaths(paths, backupVP);
+	analyzeData(distTime);
 	return;
 }
 
 void Program::allMarketsAllClients()
 {
 	setClosestMarketToAllClients();
-	displayClosestMarketsToClients();
 
 	for (int i = 0; i < markets.size(); i++)
 	{
@@ -669,9 +677,9 @@ void Program::allMarketsAllClients()
 		}
 		vector<RoadNode> backupVP = closest;
 		int closestSize = closest.size();
-		cout << "There are " << closestSize << " clients to be served by this market\n";
 		graph.dijkstraShortestPath(markets.at(i));
 		int pathId = 1;
+		int clientCounter = 0;
 		vector<vector<RoadNode> > paths;
 		vector<pair<int, int> > distTime;
 		while (!closest.empty())
@@ -684,13 +692,15 @@ void Program::allMarketsAllClients()
 				cout << distance << " meters (" << distance / 1000.0 << " Km), estimated time is " <<
 						calculateTime(distance, closestSize - closest.size()) << " min\n";
 				paths.push_back(path);
+				clientCounter += closestSize - closest.size();
 				distTime.push_back(pair<int, int>(distance, calculateTime(distance, closestSize - closest.size())));
 				pathId++;
 			}
 			closestSize = closest.size();
 		}
+		cout << closestSize << " clients served by " << paths.size() << "paths\n";
+	//	displaySetOfPaths(paths, backupVP);
 		analyzeData(distTime);
-		displaySetOfPaths(paths, backupVP);
 		cout << "Press any key to continue to the next market...";
 		getch();
 	}
@@ -828,12 +838,12 @@ void Program::analyzeData(vector<pair<int, int> > distTime)
 		if (distTime.at(i).second > timeMax)
 			timeMax = distTime.at(i).second;
 	}
-	cout << "The total distance of all paths is " << distanceTotal << " meters (";
+	cout << "\nThe total distance of all paths is " << distanceTotal << " meters (";
 	cout << distanceTotal / 1000 << " Km)\n";
 	cout << "For a single truck (assuming the return time is the same), it takes ";
-	cout << timeTotal * 2 << "minutes ";
+	cout << timeTotal * 2 << " minutes ";
 	if (timeTotal * 2 > 60)
-		cout << "(" << static_cast<float>(timeTotal) / 60 << " hours) ";
+		cout << "(" << static_cast<float>(timeTotal * 2) / 60 << " hours) ";
 	cout << "to deliver to all clients\n";
 	cout << "For a maximum number of trucks departing at the same time (" << distTime.size();
 	cout << " trucks), it takes " << timeMax << " minutes to deliver to all clients (not accounting for return)\n";
@@ -846,36 +856,45 @@ void Program::analyzeData(vector<pair<int, int> > distTime)
 		cout << "Invalid number, number of trucks defaulted to " << distTime.size() / 2;
 		nTrucks = distTime.size() / 2;
 	}
-
+	vector<pair<int, int> > dtBackup = distTime;
 	vector<vector<int> > trucks(nTrucks);
-	while(timeTotal)
+	for (int i = 0; i < distTime.size(); i++)
 	{
-		reverse(trucks.begin(), trucks.end());
-		for (int i = 0; i < trucks.size(); i++)
+		int shortestSize = INT_INFINITY;
+		int shortestIndex = -1;
+		for (int j = 0; j < trucks.size(); j++)
 		{
-			pair<int, int> max(0, 0);
-			int index;
-			for (int j = 0; j < distTime.size(); j++)
+			int counter = 0;
+			for (int k = 0; k < trucks.at(j).size(); k++)
+				counter += distTime.at(trucks.at(j).at(k)).first;
+			if (counter < shortestSize)
 			{
-				if (distTime.at(j).second != 0 && distTime.at(j).second > max.second)
-				{
-					index = j;
-					max = distTime.at(j);
-				}
+				shortestSize = counter;
+				shortestIndex = j;
 			}
-			distTime.at(index) = pair<int, int>(0, 0);
-			timeTotal -= max.second;
-			trucks.at(i).push_back(index);
-			if (timeTotal <= 0)
-				break;
 		}
+		trucks.at(shortestIndex).push_back(i);
 	}
+	cout << endl;
+	int distMax = 0;
+	timeMax = 0;
 	for (int i = 0; i < trucks.size(); i++)
 	{
 		cout << "Truck " << i + 1 << ": path(s) ";
+		int timeCounter = 0, distCounter = 0;
 		for (int j = 0; j < trucks.at(i).size(); j++)
+		{
 			cout << trucks.at(i).at(j) << " ";
-		cout << endl;
+			distCounter += dtBackup.at(i).first;
+			timeCounter += dtBackup.at(i).second;
+		}
+		cout << ", total time " << timeCounter << " minutes (" << distCounter / 1000 << " Km)\n";
+		if (distCounter > distMax)
+		{
+			distMax = distCounter;
+			timeMax = timeCounter;
+		}
 	}
-
+	cout << "Assuming that all trucks depart at the same time and not accounting for return time, it takes ";
+	cout << timeMax << " minutes (" << distMax / 1000 << " Km) to deliver to all clients\n";
 }
