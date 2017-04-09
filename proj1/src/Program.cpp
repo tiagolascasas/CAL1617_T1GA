@@ -14,7 +14,7 @@
 #include <conio.h>
 #endif
 
-#define DEFAULT_PURCHASES 10
+#define DEFAULT_PURCHASES 15
 
 Program::Program(char** files): avgVelocity(30), running(true), lastEdgeID(-1), lastNodeID(-1), deliveryTime(2)
 {
@@ -697,7 +697,7 @@ void Program::allMarketsAllClients()
 			}
 			closestSize = closest.size();
 		}
-		cout << clientCounter << " clients served by " << paths.size() << "paths\n";
+		cout << clientCounter << " clients served by " << paths.size() << " paths\n";
 		try
 		{
 			displaySetOfPaths(paths, backupVP);
