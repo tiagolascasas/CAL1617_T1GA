@@ -1,10 +1,3 @@
-/*
- * Program.cpp
- *
- *  Created on: 21/03/2017
- *      Author: Tiago
- */
-
 #include "Program.h"
 #include "Exceptions.h"
 #include <fstream>
