@@ -156,10 +156,17 @@ void Program::loadMarkets(char* marketsFile)
 	{
 		istringstream ss(s);
 		long long marketID;
-		string mName;
+		string mName, r1, r2;
+		char aux;
 		ss >> marketID;
-		getline(ss, mName);
-		mName.erase(0, 1);
+		getline(ss, mName, ';');
+		cin >> aux;
+		getline(ss, r1, ';');
+		cin >> aux;
+		getline(ss, r2, ';');
+		//trim strings
+		roadMarkets.insert(pair<string, string>(r1, mName));
+		roadMarkets.insert(pair<string, string>(r2, mName));
 		for (int i = 0; i < graph.getNumVertex(); i++)
 		{
 			if (graph.getVertexSet().at(i)->getInfo().getID() == marketID)
