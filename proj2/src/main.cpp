@@ -15,7 +15,7 @@ int main(int argc, char** argv)
 	if (argc != ARGS && argc != NO_ARGS)
 	{
 		cout << "Invalid number of arguments!\n";
-		cout << "Usage: proj1 nodes_file road_info_file road_file markets_file map_file\n";
+		cout << "Usage: proj2 nodes_file road_info_file road_file markets_file map_file\n";
 		cout << "       or simply proj1 to use the default files in ./res\n";
 		return 1;
 	}

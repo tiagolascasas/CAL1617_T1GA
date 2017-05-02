@@ -13,6 +13,7 @@ private:
 	GraphViewer* gv;			/// Pointer to a GraphViewer instantiation
 	Graph<RoadNode> graph;		/// The main graph
 	vector<road_t> r;			/// A vector which holds information about all roads
+	string roadNames;			/// A string holding all names of the roads, without duplicates
 	vector<RoadNode> markets;	/// A vector that holds all markets
 	vector<string> marketNames;	/// A vector that holds the names of all markets
 	vector<Purchase> purchases;	/// A vector that holds all the clients/purchases
@@ -216,6 +217,31 @@ private:
 	 * Distributes from all markets to all clients
 	 */
 	void allMarketsAllClients();
+
+	/**
+	 * Shows a menu with multiple search options, asking in a loop for inputs
+	 */
+	void searchMenu();
+
+	/**
+	 * Searches for a road using exact matching and then shows if the road has any adjacent market
+	 */
+	void searchRoadExact();
+
+	/*
+	 * Searches for a market using exact matching
+	 */
+	void searchMarketExact();
+
+	/**
+	 * Searches for a road using approximate matching, showing similar roads if the road does not exist
+	 */
+	void searchRoadApprox();
+
+	/**
+	 * Searches for a market using approximate matching, showing similar markets if the market does not exist
+	 */
+	void searchMarketApprox();
 
 
 public:

@@ -6,6 +6,7 @@
 #include <iomanip>
 #include <cmath>
 #include <functional>
+#include <set>
 
 #ifdef __linux__
 #include <curses.h>
@@ -55,6 +56,8 @@ void Program::loadGraph(char* nodesFile, char* roadInfoFile, char* roadFile)
 		graph.addVertex(n);
 	}
 
+	set <string> roadSet;
+
 	while (getline(roadInfo, s))
 	{
 		road_t road;
@@ -66,7 +69,10 @@ void Program::loadGraph(char* nodesFile, char* roadInfoFile, char* roadFile)
 		if (aux == "")
 			road.name = "Undefined street name";
 		else
+		{
 			road.name = aux;
+			roadSet.insert(aux);
+		}
 		ss >> marker >> aux;
 		if (aux.find("lse", 0) != aux.npos)
 			road.twoWay = false;
@@ -102,6 +108,10 @@ void Program::loadGraph(char* nodesFile, char* roadInfoFile, char* roadFile)
 	nodes.close();
 	roadInfo.close();
 	roads.close();
+
+	roadNames = "";
+	for (auto s : roadSet)
+		roadNames += s + " ";
 }
 
 void Program::loadMap(char* mapFile)
@@ -232,6 +242,9 @@ void Program::run()
 		case 10:
 			changeParameters();
 			break;
+		case 11:
+			searchMenu();
+			break;
 		case 0:
 #ifdef __linux__
 			close(GraphViewer::port -1);
@@ -240,6 +253,7 @@ void Program::run()
 			running = false;
 			break;
 		default:
+			cout << "Invalid choice\n";
 			break;
 		}
 	}
@@ -258,6 +272,7 @@ void Program::displayMenu()
 	cout << "8.  Distribute from a single market to all clients\n";
 	cout << "9.  Distribute from all markets to all clients\n";
 	cout << "10. Change delivery parameters\n";
+	cout << "11. Search roads/markets\n";
 	cout << "0.  Quit program\n";
 	cout << endl;
 }
@@ -907,4 +922,79 @@ void Program::analyzeData(vector<pair<int, int> > distTime)
 	}
 	cout << "Assuming that all trucks depart at the same time and not accounting for return time, it takes ";
 	cout << timeMax << " minutes (" << distMax / 1000 << " Km) to deliver to all clients\n";
+}
+
+void Program::searchMenu()
+{
+	bool searchMenuRunning = true;
+
+	while (searchMenuRunning)
+	{
+		cout << endl;
+		cout << "1. Exact search for a road\n";
+		cout << "2. Exact search for a market\n";
+		cout << "3. Approximate search for a road\n";
+		cout << "4. Approximate search for a market\n";
+		cout << "0. Return to main menu\n";
+		cout << endl;
+		cout << "Option: ";
+		int choice;
+		cin >> choice;
+		switch(choice)
+		{
+		case 1:
+			searchRoadExact();
+			break;
+		case 2:
+			searchMarketExact();
+			break;
+		case 3:
+			searchRoadApprox();
+			break;
+		case 4:
+			searchMarketExact();
+			break;
+		case 0:
+			searchMenuRunning = false;
+			break;
+		default:
+			cout << "Invalid input\n";
+			break;
+		}
+
+	}
+}
+
+void Program::searchRoadExact()
+{
+	string input;
+	cout << "Name of the road: ";
+	cin.ignore();
+	getline(cin, input);
+
+	//exact search
+}
+
+void Program::searchMarketExact()
+{
+	string input;
+	cout << "Name of the market: ";
+	cin.ignore();
+	getline(cin, input);
+}
+
+void Program::searchRoadApprox()
+{
+	string input;
+	cout << "Name of the road: ";
+	cin.ignore();
+	getline(cin, input);
+}
+
+void Program::searchMarketApprox()
+{
+	string input;
+	cout << "Name of the market: ";
+	cin.ignore();
+	getline(cin, input);
 }
