@@ -1,0 +1,5 @@
+res/mapArea.png
+41.18187,-8.60736	//top left corner
+41.15581,-8.60736	//bottom left corner
+41.18187,-8.55922	//top right corner
+1131 819			//image resolution
