@@ -43,44 +43,83 @@ bool kmpStringMatching(string &text, string pattern, bool caseSensitive)
 	int cnd=0;
 
 	while(pos<pattern.size()){
-		if(pattern[pos-1]==pattern[cnd]){
-			t[pos]=cnd+1;
-			cnd++;
-			pos++;
-		}
-		else if(cnd>0){
-			cnd=t[cnd];
+		if(caseSensitive){
+			if(pattern[pos-1]==pattern[cnd]){
+				t[pos]=cnd+1;
+				cnd++;
+				pos++;
+			}
+			else if(cnd>0){
+				cnd=t[cnd];
+			}
+			else{
+				t[pos]=0;
+				pos++;
+			}
 		}
 		else{
-			t[pos]=0;
-			pos++;
+			if(tolower(pattern[pos-1])==tolower(pattern[cnd])){
+				t[pos]=cnd+1;
+				cnd++;
+				pos++;
+			}
+			else if(cnd>0){
+				cnd=t[cnd];
+			}
+			else{
+				t[pos]=0;
+				pos++;
+			}
 		}
 	}
 
 
-///////////////////////////
+	///////////////////////////
 
 	int i = 0;
 	int m = 0;
 
 	while(m+i<text.size()){
-		if(pattern[i]==text[m+i]){
-			if(i==pattern.size()-1){
-				return true;
+		if(caseSensitive){
+			if(pattern[i]==text[m+i]){
+				if(i==pattern.size()-1){
+					return true;
+				}
+				else{
+					i++;
+				}
 			}
 			else{
-				i++;
+				if(t[i]>-1){
+					m=m+i-t[i];
+					i=t[i];
+				}
+				else{
+					m=m+i+1;
+					i=0;
+				}
 			}
 		}
 		else{
-			if(t[i]>-1){
-				m=m+i-t[i];
-				i=t[i];
+			if(tolower(pattern[i])==tolower(text[m+i])){
+				if(i==pattern.size()-1){
+					return true;
+				}
+				else{
+					i++;
+				}
 			}
 			else{
-				m=m+i+1;
-				i=0;
+				if(t[i]>-1){
+					m=m+i-t[i];
+					i=t[i];
+				}
+				else{
+					m=m+i+1;
+					i=0;
+				}
 			}
+
 		}
 	}
 
