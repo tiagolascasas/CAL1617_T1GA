@@ -5,17 +5,17 @@
 			<provider copy-of="extension" id="org.eclipse.cdt.ui.UserLanguageSettingsProvider"/>
 			<provider-reference id="org.eclipse.cdt.core.ReferencedProjectsLanguageSettingsProvider" ref="shared-provider"/>
 			<provider-reference id="org.eclipse.cdt.managedbuilder.core.MBSLanguageSettingsProvider" ref="shared-provider"/>
-			<provider class="org.eclipse.cdt.managedbuilder.internal.language.settings.providers.GCCBuiltinSpecsDetectorMinGW" console="false" env-hash="978365381875882686" id="org.eclipse.cdt.managedbuilder.core.GCCBuiltinSpecsDetectorMinGW" keep-relative-paths="false" name="CDT GCC Built-in Compiler Settings MinGW" parameter="${COMMAND} ${FLAGS} -E -P -v -dD &quot;${INPUTS}&quot; -std=c++1y" prefer-non-shared="true" store-entries-with-project="true">
+			<provider class="org.eclipse.cdt.managedbuilder.internal.language.settings.providers.GCCBuiltinSpecsDetectorMinGW" console="false" env-hash="1878363576905553550" id="org.eclipse.cdt.managedbuilder.core.GCCBuiltinSpecsDetectorMinGW" keep-relative-paths="false" name="CDT GCC Built-in Compiler Settings MinGW" parameter="${COMMAND} ${FLAGS} -E -P -v -dD &quot;${INPUTS}&quot; -std=c++1y" prefer-non-shared="true" store-entries-with-project="true">
 				<language-scope id="org.eclipse.cdt.core.gcc"/>
 				<language-scope id="org.eclipse.cdt.core.g++"/>
 				<language id="org.eclipse.cdt.core.gcc">
-					<entry kind="includePath" name="C:/Programs/MinGW/lib/gcc/x86_64-w64-mingw32/6.2.0/include">
+					<entry kind="includePath" name="C:/Program Files/mingw-w64/x86_64-6.2.0-posix-sjlj-rt_v5-rev1/mingw64/lib/gcc/x86_64-w64-mingw32/6.2.0/include">
 						<flag value="BUILTIN|READONLY"/>
 					</entry>
-					<entry kind="includePath" name="C:/Programs/MinGW/lib/gcc/x86_64-w64-mingw32/6.2.0/include-fixed">
+					<entry kind="includePath" name="C:/Program Files/mingw-w64/x86_64-6.2.0-posix-sjlj-rt_v5-rev1/mingw64/lib/gcc/x86_64-w64-mingw32/6.2.0/include-fixed">
 						<flag value="BUILTIN|READONLY"/>
 					</entry>
-					<entry kind="includePath" name="C:/Programs/MinGW/x86_64-w64-mingw32/include">
+					<entry kind="includePath" name="C:/Program Files/mingw-w64/x86_64-6.2.0-posix-sjlj-rt_v5-rev1/mingw64/x86_64-w64-mingw32/include">
 						<flag value="BUILTIN|READONLY"/>
 					</entry>
 					<entry kind="macro" name="WIN32" value="1">
@@ -720,6 +720,9 @@
 					<entry kind="macro" name="__USER_LABEL_PREFIX__" value="">
 						<flag value="BUILTIN|READONLY"/>
 					</entry>
+					<entry kind="macro" name="__USING_SJLJ_EXCEPTIONS__" value="1">
+						<flag value="BUILTIN|READONLY"/>
+					</entry>
 					<entry kind="macro" name="__VERSION__" value="&quot;6.2.0&quot;">
 						<flag value="BUILTIN|READONLY"/>
 					</entry>
@@ -821,22 +824,22 @@
 					</entry>
 				</language>
 				<language id="org.eclipse.cdt.core.g++">
-					<entry kind="includePath" name="C:/Programs/MinGW/lib/gcc/x86_64-w64-mingw32/6.2.0/include/c++">
+					<entry kind="includePath" name="C:/Program Files/mingw-w64/x86_64-6.2.0-posix-sjlj-rt_v5-rev1/mingw64/lib/gcc/x86_64-w64-mingw32/6.2.0/include/c++">
 						<flag value="BUILTIN|READONLY"/>
 					</entry>
-					<entry kind="includePath" name="C:/Programs/MinGW/lib/gcc/x86_64-w64-mingw32/6.2.0/include/c++/x86_64-w64-mingw32">
+					<entry kind="includePath" name="C:/Program Files/mingw-w64/x86_64-6.2.0-posix-sjlj-rt_v5-rev1/mingw64/lib/gcc/x86_64-w64-mingw32/6.2.0/include/c++/x86_64-w64-mingw32">
 						<flag value="BUILTIN|READONLY"/>
 					</entry>
-					<entry kind="includePath" name="C:/Programs/MinGW/lib/gcc/x86_64-w64-mingw32/6.2.0/include/c++/backward">
+					<entry kind="includePath" name="C:/Program Files/mingw-w64/x86_64-6.2.0-posix-sjlj-rt_v5-rev1/mingw64/lib/gcc/x86_64-w64-mingw32/6.2.0/include/c++/backward">
 						<flag value="BUILTIN|READONLY"/>
 					</entry>
-					<entry kind="includePath" name="C:/Programs/MinGW/lib/gcc/x86_64-w64-mingw32/6.2.0/include">
+					<entry kind="includePath" name="C:/Program Files/mingw-w64/x86_64-6.2.0-posix-sjlj-rt_v5-rev1/mingw64/lib/gcc/x86_64-w64-mingw32/6.2.0/include">
 						<flag value="BUILTIN|READONLY"/>
 					</entry>
-					<entry kind="includePath" name="C:/Programs/MinGW/lib/gcc/x86_64-w64-mingw32/6.2.0/include-fixed">
+					<entry kind="includePath" name="C:/Program Files/mingw-w64/x86_64-6.2.0-posix-sjlj-rt_v5-rev1/mingw64/lib/gcc/x86_64-w64-mingw32/6.2.0/include-fixed">
 						<flag value="BUILTIN|READONLY"/>
 					</entry>
-					<entry kind="includePath" name="C:/Programs/MinGW/x86_64-w64-mingw32/include">
+					<entry kind="includePath" name="C:/Program Files/mingw-w64/x86_64-6.2.0-posix-sjlj-rt_v5-rev1/mingw64/x86_64-w64-mingw32/include">
 						<flag value="BUILTIN|READONLY"/>
 					</entry>
 					<entry kind="macro" name="_INTEGRAL_MAX_BITS" value="64">
@@ -1548,6 +1551,9 @@
 						<flag value="BUILTIN|READONLY"/>
 					</entry>
 					<entry kind="macro" name="__USER_LABEL_PREFIX__" value="">
+						<flag value="BUILTIN|READONLY"/>
+					</entry>
+					<entry kind="macro" name="__USING_SJLJ_EXCEPTIONS__" value="1">
 						<flag value="BUILTIN|READONLY"/>
 					</entry>
 					<entry kind="macro" name="__VERSION__" value="&quot;6.2.0&quot;">
@@ -1748,17 +1754,17 @@
 			<provider copy-of="extension" id="org.eclipse.cdt.ui.UserLanguageSettingsProvider"/>
 			<provider-reference id="org.eclipse.cdt.core.ReferencedProjectsLanguageSettingsProvider" ref="shared-provider"/>
 			<provider-reference id="org.eclipse.cdt.managedbuilder.core.MBSLanguageSettingsProvider" ref="shared-provider"/>
-			<provider class="org.eclipse.cdt.managedbuilder.internal.language.settings.providers.GCCBuiltinSpecsDetectorMinGW" console="false" env-hash="978365381875882686" id="org.eclipse.cdt.managedbuilder.core.GCCBuiltinSpecsDetectorMinGW" keep-relative-paths="false" name="CDT GCC Built-in Compiler Settings MinGW" parameter="${COMMAND} ${FLAGS} -E -P -v -dD &quot;${INPUTS}&quot; -std=c++1y" prefer-non-shared="true" store-entries-with-project="true">
+			<provider class="org.eclipse.cdt.managedbuilder.internal.language.settings.providers.GCCBuiltinSpecsDetectorMinGW" console="false" env-hash="1878363576905553550" id="org.eclipse.cdt.managedbuilder.core.GCCBuiltinSpecsDetectorMinGW" keep-relative-paths="false" name="CDT GCC Built-in Compiler Settings MinGW" parameter="${COMMAND} ${FLAGS} -E -P -v -dD &quot;${INPUTS}&quot; -std=c++1y" prefer-non-shared="true" store-entries-with-project="true">
 				<language-scope id="org.eclipse.cdt.core.gcc"/>
 				<language-scope id="org.eclipse.cdt.core.g++"/>
 				<language id="org.eclipse.cdt.core.gcc">
-					<entry kind="includePath" name="C:/Programs/MinGW/lib/gcc/x86_64-w64-mingw32/6.2.0/include">
+					<entry kind="includePath" name="C:/Program Files/mingw-w64/x86_64-6.2.0-posix-sjlj-rt_v5-rev1/mingw64/lib/gcc/x86_64-w64-mingw32/6.2.0/include">
 						<flag value="BUILTIN|READONLY"/>
 					</entry>
-					<entry kind="includePath" name="C:/Programs/MinGW/lib/gcc/x86_64-w64-mingw32/6.2.0/include-fixed">
+					<entry kind="includePath" name="C:/Program Files/mingw-w64/x86_64-6.2.0-posix-sjlj-rt_v5-rev1/mingw64/lib/gcc/x86_64-w64-mingw32/6.2.0/include-fixed">
 						<flag value="BUILTIN|READONLY"/>
 					</entry>
-					<entry kind="includePath" name="C:/Programs/MinGW/x86_64-w64-mingw32/include">
+					<entry kind="includePath" name="C:/Program Files/mingw-w64/x86_64-6.2.0-posix-sjlj-rt_v5-rev1/mingw64/x86_64-w64-mingw32/include">
 						<flag value="BUILTIN|READONLY"/>
 					</entry>
 					<entry kind="macro" name="WIN32" value="1">
@@ -2463,6 +2469,9 @@
 					<entry kind="macro" name="__USER_LABEL_PREFIX__" value="">
 						<flag value="BUILTIN|READONLY"/>
 					</entry>
+					<entry kind="macro" name="__USING_SJLJ_EXCEPTIONS__" value="1">
+						<flag value="BUILTIN|READONLY"/>
+					</entry>
 					<entry kind="macro" name="__VERSION__" value="&quot;6.2.0&quot;">
 						<flag value="BUILTIN|READONLY"/>
 					</entry>
@@ -2564,22 +2573,22 @@
 					</entry>
 				</language>
 				<language id="org.eclipse.cdt.core.g++">
-					<entry kind="includePath" name="C:/Programs/MinGW/lib/gcc/x86_64-w64-mingw32/6.2.0/include/c++">
+					<entry kind="includePath" name="C:/Program Files/mingw-w64/x86_64-6.2.0-posix-sjlj-rt_v5-rev1/mingw64/lib/gcc/x86_64-w64-mingw32/6.2.0/include/c++">
 						<flag value="BUILTIN|READONLY"/>
 					</entry>
-					<entry kind="includePath" name="C:/Programs/MinGW/lib/gcc/x86_64-w64-mingw32/6.2.0/include/c++/x86_64-w64-mingw32">
+					<entry kind="includePath" name="C:/Program Files/mingw-w64/x86_64-6.2.0-posix-sjlj-rt_v5-rev1/mingw64/lib/gcc/x86_64-w64-mingw32/6.2.0/include/c++/x86_64-w64-mingw32">
 						<flag value="BUILTIN|READONLY"/>
 					</entry>
-					<entry kind="includePath" name="C:/Programs/MinGW/lib/gcc/x86_64-w64-mingw32/6.2.0/include/c++/backward">
+					<entry kind="includePath" name="C:/Program Files/mingw-w64/x86_64-6.2.0-posix-sjlj-rt_v5-rev1/mingw64/lib/gcc/x86_64-w64-mingw32/6.2.0/include/c++/backward">
 						<flag value="BUILTIN|READONLY"/>
 					</entry>
-					<entry kind="includePath" name="C:/Programs/MinGW/lib/gcc/x86_64-w64-mingw32/6.2.0/include">
+					<entry kind="includePath" name="C:/Program Files/mingw-w64/x86_64-6.2.0-posix-sjlj-rt_v5-rev1/mingw64/lib/gcc/x86_64-w64-mingw32/6.2.0/include">
 						<flag value="BUILTIN|READONLY"/>
 					</entry>
-					<entry kind="includePath" name="C:/Programs/MinGW/lib/gcc/x86_64-w64-mingw32/6.2.0/include-fixed">
+					<entry kind="includePath" name="C:/Program Files/mingw-w64/x86_64-6.2.0-posix-sjlj-rt_v5-rev1/mingw64/lib/gcc/x86_64-w64-mingw32/6.2.0/include-fixed">
 						<flag value="BUILTIN|READONLY"/>
 					</entry>
-					<entry kind="includePath" name="C:/Programs/MinGW/x86_64-w64-mingw32/include">
+					<entry kind="includePath" name="C:/Program Files/mingw-w64/x86_64-6.2.0-posix-sjlj-rt_v5-rev1/mingw64/x86_64-w64-mingw32/include">
 						<flag value="BUILTIN|READONLY"/>
 					</entry>
 					<entry kind="macro" name="_INTEGRAL_MAX_BITS" value="64">
@@ -3291,6 +3300,9 @@
 						<flag value="BUILTIN|READONLY"/>
 					</entry>
 					<entry kind="macro" name="__USER_LABEL_PREFIX__" value="">
+						<flag value="BUILTIN|READONLY"/>
+					</entry>
+					<entry kind="macro" name="__USING_SJLJ_EXCEPTIONS__" value="1">
 						<flag value="BUILTIN|READONLY"/>
 					</entry>
 					<entry kind="macro" name="__VERSION__" value="&quot;6.2.0&quot;">

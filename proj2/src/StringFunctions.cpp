@@ -26,6 +26,64 @@ string trim(string &s)
 
 bool kmpStringMatching(string &text, string pattern, bool caseSensitive)
 {
+	int t[];
+
+	if(pattern.size()<2){
+		t=new int[2];
+		t[0]=-1;
+		t[1]=0;
+	}
+	else{
+		t=new int[pattern.size()];
+		t[0]=-1;
+		t[1]=0;
+	}
+
+	int pos=2;
+	int cnd=0;
+
+	while(pos<pattern.size()){
+		if(pattern[pos-1]==pattern[cnd]){
+			t[pos]=cnd+1;
+			cnd++;
+			pos++;
+		}
+		else if(cnd>0){
+			cnd=t[cnd];
+		}
+		else{
+			t[pos]=0;
+			pos++;
+		}
+	}
+
+
+///////////////////////////
+
+	int i = 0;
+	int m = 0;
+
+	while(m+i<text.size()){
+		if(pattern[i]==text[m+i]){
+			if(i==pattern.size()-1){
+				return true;
+			}
+			else{
+				i++;
+			}
+		}
+		else{
+			if(t[i]>-1){
+				m=m+i-t[i];
+				i=t[i];
+			}
+			else{
+				m=m+i+1;
+				i=0;
+			}
+		}
+	}
+
 	return false;
 }
 
