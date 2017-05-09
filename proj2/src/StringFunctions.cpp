@@ -26,18 +26,20 @@ string trim(string &s)
 
 bool kmpStringMatching(string &text, string pattern, bool caseSensitive)
 {
-	int t[];
+	int size;
 
 	if(pattern.size()<2){
-		t=new int[2];
-		t[0]=-1;
-		t[1]=0;
+		size=2;
 	}
 	else{
-		t=new int[pattern.size()];
-		t[0]=-1;
-		t[1]=0;
+		size=pattern.size();
+
 	}
+
+	int t[size];
+
+	t[0]=-1;
+	t[1]=0;
 
 	int pos=2;
 	int cnd=0;
