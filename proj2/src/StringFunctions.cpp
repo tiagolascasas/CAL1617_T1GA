@@ -129,9 +129,47 @@ bool kmpStringMatching(string &text, string pattern, bool caseSensitive)
 }
 
 priority_queue<ApproxString> approximateStringMatching(vector<string> &text, string pattern, bool caseSensitive)
-{
+					{
 	priority_queue<ApproxString> res;
+
+	for (unsigned i=0;i<text.size();i++) {
+		res.push(ApproxString(text[i], levenshtein_distance(text[i], pattern, caseSensitive)));}
+
 	return res;
+					}
+
+int levenshtein_distance(const string &t, const string &p, bool caseSensitive)
+{
+	int textSize = t.size(), patternSize = p.size();
+	int last_diagonal, old_diagonal, substitutionCost;
+	bool aux;
+
+
+	int* d = new int[textSize + 1];
+	iota(d + 1, d + textSize + 1, 1);
+
+	for (int i = 1; i <= patternSize; i++) {
+		d[0] = i;
+		last_diagonal = i - 1;
+		for (int j = 1; j <= textSize; j++) {
+			if(caseSensitive)
+				aux=(t[j - 1] == p[i - 1]);
+			else
+				aux=(tolower(t[j - 1]) == tolower(p[i - 1]));
+
+			if(aux) substitutionCost=0;
+			else 	substitutionCost=1;
+
+			old_diagonal = d[j];
+			d[j] = min(d[j] + 1,min(d[j - 1] + 1,
+					last_diagonal + substitutionCost));
+			last_diagonal = old_diagonal;
+		}
+	}
+
+	int result = d[textSize];
+	delete[] d;
+	return result;
 }
 
 

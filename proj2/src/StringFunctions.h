@@ -3,6 +3,8 @@
 
 #include <string>
 #include <queue>
+#include <numeric>
+
 using namespace std;
 
 /**
@@ -69,4 +71,12 @@ bool kmpStringMatching(string &text, string pattern, bool caseSensitive);
  */
 priority_queue<ApproxString> approximateStringMatching(vector<string> &text, string pattern, bool caseSensitive);
 
+/**
+ * Compares a string with a pattern to determine the amount of operations (deletion, addition or substitution) needed to turn the string into the pattern
+ * @param t the string to be tested
+ * @param p the pattern to be used as base for comparison
+ * @param caseSensitive true to consider case sensitiveness, false to not consider
+ * @return an integer symbolizing the amount of operations needed to make both strings similar
+ */
+int levenshtein_distance(const std::string &t, const std::string &p, bool caseSensitive);
 #endif /* STRINGFUNCTIONS_H_ */
