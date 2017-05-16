@@ -18,7 +18,7 @@ bool ApproxString::operator<(const ApproxString as) const
 	return closeness < as.getCloseness();
 }
 
-string trim(string &s)
+void trim(string &s)
 {
 	s.erase(0, s.find_first_not_of(' '));
 	s.erase(s.find_last_not_of(' ') + 1);
@@ -129,14 +129,17 @@ bool kmpStringMatching(string &text, string pattern, bool caseSensitive)
 }
 
 priority_queue<ApproxString> approximateStringMatching(vector<string> &text, string pattern, bool caseSensitive)
-					{
+{
 	priority_queue<ApproxString> res;
 
-	for (unsigned i=0;i<text.size();i++) {
-		res.push(ApproxString(text[i], levenshtein_distance(text[i], pattern, caseSensitive)));}
-
+	for (unsigned i=0;i<text.size();i++)
+	{
+		res.push(ApproxString(text[i], levenshtein_distance(text[i], pattern, caseSensitive)));
+		if (res.top().getCloseness() == 0)
+			return res;
+	}
 	return res;
-					}
+}
 
 int levenshtein_distance(const string &t, const string &p, bool caseSensitive)
 {

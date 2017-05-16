@@ -50,7 +50,7 @@ public:
  * the ending of a string
  * @param s the string to be trimmed (passed by reference)
  */
-string trim(string &s);
+void trim(string &s);
 
 /**
  * Checks if a certain pattern can be found in a
@@ -78,5 +78,6 @@ priority_queue<ApproxString> approximateStringMatching(vector<string> &text, str
  * @param caseSensitive true to consider case sensitiveness, false to not consider
  * @return an integer symbolizing the amount of operations needed to make both strings similar
  */
-int levenshtein_distance(const std::string &t, const std::string &p, bool caseSensitive);
+int levenshtein_distance(const string &t, const string &p, bool caseSensitive);
+
 #endif /* STRINGFUNCTIONS_H_ */

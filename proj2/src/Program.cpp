@@ -1,5 +1,3 @@
-#include "Program.h"
-#include "Exceptions.h"
 #include <fstream>
 #include <sstream>
 #include <algorithm>
@@ -7,6 +5,11 @@
 #include <cmath>
 #include <functional>
 #include <set>
+#include <unordered_set>
+
+#include "Program.h"
+#include "Exceptions.h"
+#include "StringFunctions.h"
 
 #ifdef __linux__
 #include <curses.h>
@@ -70,6 +73,7 @@ void Program::loadGraph(char* nodesFile, char* roadInfoFile, char* roadFile)
 			road.name = "Undefined street name";
 		else
 		{
+			trim(aux);
 			road.name = aux;
 			roadSet.insert(aux);
 		}
@@ -80,6 +84,10 @@ void Program::loadGraph(char* nodesFile, char* roadInfoFile, char* roadFile)
 			road.twoWay = true;
 		r.push_back(road);
 	}
+
+	set<string>::iterator it = roadSet.begin();
+	for (; it != roadSet.end(); it++)
+		roadMarkets[*it] = "";
 
 	while (getline(roads, s))
 	{
@@ -109,9 +117,9 @@ void Program::loadGraph(char* nodesFile, char* roadInfoFile, char* roadFile)
 	roadInfo.close();
 	roads.close();
 
-	roadNames = "";
+	roadNamesString = "";
 	for (auto s : roadSet)
-		roadNames += s + " ";
+		roadNamesString += s + " ";
 }
 
 void Program::loadMap(char* mapFile)
@@ -151,22 +159,27 @@ void Program::loadMarkets(char* marketsFile)
 	if (!mark.is_open())
 		throw new FileNotFound(marketsFile);
 
+	marketNamesString = "";
+
 	string s;
 	while (getline(mark, s))
 	{
 		istringstream ss(s);
 		long long marketID;
 		string mName, r1, r2;
-		char aux;
 		ss >> marketID;
 		getline(ss, mName, ';');
-		cin >> aux;
 		getline(ss, r1, ';');
-		cin >> aux;
-		getline(ss, r2, ';');
-		//trim strings
-		roadMarkets.insert(pair<string, string>(r1, mName));
-		roadMarkets.insert(pair<string, string>(r2, mName));
+		getline(ss, r2);
+		trim(mName);
+		trim(r1);
+		trim(r2);
+
+		roadMarkets[r1] = mName;
+		roadMarkets[r2] = mName;
+		adjacentRoads[mName] = pair<string, string>(r1, r2);
+		marketNamesString += mName + " ";
+
 		for (int i = 0; i < graph.getNumVertex(); i++)
 		{
 			if (graph.getVertexSet().at(i)->getInfo().getID() == marketID)
@@ -968,40 +981,155 @@ void Program::searchMenu()
 			cout << "Invalid input\n";
 			break;
 		}
-
 	}
+}
+
+bool Program::promptCaseSensitive()
+{
+	char caseSensitive;
+	string caseSensitiveFlag;
+
+	cout << "Case-sensitive search? (Y/N): ";
+	cin >> caseSensitive;
+	if (tolower(caseSensitive) != 'n' && tolower(caseSensitive) != 'y')
+	{
+		cout << "Unrecognized choice entered, assuming case-sensitive search\n";
+		return true;
+	}
+	else
+		return tolower(caseSensitive) == 'n' ? false : true;
 }
 
 void Program::searchRoadExact()
 {
 	string input;
+	bool caseSensitiveFlag;
+
+	caseSensitiveFlag = promptCaseSensitive();
 	cout << "Name of the road: ";
 	cin.ignore();
 	getline(cin, input);
+	bool found = kmpStringMatching(roadNamesString, input, caseSensitiveFlag);
 
-	//exact search
+	if (!found)
+	{
+		cout << "No road with that name was found\n";
+		return;
+	}
+	else
+	{
+		cout << "Road \"" << input <<"\" found\n";
+		string mk = roadMarkets[input];
+		if (mk == "")
+			cout << "There isn't any market adjacent to this road\n";
+		else
+			cout << "Market \"" << mk << "\" is adjacent to this road\n";
+		return;
+	}
 }
 
 void Program::searchMarketExact()
 {
 	string input;
+	bool caseSensitiveFlag;
+
+	caseSensitiveFlag = promptCaseSensitive();
 	cout << "Name of the market: ";
 	cin.ignore();
 	getline(cin, input);
+	bool found = kmpStringMatching(marketNamesString, input, caseSensitiveFlag);
+
+	if (!found)
+	{
+		cout << "No market with that name was found\n";
+		return;
+	}
+	else
+	{
+		cout << "Market \"" << input <<"\" found\n";
+		pair<string, string> rd = adjacentRoads[input];
+		cout << "The two roads adjacent to market \"" << input << "\" are:\n";
+		cout << rd.first << endl;
+		cout << rd.second << endl;
+		return;
+	}
 }
 
 void Program::searchRoadApprox()
 {
 	string input;
+	bool caseSensitiveFlag;
+
+	caseSensitiveFlag = promptCaseSensitive();
 	cout << "Name of the road: ";
 	cin.ignore();
 	getline(cin, input);
+
+	priority_queue<ApproxString> pq;
+	pq = approximateStringMatching(roadNames, input, caseSensitiveFlag);
+	if (pq.top().getCloseness() == 0)
+	{
+		cout << "Road \"" << pq.top().getString() << "\" found\n";
+		string mk = roadMarkets[pq.top().getString()];
+		if (mk == "")
+			cout << "There isn't any market adjacent to this road\n";
+		else
+			cout << "Market \"" << mk << "\" is adjacent to this road\n";
+		return;
+	}
+	else
+	{
+		cout << "No road with this name was found, possible candidates are:\n";
+		int i = 0;
+		while (!pq.empty() || i < 10)
+		{
+			cout << pq.top().getString();
+			string mk = roadMarkets[pq.top().getString()];
+			if (mk != "")
+				cout << ", adjacent to market \"" << mk << "\"\n";
+			pq.pop();
+			i++;
+		}
+		cout << "(Results limited to the " << i << " closest names)\n";
+		return;
+	}
 }
 
 void Program::searchMarketApprox()
 {
 	string input;
+	bool caseSensitiveFlag;
+
+	caseSensitiveFlag = promptCaseSensitive();
 	cout << "Name of the market: ";
 	cin.ignore();
 	getline(cin, input);
+
+	priority_queue<ApproxString> pq;
+	pq = approximateStringMatching(marketNames, input, caseSensitiveFlag);
+	if (pq.top().getCloseness() == 0)
+	{
+		cout << "Market \"" << input <<"\" found\n";
+		pair<string, string> rd = adjacentRoads[pq.top().getString()];
+		cout << "The two roads adjacent to market \"" << input << "\" are:\n";
+		cout << rd.first << endl;
+		cout << rd.second << endl;
+		return;
+	}
+	else
+	{
+		cout << "No road with this name was found, possible candidates are:\n";
+		int i = 0;
+		while (!pq.empty() || i < 10)
+		{
+			cout << pq.top().getString();
+			pair<string, string> rd = adjacentRoads[pq.top().getString()];
+			cout << "\"" << pq.top().getString() << "\" adjacent roads: ";
+			cout << rd.first << ", " << rd.second << endl;
+			pq.pop();
+			i++;
+		}
+		cout << "(Results limited to the " << i << " closest names)\n";
+		return;
+	}
 }

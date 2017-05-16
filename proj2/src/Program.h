@@ -7,6 +7,7 @@
 #include "RoadNode.h"
 #include <string>
 #include <map>
+#include <unordered_map>
 
 class Program
 {
@@ -14,17 +15,25 @@ private:
 	GraphViewer* gv;					/// Pointer to a GraphViewer instantiation
 	Graph<RoadNode> graph;				/// The main graph
 	vector<road_t> r;					/// A vector which holds information about all roads
-	string roadNames;					/// A string holding all names of the roads, without duplicates
-	vector<RoadNode> markets;			/// A vector that holds all markets
-	vector<string> marketNames;			/// A vector that holds the names of all markets
-	map<string, string>	roadMarkets;	///	A map holding, for a road, its adjacent market
 	vector<Purchase> purchases;			/// A vector that holds all the clients/purchases
+
+	string roadNamesString;				/// A string holding all names of the roads, without duplicates
+	string marketNamesString;			/// A string holding all names of the markets, without duplicates
+
+	vector<RoadNode> markets;			/// A vector that holds all the nodes that match a market
+	vector<string> marketNames;			/// A vector that holds the names of all markets
+	vector<string> roadNames;			/// A vector that holds the names of all roads
+
+	unordered_map<string, string> roadMarkets;					/// A map that, for each road, has the market adjacent to it (or "" if it has no market)
+	unordered_map<string, pair<string, string>> adjacentRoads;	/// A map that, for each market, has a pair with its two adjacent roads
+
 	unsigned int xRes;					/// The x resolution of the map
 	unsigned int yRes;					/// The y resolution of the map
 	string mapName;						/// The path and/or name of the map picture
 	pair<float, float> origin;			/// The geographical coordinate of the map's top left corner
 	pair<float, float> xMax;			/// The geographical coordinate of the map's top right corner
 	pair<float, float> yMax;			/// The geographical coordinate of the map's bottom left corner
+
 	bool running;						/// Flag which tells if the main loop is running
 	float avgVelocity;					/// Average velocity value for the trucks (in Km/h)
 	int deliveryTime;					/// Time spent on a single delivery (in min)
@@ -245,6 +254,11 @@ private:
 	 */
 	void searchMarketApprox();
 
+	/**
+	 * Prompts the user to ask them if they want to make a case-sensitive search
+	 * @return true if the user wants to use case-sensitiveness or if the user input was unrecognizable, false otherwise
+	 */
+	bool promptCaseSensitive();
 
 public:
 	/**
