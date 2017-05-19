@@ -1009,17 +1009,17 @@ void Program::searchRoadExact()
 	cout << "Name of the road: ";
 	cin.ignore();
 	getline(cin, input);
-	bool found = kmpStringMatching(roadNamesString, input, caseSensitiveFlag);
+	string found = kmpStringMatching(roadNamesString, input, caseSensitiveFlag);
 
-	if (!found)
+	if (found=="")
 	{
 		cout << "No road with that name was found\n";
 		return;
 	}
 	else
 	{
-		cout << "Road \"" << input <<"\" found\n";
-		string mk = roadMarkets[input];
+		cout << "Road \"" << found <<"\" found\n";
+		string mk = roadMarkets[found];
 		if (mk == "")
 			cout << "There isn't any market adjacent to this road\n";
 		else
@@ -1037,18 +1037,18 @@ void Program::searchMarketExact()
 	cout << "Name of the market: ";
 	cin.ignore();
 	getline(cin, input);
-	bool found = kmpStringMatching(marketNamesString, input, caseSensitiveFlag);
+	string found = kmpStringMatching(marketNamesString, input, caseSensitiveFlag);
 
-	if (!found)
+	if (found=="")
 	{
 		cout << "No market with that name was found\n";
 		return;
 	}
 	else
 	{
-		cout << "Market \"" << input <<"\" found\n";
-		pair<string, string> rd = adjacentRoads[input];
-		cout << "The two roads adjacent to market \"" << input << "\" are:\n";
+		cout << "Market \"" << found <<"\" found\n";
+		pair<string, string> rd = adjacentRoads[found];
+		cout << "The two roads adjacent to market \"" << found << "\" are:\n";
 		cout << rd.first << endl;
 		cout << rd.second << endl;
 		return;

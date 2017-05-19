@@ -58,9 +58,9 @@ void trim(string &s);
  * @param text the text to analyze
  * @param pattern the pattern to search for
  * @param caseSensitive true to consider case sensitiveness, false to not consider
- * @return true if the pattern was found, false otherwise
+ * @return string if the pattern was found, empty string otherwise
  */
-bool kmpStringMatching(string &text, string pattern, bool caseSensitive);
+string kmpStringMatching(string &text, string pattern, bool caseSensitive);
 
 /**
  * Scans a set of strings, ordering them by resemblance to a certain pattern

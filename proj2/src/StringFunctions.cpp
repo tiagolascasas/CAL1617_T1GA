@@ -24,7 +24,7 @@ void trim(string &s)
 	s.erase(s.find_last_not_of(' ') + 1);
 }
 
-bool kmpStringMatching(string &text, string pattern, bool caseSensitive)
+string kmpStringMatching(string &text, string pattern, bool caseSensitive)
 {
 	int size;
 
@@ -33,7 +33,6 @@ bool kmpStringMatching(string &text, string pattern, bool caseSensitive)
 	}
 	else{
 		size=pattern.size();
-
 	}
 
 	int t[size];
@@ -80,14 +79,22 @@ bool kmpStringMatching(string &text, string pattern, bool caseSensitive)
 
 	int i = 0;
 	int m = 0;
+	string result="";
+
+	for(int i2 =0;i2< pattern.size();i2++){
+		result=result+" ";
+	}
 
 	while(m+i<text.size()){
 		if(caseSensitive){
 			if(pattern[i]==text[m+i]){
 				if(i==pattern.size()-1){
-					return true;
+					//return true;
+					result[i]=text[m+i];
+					return result;
 				}
 				else{
+					result[i]=text[m+i];
 					i++;
 				}
 			}
@@ -105,9 +112,12 @@ bool kmpStringMatching(string &text, string pattern, bool caseSensitive)
 		else{
 			if(tolower(pattern[i])==tolower(text[m+i])){
 				if(i==pattern.size()-1){
-					return true;
+					result[i]=text[m+i];
+					return result;
+					//return true;
 				}
 				else{
+					result[i]=text[m+i];
 					i++;
 				}
 			}
@@ -121,11 +131,11 @@ bool kmpStringMatching(string &text, string pattern, bool caseSensitive)
 					i=0;
 				}
 			}
-
 		}
 	}
 
-	return false;
+	//return false;
+	return "";
 }
 
 priority_queue<ApproxString> approximateStringMatching(vector<string> &text, string pattern, bool caseSensitive)
