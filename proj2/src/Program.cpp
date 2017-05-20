@@ -87,7 +87,10 @@ void Program::loadGraph(char* nodesFile, char* roadInfoFile, char* roadFile)
 
 	set<string>::iterator it = roadSet.begin();
 	for (; it != roadSet.end(); it++)
+	{
 		roadMarkets[*it] = "";
+		roadNames.push_back(*it);
+	}
 
 	while (getline(roads, s))
 	{
@@ -972,7 +975,7 @@ void Program::searchMenu()
 			searchRoadApprox();
 			break;
 		case 4:
-			searchMarketExact();
+			searchMarketApprox();
 			break;
 		case 0:
 			searchMenuRunning = false;
@@ -1066,6 +1069,7 @@ void Program::searchRoadApprox()
 	getline(cin, input);
 
 	priority_queue<ApproxString> pq;
+
 	pq = approximateStringMatching(roadNames, input, caseSensitiveFlag);
 	if (pq.top().getCloseness() == 0)
 	{
@@ -1081,12 +1085,14 @@ void Program::searchRoadApprox()
 	{
 		cout << "No road with this name was found, possible candidates are:\n";
 		int i = 0;
-		while (!pq.empty() || i < 10)
+		while (!pq.empty() && i < 10)
 		{
 			cout << pq.top().getString();
 			string mk = roadMarkets[pq.top().getString()];
 			if (mk != "")
 				cout << ", adjacent to market \"" << mk << "\"\n";
+			else
+				cout << endl;
 			pq.pop();
 			i++;
 		}
@@ -1120,11 +1126,11 @@ void Program::searchMarketApprox()
 	{
 		cout << "No road with this name was found, possible candidates are:\n";
 		int i = 0;
-		while (!pq.empty() || i < 10)
+		while (!pq.empty() && i < 10)
 		{
 			cout << pq.top().getString();
 			pair<string, string> rd = adjacentRoads[pq.top().getString()];
-			cout << "\"" << pq.top().getString() << "\" adjacent roads: ";
+			cout << ", adjacent roads: ";
 			cout << rd.first << ", " << rd.second << endl;
 			pq.pop();
 			i++;

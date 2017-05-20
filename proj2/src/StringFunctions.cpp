@@ -15,7 +15,7 @@ int ApproxString::getCloseness() const
 
 bool ApproxString::operator<(const ApproxString as) const
 {
-	return closeness < as.getCloseness();
+	return closeness > as.getCloseness();
 }
 
 void trim(string &s)
@@ -142,7 +142,7 @@ priority_queue<ApproxString> approximateStringMatching(vector<string> &text, str
 {
 	priority_queue<ApproxString> res;
 
-	for (unsigned i=0;i<text.size();i++)
+	for (unsigned int i = 0; i < text.size(); i++)
 	{
 		res.push(ApproxString(text[i], levenshtein_distance(text[i], pattern, caseSensitive)));
 		if (res.top().getCloseness() == 0)
