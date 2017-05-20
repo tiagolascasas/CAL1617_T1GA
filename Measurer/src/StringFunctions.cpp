@@ -1,5 +1,4 @@
 #include "StringFunctions.h"
-#include <numeric>
 
 ApproxString::ApproxString(string s, int closeness): s(s), closeness(closeness){};
 
@@ -16,7 +15,7 @@ int ApproxString::getCloseness() const
 
 bool ApproxString::operator<(const ApproxString as) const
 {
-	return closeness < as.getCloseness();
+	return closeness > as.getCloseness();
 }
 
 void trim(string &s)
@@ -25,7 +24,7 @@ void trim(string &s)
 	s.erase(s.find_last_not_of(' ') + 1);
 }
 
-string kmpStringMatching(string &text, string &pattern, bool caseSensitive)
+string kmpStringMatching(string &text, string pattern, bool caseSensitive)
 {
 	int size;
 
@@ -45,38 +44,20 @@ string kmpStringMatching(string &text, string &pattern, bool caseSensitive)
 	int cnd=0;
 
 	while(pos<pattern.size()){
-		if(caseSensitive){
-			if(pattern[pos-1]==pattern[cnd]){
-				t[pos]=cnd+1;
-				cnd++;
-				pos++;
-			}
-			else if(cnd>0){
-				cnd=t[cnd];
-			}
-			else{
-				t[pos]=0;
-				pos++;
-			}
+		if(caseSensitive ? pattern[pos-1] == pattern[cnd] : tolower(pattern[pos-1]) == tolower(pattern[cnd]))
+		{
+			t[pos]=cnd+1;
+			cnd++;
+			pos++;
+		}
+		else if(cnd>0){
+			cnd=t[cnd];
 		}
 		else{
-			if(tolower(pattern[pos-1])==tolower(pattern[cnd])){
-				t[pos]=cnd+1;
-				cnd++;
-				pos++;
-			}
-			else if(cnd>0){
-				cnd=t[cnd];
-			}
-			else{
-				t[pos]=0;
-				pos++;
-			}
+			t[pos]=0;
+			pos++;
 		}
 	}
-
-
-	///////////////////////////
 
 	int i = 0;
 	int m = 0;
@@ -87,63 +68,35 @@ string kmpStringMatching(string &text, string &pattern, bool caseSensitive)
 	}
 
 	while(m+i<text.size()){
-		if(caseSensitive){
-			if(pattern[i]==text[m+i]){
-				if(i==pattern.size()-1){
-					//return true;
-					result[i]=text[m+i];
-					return result;
-				}
-				else{
-					result[i]=text[m+i];
-					i++;
-				}
+		if(caseSensitive ? pattern[i] == text[m+i] : tolower(pattern[i]) == tolower(text[m+i])){
+			if(i==pattern.size()-1){
+				result[i]=text[m+i];
+				return result;
 			}
 			else{
-				if(t[i]>-1){
-					m=m+i-t[i];
-					i=t[i];
-				}
-				else{
-					m=m+i+1;
-					i=0;
-				}
+				result[i]=text[m+i];
+				i++;
 			}
 		}
 		else{
-			if(tolower(pattern[i])==tolower(text[m+i])){
-				if(i==pattern.size()-1){
-					result[i]=text[m+i];
-					return result;
-					//return true;
-				}
-				else{
-					result[i]=text[m+i];
-					i++;
-				}
+			if(t[i]>-1){
+				m=m+i-t[i];
+				i=t[i];
 			}
 			else{
-				if(t[i]>-1){
-					m=m+i-t[i];
-					i=t[i];
-				}
-				else{
-					m=m+i+1;
-					i=0;
-				}
+				m=m+i+1;
+				i=0;
 			}
 		}
 	}
-
-	//return false;
 	return "";
 }
 
-priority_queue<ApproxString> approximateStringMatching(vector<string> &text, string &pattern, bool caseSensitive)
+priority_queue<ApproxString> approximateStringMatching(vector<string> &text, string pattern, bool caseSensitive)
 {
 	priority_queue<ApproxString> res;
 
-	for (unsigned i=0;i<text.size();i++)
+	for (unsigned int i = 0; i < text.size(); i++)
 	{
 		res.push(ApproxString(text[i], levenshtein_distance(text[i], pattern, caseSensitive)));
 		if (res.top().getCloseness() == 0)

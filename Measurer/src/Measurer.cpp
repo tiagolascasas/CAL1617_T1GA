@@ -21,7 +21,7 @@ void measureTimeExact1()
 	vector<long int> time;
 	vector<int> size;
 
-	for (long long i = 10000; i < INT_MAX; i *= 10)
+	for (long long i = 10000; i < UINT_MAX; i *= 10)
 	{
 		string* s = randomStr(i);
 		string* t = randomStr(100);
@@ -47,9 +47,9 @@ void measureTimeExact2()
 	vector<long int> time;
 	vector<int> size;
 
-	for (long long i = 10000; i < INT_MAX; i *= 10)
+	for (long long i = 1000; i < UINT_MAX; i *= 10)
 	{
-		string* s = randomStr(1000);
+		string* s = randomStr(1000000);
 		string* t = randomStr(i);
 		long int start = GetTickCount();
 		kmpStringMatching(*s, *t, true);
@@ -73,7 +73,7 @@ void measureTimeApprox1()
 	vector<long int> time;
 	vector<int> size;
 
-	for (long long i = 100; i < INT_MAX; i *= 10)
+	for (long long i = 10; i < 100000; i *= 2)
 	{
 		string* s = randomStr(i);
 		string* t = randomStr(i);
@@ -98,6 +98,6 @@ int main()
 {
 	srand(time(NULL));
 //	measureTimeExact1();
-	measureTimeExact2();
-//	measureTimeApprox1();
+//	measureTimeExact2();
+	measureTimeApprox1();
 }
