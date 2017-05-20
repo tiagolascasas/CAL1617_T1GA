@@ -122,7 +122,7 @@ void Program::loadGraph(char* nodesFile, char* roadInfoFile, char* roadFile)
 
 	roadNamesString = "";
 	for (auto s : roadSet)
-		roadNamesString += s + " ";
+		roadNamesString += s + "  ";
 }
 
 void Program::loadMap(char* mapFile)
@@ -181,7 +181,7 @@ void Program::loadMarkets(char* marketsFile)
 		roadMarkets[r1] = mName;
 		roadMarkets[r2] = mName;
 		adjacentRoads[mName] = pair<string, string>(r1, r2);
-		marketNamesString += mName + " ";
+		marketNamesString += mName + "  ";
 
 		for (int i = 0; i < graph.getNumVertex(); i++)
 		{
@@ -1041,6 +1041,8 @@ void Program::searchMarketExact()
 	cin.ignore();
 	getline(cin, input);
 	string found = kmpStringMatching(marketNamesString, input, caseSensitiveFlag);
+
+
 
 	if (found=="")
 	{
