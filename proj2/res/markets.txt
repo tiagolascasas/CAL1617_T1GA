@@ -1,3 +1,3 @@
-409089302 Alameda ; Rua 1 ; Rua 2
-1731170287 Parque Nascente ; Rua 3 ; Rua 4
-2156098698 Campus S. Joao ; Rua 5 ; Rua 6
+409089302 Alameda ; Rua Professor Manuel Baganha ; Rua de "A Renascenca Portuguesa"
+1731170287 Parque Nascente ; Estrada Exterior da Circunvalacao ; Rotunda do Parque Nascente
+2156098698 Campus S. Joao ; Rua Doutor Antonio Bernardino de Almeida ; Rua Doutor Placido da Costa
