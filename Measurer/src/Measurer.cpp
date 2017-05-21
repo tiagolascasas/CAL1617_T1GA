@@ -47,9 +47,9 @@ void measureTimeExact2()
 	vector<long int> time;
 	vector<int> size;
 
-	for (long long i = 1000; i < UINT_MAX; i *= 10)
+	for (long long i = 10; i < 1e6; i *= 7)
 	{
-		string* s = randomStr(1000000);
+		string* s = randomStr(1e6);
 		string* t = randomStr(i);
 		long int start = GetTickCount();
 		kmpStringMatching(*s, *t, true);
@@ -73,10 +73,20 @@ void measureTimeApprox1()
 	vector<long int> time;
 	vector<int> size;
 
-	for (long long i = 10; i < 1000000; i *= 2)
+	string* s = randomStr(100);
+	string* t = randomStr(100);
+	long int start = GetTickCount();
+	levenshtein_distance(*s, *t, true);
+	long int end = GetTickCount();
+	delete s;
+	delete t;
+	time.push_back(end - start);
+	size.push_back(100);
+
+	for (long long i = 100000; i < 1000000; i *= 1.2)
 	{
-		string* s = randomStr(i);
-		string* t = randomStr(i);
+		s = randomStr(i);
+		t = randomStr(i);
 		long int start = GetTickCount();
 		levenshtein_distance(*s, *t, true);
 		long int end = GetTickCount();
@@ -98,6 +108,6 @@ int main()
 {
 	srand(time(NULL));
 //	measureTimeExact1();
-//	measureTimeExact2();
-	measureTimeApprox1();
+	measureTimeExact2();
+//	measureTimeApprox1();
 }
