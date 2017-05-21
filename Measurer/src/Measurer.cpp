@@ -73,7 +73,7 @@ void measureTimeApprox1()
 	vector<long int> time;
 	vector<int> size;
 
-	for (long long i = 10; i < 100000; i *= 2)
+	for (long long i = 10; i < 1000000; i *= 2)
 	{
 		string* s = randomStr(i);
 		string* t = randomStr(i);

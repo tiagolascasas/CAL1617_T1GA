@@ -71,7 +71,13 @@ string kmpStringMatching(string &text, string pattern, bool caseSensitive)
 		if(caseSensitive ? pattern[i] == text[m+i] : tolower(pattern[i]) == tolower(text[m+i])){
 			if(i==pattern.size()-1){
 				result[i]=text[m+i];
+
+				if(text[m+i+2]==' ' && text[m+i+1]==' '){
 				return result;
+				}
+				else{
+					return "";
+				}
 			}
 			else{
 				result[i]=text[m+i];
